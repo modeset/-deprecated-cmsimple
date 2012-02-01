@@ -16,6 +16,13 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
+  s.add_runtime_dependency "rails"
+  s.add_runtime_dependency "haml-rails"
+  s.add_runtime_dependency 'jquery-rails'
+  s.add_runtime_dependency "formtastic"
+  s.add_runtime_dependency "will_paginate"
+
+
   # specify any dependencies here; for example:
   # s.add_development_dependency "rspec"
   # s.add_runtime_dependency "rest-client"

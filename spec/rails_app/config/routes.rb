@@ -1,4 +1,7 @@
 RailsTestApp::Application.routes.draw do
+
+  mount Cmsimple::Engine, :at => '/'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
