@@ -1,0 +1,33 @@
+# System stuff
+.DS_Store
+.bundle
+.idea
+.rake_tasks
+REVISION
+vendor/bundle
+.rake_tasks~
+mkmf.log
+
+# Local config files
+config/database.yml
+config/*.sphinx.conf
+config/mongoid.yml
+
+# Local DBs
+db/sphinx
+db/*.sqlite3
+
+# Logs
+log/*.log
+log/*.pid
+
+# Tempfiles
+tmp/**/*
+coverage
+capybara*
+
+# Assets
+public/system
+public/static
+/assets
+packages
