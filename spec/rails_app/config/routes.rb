@@ -1,4 +1,4 @@
-Cmsimple::Application.routes.draw do
+RailsTestApp::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

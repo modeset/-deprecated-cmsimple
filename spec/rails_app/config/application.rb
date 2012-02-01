@@ -11,7 +11,7 @@ end
 
 require 'cmsimple'
 
-module Cmsimple
+module RailsTestApp
   class Application < Rails::Application
     config.generators do |g|
       g.template_engine     :haml

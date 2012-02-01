@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Cmsimple::Application.load_tasks
+RailsTestApp::Application.load_tasks
