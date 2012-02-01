@@ -9,6 +9,7 @@ mkmf.log
 
 # Local config files
 database.yml
+schema.rb
 
 # Logs
 log/*.log
