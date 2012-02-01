@@ -1,4 +1,23 @@
-*.gem
+.DS_Store
 .bundle
+.idea
+.rake_tasks
+REVISION
+vendor/bundle
+.rake_tasks~
+mkmf.log
+
+# Local config files
+database.yml
+
+# Logs
+log/*.log
+log/*.pid
+
+# Tempfiles
+tmp/**/*
+tmp/
+coverage
+capybara*
+
 Gemfile.lock
-pkg/*
