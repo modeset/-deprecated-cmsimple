@@ -1,4 +1,4 @@
 Cmsimple::Engine.routes.draw do
-  match '*page' => 'cmsimple/pages#show'
-  root :to => 'cmsimple/pages#show'
+  match '*page' => 'pages#show'
+  root :to => 'pages#show'
 end

@@ -1,5 +1,7 @@
 Feature: As a user I should be able to visit pages on the site
 
-  Scenario: As a user I should be able to view the home page
-    When I go to the home page
-    Then I should see "Hello"
+  Scenario: As a user I should be able to view a page with custom content at a specified path
+    Given a page exists at a custom path with custom content
+    When I visit that page's path
+    Then I should see that page's content
+

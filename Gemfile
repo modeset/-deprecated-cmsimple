@@ -23,9 +23,7 @@ group :test do
   gem "cucumber"
   gem "cucumber-rails"
   gem "capybara"
-  gem "shoulda"
-  gem "factory_girl"
-  gem "evergreen"
+  gem "shoulda-matchers"
   gem "database_cleaner"
 end
 
