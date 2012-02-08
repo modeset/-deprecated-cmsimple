@@ -1,5 +1,5 @@
 module Cmsimple
-  class PagesController < ApplicationController
+  class PagesController < Cmsimple.configuration.parent_controller.constantize
     self.responder = Cmsimple::TemplateResponder
     respond_to :html
 
