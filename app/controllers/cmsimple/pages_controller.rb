@@ -1,5 +1,6 @@
 module Cmsimple
   class PagesController < ApplicationController
+    self.responder = Cmsimple::TemplateResponder
     respond_to :html
 
     def show

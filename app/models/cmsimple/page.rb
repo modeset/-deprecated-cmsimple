@@ -3,5 +3,10 @@ module Cmsimple
     validates :path,
               :content,
               :presence => true
+
+    def template
+      nil
+    end
+
   end
 end

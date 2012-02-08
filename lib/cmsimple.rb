@@ -8,3 +8,4 @@ module Cmsimple
 end
 
 require 'cmsimple/rails'
+require 'cmsimple/template_responder'
