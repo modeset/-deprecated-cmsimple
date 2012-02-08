@@ -4,9 +4,5 @@ module Cmsimple
               :content,
               :presence => true
 
-    def template
-      nil
-    end
-
   end
 end
