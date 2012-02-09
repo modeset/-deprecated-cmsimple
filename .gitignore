@@ -2,6 +2,7 @@
 .bundle
 .idea
 .rake_tasks
+.rvmrc
 REVISION
 vendor/bundle
 .rake_tasks~
@@ -20,5 +21,8 @@ tmp/**/*
 tmp/
 coverage
 capybara*
+
+# test app
+spec/rails_app/db/migrate/**.cmsimple.rb
 
 Gemfile.lock
