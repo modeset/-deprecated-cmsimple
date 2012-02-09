@@ -8,6 +8,6 @@ describe Cmsimple::Regions do
 
   it 'returns the value on to_s' do
     regions = Cmsimple::Regions.new content: {value: 'hello'}
-    regions.content.html_safe.should == 'hello'
+    regions.content.to_s.should == 'hello'
   end
 end
