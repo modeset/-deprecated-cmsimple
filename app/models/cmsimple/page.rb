@@ -3,11 +3,10 @@ module Cmsimple
   class Page < ActiveRecord::Base
     serialize :content, Hash
     validates :path,
-              :content,
               :presence => true
 
     def regions
-      OpenStruct.new self.content.inject({}) { |h, (k,v)| h[k] = v['value']; h}
+      @regions ||= Regions.new(self.content)
     end
 
     def update_content(json)
