@@ -10,4 +10,9 @@ describe Cmsimple::Regions do
     regions = Cmsimple::Regions.new content: {value: 'hello'}
     regions.content.to_s.should == 'hello'
   end
+
+  it 'returns an empty string for a non-existent region' do
+    regions = Cmsimple::Regions.new nil
+    regions.content.to_s.should == ''
+  end
 end

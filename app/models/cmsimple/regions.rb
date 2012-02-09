@@ -3,9 +3,11 @@ module Cmsimple
     attr_accessor :regions_hash
 
     def initialize(regions_hash)
-      @regions_hash = regions_hash.dup
-      @regions_hash.symbolize_keys!
-      define_regions
+      if regions_hash.is_a?(Hash)
+        @regions_hash = regions_hash.dup
+        @regions_hash.symbolize_keys!
+        define_regions
+      end
     end
 
     def define_regions
