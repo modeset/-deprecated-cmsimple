@@ -5,8 +5,8 @@ require "cmsimple/version"
 Gem::Specification.new do |s|
   s.name        = "cmsimple"
   s.version     = Cmsimple::VERSION
-  s.authors     = ["Gabe Varela"]
-  s.email       = ["gvarela@gmail.com"]
+  s.authors     = ["Gabe Varela", "Jay Zeschin"]
+  s.email       = ["info@modeset.com"]
   s.homepage    = ""
   s.summary     = %q{TODO: Write a gem summary}
   s.description = %q{TODO: Write a gem description}
@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "haml-rails"
   s.add_runtime_dependency 'jquery-rails'
   s.add_runtime_dependency "formtastic"
-  s.add_runtime_dependency "will_paginate"
+  s.add_runtime_dependency "mercury-rails"
 
 
   # specify any dependencies here; for example:
