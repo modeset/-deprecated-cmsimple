@@ -3,7 +3,7 @@ module Cmsimple
     self.responder = Cmsimple.configuration.template_strategy
     respond_to :html, :json
 
-    def update
+    def update_content
       @page = Page.find_by_path!("/#{params[:page]}")
       @page.update_content(params[:content])
       respond_with @page, :location => @page.path

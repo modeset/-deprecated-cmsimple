@@ -5,6 +5,6 @@ Cmsimple::Engine.routes.draw do
   match '*page' => 'pages#show', :via => :get
   root :to => 'pages#show', :via => :get
 
-  match '*page' => 'pages#update', :via => :post
-  root :to => 'pages#update', :via => :post
+  match '*page' => 'pages#update_content', :via => :post
+  root :to => 'pages#update_content', :via => :post
 end
