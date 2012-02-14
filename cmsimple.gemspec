@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'jquery-rails'
   s.add_runtime_dependency "formtastic"
   s.add_runtime_dependency "mercury-rails"
+  s.add_runtime_dependency "cells", "~> 3.8"
 
 
   # specify any dependencies here; for example:

@@ -1,6 +1,8 @@
 module Cmsimple
   class PagesController < Cmsimple.configuration.parent_controller.constantize
     self.responder = Cmsimple.configuration.template_strategy
+    helper Cmsimple::RegionsHelper
+
     respond_to :html, :json
 
     def update_content

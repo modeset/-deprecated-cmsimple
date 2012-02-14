@@ -2,6 +2,7 @@ require "cmsimple/version"
 require 'rails'
 require 'haml-rails'
 require 'mercury-rails'
+require 'cells'
 
 module Cmsimple
   class Configuration
