@@ -39,5 +39,5 @@ end
 
 require 'cmsimple/rails'
 require 'cmsimple/template_responder'
-require 'cmsimple/region_proxy'
+require 'cmsimple/regions_proxy'
 

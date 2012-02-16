@@ -6,7 +6,7 @@ module Cmsimple
               :presence => true
 
     def regions
-      @regions ||= RegionProxy.new(self.content)
+      @regions ||= RegionsProxy.new(self.content)
     end
 
     def update_content(content)

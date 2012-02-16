@@ -1,5 +1,5 @@
 module Cmsimple
-  class RegionProxy
+  class RegionsProxy
     attr_accessor :regions_hash
 
     def initialize(regions_hash)
