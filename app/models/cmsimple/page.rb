@@ -9,8 +9,8 @@ module Cmsimple
       @regions ||= RegionProxy.new(self.content)
     end
 
-    def update_content(json)
-      update_attributes(content: JSON.parse(json))
+    def update_content(content)
+      update_attributes(content: content)
     end
 
   end

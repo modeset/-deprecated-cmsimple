@@ -1,0 +1,7 @@
+%h2 Full Name Snippet
+= semantic_form_for @snippet, :url => '#' do |f|
+  = f.input :first_name
+  = f.input :last_name
+  = f.buttons do
+    = f.commit_button
+

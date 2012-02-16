@@ -2,13 +2,13 @@ require 'spec_helper'
 require 'cell/test_case'
 describe Cmsimple::RegionsHelper do
   it 'returns the value of the region' do
-    region(Cmsimple::Regions::Region.new value: '<h1>blah</h1>').should == '<h1>blah</h1>'
+    region(Cmsimple::Region.new value: '<h1>blah</h1>').should == '<h1>blah</h1>'
   end
 
   describe 'snippets' do
     include Cell::TestCase::TestMethods
     before do
-      @region = Cmsimple::Regions::Region.new(value: "<div>some content</div><div>[snippet_0/0]</div>",
+      @region = Cmsimple::Region.new(value: "<div>some content</div><div>[snippet_0/0]</div>",
                                               snippets: {snippet_0: {name: 'example',
                                                                      options: { first_name: 'Fred',
                                                                                 last_name: 'Flinstone'

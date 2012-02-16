@@ -3,7 +3,7 @@ Given 'a page exists at a custom path with custom content' do
   @content = '<h1>Hello!</h1>'
   @path    = '/about'
   @page = Cmsimple::Page.create(path: @path)
-  @page.update_content(%{{"content": {"value": "#{@content}"}}})
+  @page.update_content({:content => {:value => @content}})
 end
 
 When "I visit that page's path" do

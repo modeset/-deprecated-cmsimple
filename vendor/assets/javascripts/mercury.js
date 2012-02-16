@@ -126,7 +126,7 @@ window.Mercury = {
         insertMedia:           ['Media', 'Insert Media (images and videos)', { modal: '/mercury/modals/media.html', regions: ['editable', 'markupable'] }],
         insertTable:           ['Table', 'Insert Table', { modal: '/mercury/modals/table.html', regions: ['editable', 'markupable'] }],
         insertCharacter:       ['Character', 'Special Characters', { modal: '/mercury/modals/character.html', regions: ['editable', 'markupable'] }],
-        snippetPanel:          ['Snippet', 'Snippet Panel', { panel: '/mercury/panels/snippets.html' }],
+        snippetPanel:          ['Snippet', 'Snippet Panel', { panel: '/cmsimple/snippets' }],
         sep2:                  ' ',
         historyPanel:          ['History', 'Page Version History', { panel: '/mercury/panels/history.html' }],
         sep3:                  ' ',
@@ -134,7 +134,7 @@ window.Mercury = {
         },
 
       editable: {
-        _regions:              ['editable', 'markupable'],
+        _regions:              ['editable', 'markupable', 'snippetable'],
         predefined:            {
           style:               ['Style', null, { select: '/mercury/selects/style.html', preload: true }],
           sep1:                ' ',
@@ -258,8 +258,8 @@ window.Mercury = {
     // **Note:** `:name` will be replaced with the snippet name in the urls (eg. /mercury/snippets/example/options.html)
     snippets: {
       method: 'POST',
-      optionsUrl: '/mercury/snippets/:name/options.html',
-      previewUrl: '/mercury/snippets/:name/preview.html'
+      optionsUrl: '/cmsimple/snippets/:name/options',
+      previewUrl: '/cmsimple/snippets/:name/preview'
       },
 
 

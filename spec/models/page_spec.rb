@@ -10,7 +10,7 @@ describe Cmsimple::Page do
     end
 
     it "updates content to a hash when json is given to #update_content" do
-      subject.update_content(%{{"content":"hello world"}})
+      subject.update_content({'content' => 'hello world'})
       subject.content.should be_a Hash
       subject.content['content'].should == 'hello world'
     end

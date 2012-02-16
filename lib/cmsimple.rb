@@ -1,6 +1,7 @@
 require "cmsimple/version"
 require 'rails'
 require 'haml-rails'
+require 'formtastic'
 require 'mercury-rails'
 require 'cells'
 
@@ -38,4 +39,5 @@ end
 
 require 'cmsimple/rails'
 require 'cmsimple/template_responder'
+require 'cmsimple/region_proxy'
 

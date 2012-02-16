@@ -1,6 +1,5 @@
 RailsTestApp::Application.routes.draw do
 
-  Mercury::Engine.routes
   mount Cmsimple::Engine, :at => '/'
 
   # The priority is based upon order of creation:
