@@ -2,8 +2,8 @@ require 'ostruct'
 class ExampleCell < Cell::Rails
 
   def display(snippet)
-    @first_name = snippet.options['first_name']
-    @last_name = snippet.options['last_name']
+    @first_name = snippet.first_name
+    @last_name = snippet.last_name
     render view: :display
   end
 
@@ -13,7 +13,6 @@ class ExampleCell < Cell::Rails
 
   def options(snippet)
     @snippet = snippet
-    @options = OpenStruct.new snippet.options
     render
   end
 
