@@ -5,7 +5,6 @@ require 'rspec/rails'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-puts File.expand_path("../support/**/*.rb", __FILE__)
 Dir[File.expand_path("../support/**/*.rb", __FILE__)].each {|f| require f}
 
 RSpec.configure do |config|
