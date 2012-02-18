@@ -22,31 +22,6 @@
  * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- *= require_self
- *
- * Minimum jQuery requirements are 1.7
- *= require mercury/dependencies/jquery-1.7
- *
- * You can include the Rails jQuery ujs script here to get some nicer behaviors in modals, panels and lightviews when
- * using :remote => true within the contents rendered in them.
- * require jquery_ujs
- *
- * If you want to override Mercury functionality, you can do so in a custom file that binds to the mercury:loaded event,
- * or do so at the end of the current file (mercury.js).  There's an example that will help you get started.
- * require mercury_overrides
- *
- * Add all requires for the support libraries that integrate nicely with Mercury Editor.
- * require mercury/support/history
- *
- * Require Mercury Editor itself.
- *= require mercury/mercury
- *
- * Require any localizations you wish to support
- * Example: es.locale, or fr.locale -- regional dialects are in each language file so never en_US for instance.
- * require mercury/locales/swedish_chef.locale
- *
- * Add all requires for plugins that extend or change the behavior of Mercury Editor.
- * require mercury/plugins/save_as_xml/plugin.js
  */
 window.Mercury = {
 
@@ -128,9 +103,11 @@ window.Mercury = {
         insertCharacter:       ['Character', 'Special Characters', { modal: '/mercury/modals/character.html', regions: ['editable', 'markupable'] }],
         snippetPanel:          ['Snippet', 'Snippet Panel', { panel: '/cmsimple/snippets' }],
         sep2:                  ' ',
-        historyPanel:          ['History', 'Page Version History', { panel: '/mercury/panels/history.html' }],
+        editMetadata:          ['Page Metadata', 'Edit Page Metadata'],
         sep3:                  ' ',
-        notesPanel:            ['Notes', 'Page Notes', { panel: '/mercury/panels/notes.html' }]
+        historyPanel:          ['History', 'Page Version History', { panel: '/mercury/panels/history.html' }],
+        // sep4:                  ' ',
+        // notesPanel:            ['Notes', 'Page Notes', { panel: '/mercury/panels/notes.html' }]
         },
 
       editable: {
@@ -288,7 +265,7 @@ window.Mercury = {
     // The handler function should take the response from the server and return an object that matches:
     // `{image: {url: '[your provided url]'}`
     uploading: {
-      enabled: true,
+      enabled: false,
       allowedMimeTypes: ['image/jpeg', 'image/gif', 'image/png'],
       maxFileSize: 1235242880,
       inputName: 'image[image]',
@@ -331,7 +308,8 @@ window.Mercury = {
     // callback functions are executed within the scope of the given region, so you have access to all it's methods.
     behaviors: {
       //foreColor: function(selection, options) { selection.wrap('<span style="color:' + options.value.toHex() + '">', true) },
-      htmlEditor: function() { Mercury.modal('/mercury/modals/htmleditor.html', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); }
+      htmlEditor: function() { Mercury.modal('/mercury/modals/htmleditor.html', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); },
+      editMetadata: function() { Mercury.modal('/cmsimple/page/edit?page=' + window.location.href.replace(/(.*)\/editor(.*)/, '$2'), { title: 'Page Metadata', fullHeight: true, handler: 'editMetadata' }); }
       },
 
 

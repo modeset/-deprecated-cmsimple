@@ -31,3 +31,9 @@ Feature: As a user I should be able to edit pages on the site
     And the "Last name" field should contain "Flinstone"
     And the editor won't prompt when leaving the page
 
+  Scenario: As a user I want to be able to edit the meta data of a page
+    Given a page exists at a custom path with custom content
+    And I visit that page's edit path
+    When I click on the "Page Metadata" button
+    Then the modal window should be visible
+

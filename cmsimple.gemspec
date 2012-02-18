@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "formtastic"
   s.add_runtime_dependency "mercury-rails"
   s.add_runtime_dependency "cells", "~> 3.8"
+  s.add_runtime_dependency "spine-rails", "~> 0.1"
 
 
   # specify any dependencies here; for example:

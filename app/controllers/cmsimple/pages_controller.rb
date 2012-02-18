@@ -3,7 +3,7 @@ module Cmsimple
     self.responder = Cmsimple.configuration.template_strategy
     helper Cmsimple::RegionsHelper
 
-    respond_to :html, :json
+    respond_to :html, :json, :js
 
     def update_content
       @page = Page.find_by_path!("/#{params[:page]}")
@@ -14,7 +14,21 @@ module Cmsimple
     def editor
       @page = Page.find_by_path!("/#{params[:page]}")
       @snippets_hash = @page.regions.snippets_hash
-      render :nothing => true, :layout => 'mercury'
+      render :nothing => true, :layout => 'editor'
+    end
+
+    def edit
+      @page = Page.find_by_path!(params[:page])
+      render :edit, :layout => false
+    end
+
+    def update
+      @page = Page.find(params[:id])
+      if @page.update_attributes(params[:page])
+        respond_with(@page)
+      else
+        render :edit, layout: false
+      end
     end
 
     def show

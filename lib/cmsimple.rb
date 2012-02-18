@@ -3,6 +3,7 @@ require 'rails'
 require 'haml-rails'
 require 'formtastic'
 require 'mercury-rails'
+require 'spine-rails'
 require 'cells'
 
 module Cmsimple

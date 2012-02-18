@@ -1,0 +1,3 @@
+window.CMSimple ?= {}
+CMSimple.Panels ?= {}
+

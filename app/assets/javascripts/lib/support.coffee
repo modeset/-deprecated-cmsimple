@@ -1,0 +1,4 @@
+
+$.ajaxSetup
+  cache: false
+

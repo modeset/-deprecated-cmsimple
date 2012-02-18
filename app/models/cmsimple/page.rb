@@ -1,4 +1,3 @@
-require 'ostruct'
 module Cmsimple
   class Page < ActiveRecord::Base
     serialize :content, Hash
