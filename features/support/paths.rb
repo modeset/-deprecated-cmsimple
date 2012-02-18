@@ -9,7 +9,7 @@ module NavigationHelpers
     "the home page" => '/'
   }
   def path_to(page_name)
-    PATHS[page_name]
+    PATHS[page_name] || page_name.gsub('"', '')
   end
 end
 

@@ -12,14 +12,16 @@ class CMSimple.Panels.PageMetadata extends Spine.Controller
 
   submit: (e)->
     e.preventDefault()
-    page = CMSimple.Editor.current_page.fromForm(@form)
-    page.save
+    @page = CMSimple.Editor.current_page.fromForm(@form)
+    @page.save
       ajax:
         error: @proxy @error
       success: @proxy @success
 
-  success: (page)->
+  success: ->
     @modal.hide()
+    Mercury.silent = true
+    window.location.href = "/editor#{@page.path}" if @page.pathChanged()
 
   error: (event, data)->
     @content.html event.responseText

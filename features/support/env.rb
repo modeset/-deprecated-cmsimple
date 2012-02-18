@@ -8,6 +8,10 @@ ENV['RAILS_ENV'] = 'test'
 require 'cucumber/rails'
 require 'capybara/rails'
 
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, :resynchronize => true)
+end
+
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
 # order to ease the transition to Capybara we set the default here. If you'd
 # prefer to use XPath just remove this line and adjust any selectors in your

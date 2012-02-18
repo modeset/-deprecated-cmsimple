@@ -34,6 +34,9 @@ Feature: As a user I should be able to edit pages on the site
   Scenario: As a user I want to be able to edit the meta data of a page
     Given a page exists at a custom path with custom content
     And I visit that page's edit path
-    When I click on the "Page Metadata" button
+    When I click on the "editMetadata" button
     Then the modal window should be visible
+    When I fill in "Path" with "/new_path"
+    And I press "Update Page"
+    Then I should be on "/editor/new_path"
 

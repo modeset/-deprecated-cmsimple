@@ -10,3 +10,10 @@ class CMSimple.Page extends Spine.Model
     values = values.page if values.page
     @load(values)
 
+  load: (atts)->
+    @originalAttributes = atts unless @originalAttributes
+    super
+
+  pathChanged: ->
+    @originalAttributes.path && @path isnt @originalAttributes.path
+
