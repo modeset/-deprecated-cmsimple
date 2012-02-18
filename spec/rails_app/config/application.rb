@@ -10,6 +10,7 @@ if defined?(Bundler)
 end
 
 require 'cmsimple'
+require 'jasminerice'
 
 module RailsTestApp
   class Application < Rails::Application
@@ -54,6 +55,9 @@ module RailsTestApp
 
     # Enable the asset pipeline
     config.assets.enabled = true
+
+    # asset paths for jasminerice
+    config.assets.paths << File.join(Rails.root, "..", "javascripts")
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
