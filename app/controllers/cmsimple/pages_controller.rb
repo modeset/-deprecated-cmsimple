@@ -18,7 +18,7 @@ module Cmsimple
     end
 
     def edit
-      @page = Page.find_by_path!(params[:page])
+      @page = Page.find(params[:id])
       render :edit, :layout => false
     end
 

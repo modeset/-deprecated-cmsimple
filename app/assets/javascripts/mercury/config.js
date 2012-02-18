@@ -309,7 +309,7 @@ window.Mercury = {
     behaviors: {
       //foreColor: function(selection, options) { selection.wrap('<span style="color:' + options.value.toHex() + '">', true) },
       htmlEditor: function() { Mercury.modal('/mercury/modals/htmleditor.html', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); },
-      editMetadata: function() { Mercury.modal('/cmsimple/page/edit?page=' + window.location.href.replace(/(.*)\/editor(.*)/, '$2'), { title: 'Page Metadata', fullHeight: true, handler: 'editMetadata' }); }
+      editMetadata: function() { Mercury.modal('/pages/'+ CMSimple.Editor.current_page.id + '/edit', { title: 'Page Metadata', fullHeight: true, handler: 'editMetadata' }); }
       },
 
 
@@ -330,8 +330,7 @@ window.Mercury = {
     // This is a nice way to add functionality, when the behaviors aren't region specific.  These can be triggered by a
     // button, or manually with `Mercury.trigger('action', {action: 'barrelRoll'})`
     globalBehaviors: {
-      exit: function() { window.location.href = this.iframeSrc() },
-      barrelRoll: function() { $('body').css({webkitTransform: 'rotate(360deg)'}) }
+      exit: function() { window.location.href = this.iframeSrc() }
       },
 
 
