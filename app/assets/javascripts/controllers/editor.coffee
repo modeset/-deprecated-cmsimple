@@ -1,6 +1,6 @@
 Mercury.PageEditor::setFrameSource = (url)->
-  newPath = "#{path}?_=#{new Date().getTime()}"
-  @iframe.get(0).contentWindow.document.location.href = newPath
+  newUrl = "#{url}?_=#{new Date().getTime()}"
+  @iframe.get(0).contentWindow.document.location.href = newUrl
 
 class CMSimple.Editor extends Spine.Controller
   el: 'body'
