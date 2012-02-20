@@ -21,7 +21,7 @@ class CMSimple.Panels.PageMetadata extends Spine.Controller
   success: ->
     @modal.hide()
     Mercury.silent = true
-    window.location.href = "/editor#{@page.path}" if @page.pathChanged()
+    @page.reload()
 
   error: (event, data)->
     @content.html event.responseText

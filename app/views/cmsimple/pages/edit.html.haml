@@ -2,6 +2,7 @@
   = semantic_form_for @page do |f|
     = f.inputs do
       = f.input :path
+      = f.input :template, collection: Cmsimple::TemplateResolver.all, prompt: 'None / Inherit'
     .mercury-display-controls
       = f.buttons do
         = f.commit_button

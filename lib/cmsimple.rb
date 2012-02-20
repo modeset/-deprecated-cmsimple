@@ -10,10 +10,11 @@ module Cmsimple
   class Configuration
     def initialize
       self.parent_controller = 'ApplicationController'
+      self.template_path = 'cmsimple/templates'
       self.template_strategy = :basic
     end
 
-    attr_accessor :parent_controller
+    attr_accessor :parent_controller, :template_path
     attr_writer :template_strategy
 
     def template_strategy
@@ -39,6 +40,7 @@ module Cmsimple
 end
 
 require 'cmsimple/rails'
+require 'cmsimple/template_resolver'
 require 'cmsimple/template_responder'
 require 'cmsimple/regions_proxy'
 

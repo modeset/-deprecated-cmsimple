@@ -10,10 +10,9 @@ class CMSimple.Page extends Spine.Model
     values = values.page if values.page
     @load(values)
 
-  load: (atts)->
-    @originalAttributes = atts unless @originalAttributes
-    super
+  reload: (options)->
+    @trigger 'reload', options
 
-  pathChanged: ->
-    @originalAttributes.path && @path isnt @originalAttributes.path
+  editPath: ->
+    "/editor#{@path}"
 
