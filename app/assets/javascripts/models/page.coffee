@@ -1,5 +1,5 @@
 class CMSimple.Page extends Spine.Model
-  @configure 'Page', 'path', 'template'
+  @configure 'Page', 'path', 'template', 'title', 'parent_id'
   @extend Spine.Model.Ajax
 
   snippets: ->

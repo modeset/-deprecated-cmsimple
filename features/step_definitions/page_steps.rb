@@ -2,7 +2,7 @@
 Given 'a page exists at a custom path with custom content' do
   @content = '<h1>Hello!</h1>'
   @path    = '/about'
-  @page = Cmsimple::Page.create(path: @path)
+  @page = Cmsimple::Page.create(path: @path, title: 'About')
   @page.update_content({:editable1 => {:value => @content}})
 end
 
