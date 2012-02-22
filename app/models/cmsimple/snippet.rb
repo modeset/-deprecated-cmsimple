@@ -29,7 +29,7 @@ module Cmsimple
       end
 
       def matcher
-        /\[#{self.id}\/\d\]/
+        /\[#{self.id}(\/\d)?\]/
       end
 
       #
