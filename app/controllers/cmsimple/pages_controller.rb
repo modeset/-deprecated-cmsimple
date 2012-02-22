@@ -5,6 +5,11 @@ module Cmsimple
 
     respond_to :html, :json, :js
 
+    def index
+      @pages = Page.all
+      respond_with @pages
+    end
+
     def update_content
       @page = Page.find_by_path!("/#{params[:page]}")
       @page.update_content(params[:content])
@@ -13,7 +18,6 @@ module Cmsimple
 
     def editor
       @page = Page.find_by_path!("/#{params[:page]}")
-      @snippets_hash = @page.regions.snippets_hash
       render :nothing => true, :layout => 'editor'
     end
 

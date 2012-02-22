@@ -2,6 +2,7 @@ module Cmsimple
   class SnippetsController < Cmsimple.configuration.parent_controller.constantize
 
     def index
+      render :index, layout: false
     end
 
     def preview
