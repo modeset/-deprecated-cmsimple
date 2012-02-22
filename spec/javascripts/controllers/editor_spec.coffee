@@ -6,7 +6,7 @@ describe 'CMSimple.Editor', ->
     @editor.mercury =
                 iframe:
                   data: (->)
-                setFrameSource: (->)
+                setFrameSource: ((path)-> @path = path)
 
   describe 'initialization', ->
 
@@ -17,7 +17,7 @@ describe 'CMSimple.Editor', ->
       expect(CMSimple.Editor.current_page).toEqual(@page)
       expect(@editor.current_page).toEqual(@page)
 
-  describe 'path changes', ->
+  describe 'reloading with page changes', ->
 
     it 'returns true when the path argument does not match the window.location', ->
       spyOn(String::, 'match').andCallFake(-> ['http://cmsimple.dev/editor/about_us', '/editor/about_us'])
@@ -34,4 +34,22 @@ describe 'CMSimple.Editor', ->
       spyOn(@editor, 'loadPath')
       @editor.reload()
       expect(@editor.loadPath).toHaveBeenCalled()
+
+  describe 'loading a new page', ->
+    beforeEach ->
+      @otherPage = new CMSimple.Page path: '/contact'
+      @otherPage.save ajax: false
+      spyOn(Mercury.Snippet, 'clearAll').andCallThrough()
+      spyOn(Mercury.Snippet, 'load')
+      @editor.loadNewPageFromPath('/contact')
+
+    it 'sets the current page to the page with the matching path', ->
+      expect(@editor.current_page).toEqual(@otherPage)
+
+    it 'reloads the snippets', ->
+      expect(Mercury.Snippet.clearAll).toHaveBeenCalled()
+      expect(Mercury.Snippet.load).toHaveBeenCalled()
+
+    it 'loads the new path in mercury', ->
+      expect(@editor.mercury.path).toEqual(@otherPage.path)
 

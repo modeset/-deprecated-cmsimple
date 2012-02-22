@@ -1,6 +1,12 @@
 Mercury.PageEditor::setFrameSource = (url)->
   newUrl = "#{url}?_=#{new Date().getTime()}"
+  @iframe.data('loaded', false)
   @iframe.get(0).contentWindow.document.location.href = newUrl
+
+Mercury.Snippet.clearAll = ->
+  delete @all
+  @all = []
+  $('.mercury-snippet-toolbar').remove()
 
 class CMSimple.Editor extends Spine.Controller
   el: 'body'
@@ -12,7 +18,10 @@ class CMSimple.Editor extends Spine.Controller
     @routes
       '/editor/*path': (params)=>
         path = "/#{params.match[1]}"
-        @loadPath(path)
+        if @current_page.path is path
+          @loadPath(path)
+        else
+          @loadNewPageFromPath(path)
 
     Spine.Route.setup(history: true)
 
@@ -23,11 +32,17 @@ class CMSimple.Editor extends Spine.Controller
     @current_page.save(ajax: false)
     @current_page.bind 'reload', @proxy @reload
 
+  loadNewPageFromPath: (path)->
+    @setCurrentPage(CMSimple.Page.findByAttribute('path', path))
+    @loadCurrentSnippets()
+    @loadPath(path)
+
   initializeMercury: ->
     @mercury = new Mercury.PageEditor(null, saveStyle: 'form')
     @loadCurrentSnippets()
 
   loadCurrentSnippets: ->
+    Mercury.Snippet.clearAll()
     Mercury.Snippet.load(@current_page.snippets())
 
   reload: ->
@@ -38,7 +53,6 @@ class CMSimple.Editor extends Spine.Controller
 
   loadPath: (path)->
     return unless path
-    @mercury.iframe.data('loaded', false)
     @mercury.setFrameSource(path)
 
   pathChange: (path)->
