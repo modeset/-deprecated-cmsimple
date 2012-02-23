@@ -13,6 +13,7 @@
   * Spine.js (spine-rails)
   *= require spine
   *= require spine/ajax
+  *= require spine/relation
   *= require spine/route
   *
   * Mercury specifics
