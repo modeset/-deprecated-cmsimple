@@ -11,11 +11,65 @@
 html { -webkit-text-size-adjust: none; }
 
 /* Button example */
-.mercury-primary-toolbar .mercury-inspector-button em,
-.mercury-primary-toolbar .mercury-editMetadata-button em,
-.mercury-expander-button[data-button="inspector"] em {
+.mercury-primary-toolbar .mercury-inspector-button em {
   background-image: url(/assets/mercury/toolbar/primary/inspectorpanel.png);
 }
 .mercury-sitemap-button em {
   background-image: url(/assets/toolbar/sitemap.png);
 }
+
+/* Override toolbar button images */
+.mercury-primary-toolbar .mercury-save-button em,
+.mercury-expander-button[data-button=save] em {
+  background-image: url(/assets/toolbar/save.png);
+}
+
+.mercury-primary-toolbar .mercury-preview-button em,
+.mercury-expander-button[data-button=preview] em {
+  background-image: url(/assets/toolbar/preview.png);
+}
+
+.mercury-primary-toolbar .mercury-undo-button em,
+.mercury-expander-button[data-button=undo] em {
+  background-image: url(/assets/toolbar/undo.png);
+}
+
+.mercury-primary-toolbar .mercury-redo-button em,
+.mercury-expander-button[data-button=redo] em {
+  background-image: url(/assets/toolbar/redo.png);
+}
+
+.mercury-primary-toolbar .mercury-insertLink-button em,
+.mercury-expander-button[data-button=insertLink] em {
+  background-image: url(/assets/toolbar/link.png);
+}
+
+.mercury-primary-toolbar .mercury-insertMedia-button em,
+.mercury-expander-button[data-button=insertMedia] em {
+  background-image: url(/assets/toolbar/media.png);
+}
+.mercury-primary-toolbar .mercury-insertTable-button em,
+.mercury-expander-button[data-button=insertTable] em {
+  background-image: url(/assets/toolbar/table.png);
+}
+
+.mercury-primary-toolbar .mercury-insertCharacter-button em,
+.mercury-expander-button[data-button=insertCharacter] em {
+  background-image: url(/assets/toolbar/character.png);
+}
+
+.mercury-primary-toolbar .mercury-snippetPanel-button em,
+.mercury-expander-button[data-button=snippetPanel] em {
+  background-image: url(/assets/toolbar/snippets.png);
+}
+
+.mercury-primary-toolbar .mercury-historyPanel-button em,
+.mercury-expander-button[data-button=historyPanel] em {
+  background-image: url(/assets/toolbar/history.png);
+}
+
+.mercury-primary-toolbar .mercury-editMetadata-button em,
+.mercury-expander-button[data-button="inspector"] em {
+  background-image: url(/assets/toolbar/metadata.png);
+}
+
