@@ -1,0 +1,5 @@
+%li
+  %article{data-id=@id}
+    %span= @title
+    %span.path= @path
+  %ul.child

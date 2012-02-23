@@ -1,6 +1,2 @@
+%button.add Add Page
 %ul.sitemap
-  - for page in @pages
-    %li
-      %span= page.title
-      %span= page.path
-      %a{href: page.editPath()} view

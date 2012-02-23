@@ -16,12 +16,25 @@ class CMSimple.Panels.Sitemap extends Mercury.Panel
     CMSimple.Page.fetch()
 
   render: ->
-    @loadContent JST['views/sitemap'](pages: CMSimple.Page.all())
-    @bindLinks()
+    @loadContent JST['views/sitemap']()
+    @sitemap = $('ul.sitemap', @element)
+    @renderPages(@sitemap, CMSimple.Page.roots())
     @resize()
 
-  bindLinks: ->
-    $('a', @element).click (e)->
-      e.preventDefault()
-      Spine.Route.navigate($(e.target).attr('href'))
+  renderPages: (container, pages)->
+    for page in pages
+      item = @renderPage(page)
+      container.append(item)
+      if page.children().first()
+        @renderPages($('ul.child', item), page.children().all())
+
+  renderPage: (page)->
+    item = $(JST['views/sitemap_page'](page))
+    item.click (e)=> @handleClick(e)
+    return item
+
+  handleClick: (e)->
+    e.preventDefault()
+    page_id = $(e.target).data('id') || $($(e.target).parent('[data-id]')).data('id')
+    Spine.Route.navigate(CMSimple.Page.find(page_id).editPath())
 

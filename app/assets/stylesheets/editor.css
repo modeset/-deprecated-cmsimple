@@ -1,15 +1,32 @@
 .mercury-panel ul.sitemap {
   list-style: none;
-  width: 300px;
+  width: 350px;
   padding: 0;
 }
 .mercury-panel ul.sitemap li {
   list-style: none;
-  background-color: #333;
-  padding: 10px;
-  margin-bottom: 2px;
-  border-radius: 4px;
+  padding: 0;
 }
-.mercury-panel ul.sitemap li a {
+.mercury-panel ul.sitemap > li article {
+  background-color: #666;
+  padding: 8px;
+  margin-bottom: 2px;
+  border-radius: 16px;
+  cursor: pointer;
+}
+.mercury-panel ul.sitemap > li article .path {
+  float: right
+}
+.mercury-panel ul.sitemap > li article:hover {
+  cursor: pointer;
+}
+.mercury-panel ul.sitemap li article a {
   float: right;
+}
+.mercury-panel ul.sitemap li article ul {
+  margin-left: 2px;
+  padding: 0;
+}
+.mercury-panel ul.sitemap > li ul li article {
+  background-color: #333;
 }
