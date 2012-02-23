@@ -10,9 +10,9 @@ Mercury.Snippet.clearAll = ->
 
 class CMSimple.Editor extends Spine.Controller
   el: 'body'
-  constructor: (@current_page)->
+  constructor: (page)->
     super()
-    @setCurrentPage(@current_page)
+    @setCurrentPage(page)
     @initializeMercury()
 
     @routes
@@ -26,6 +26,7 @@ class CMSimple.Editor extends Spine.Controller
     Spine.Route.setup(history: true)
 
   setCurrentPage: (page)->
+    return unless page
     @current_page.unbind() if @current_page
     @current_page = page
     CMSimple.Editor.current_page = @current_page
