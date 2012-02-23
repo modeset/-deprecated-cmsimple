@@ -18,7 +18,7 @@ class CMSimple.Editor extends Spine.Controller
     @routes
       '/editor/*path': (params)=>
         path = "/#{params.match[1]}"
-        if @current_page.path is path
+        if @current_page and @current_page.path is path
           @loadPath(path)
         else
           @loadNewPageFromPath(path)
