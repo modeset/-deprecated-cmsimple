@@ -106,6 +106,8 @@ window.Mercury = {
         editMetadata:          ['Page Metadata', 'Edit Page Metadata'],
         sep3:                  ' ',
         historyPanel:          ['History', 'Page Version History', { panel: '/mercury/panels/history.html' }],
+        sep4:                  ' ',
+        sitemap:               ['Site Map', 'List of pages in the site', {toggle: true}],
         // sep4:                  ' ',
         // notesPanel:            ['Notes', 'Page Notes', { panel: '/mercury/panels/notes.html' }]
         },
@@ -309,7 +311,8 @@ window.Mercury = {
     behaviors: {
       //foreColor: function(selection, options) { selection.wrap('<span style="color:' + options.value.toHex() + '">', true) },
       htmlEditor: function() { Mercury.modal('/mercury/modals/htmleditor.html', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); },
-      editMetadata: function() { Mercury.modal('/pages/'+ CMSimple.Editor.current_page.id + '/edit', { title: 'Page Metadata', fullHeight: true, handler: 'editMetadata' }); }
+      editMetadata: function() { Mercury.modal('/pages/'+ CMSimple.Editor.current_page.id + '/edit', { title: 'Page Metadata', fullHeight: true, handler: 'editMetadata' }); },
+      sitemap: function(){ CMSimple.Panels.Sitemap.toggle(this) }
       },
 
 

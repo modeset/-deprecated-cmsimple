@@ -16,3 +16,6 @@ html { -webkit-text-size-adjust: none; }
 .mercury-expander-button[data-button="inspector"] em {
   background-image: url(/assets/mercury/toolbar/primary/inspectorpanel.png);
 }
+.mercury-sitemap-button em {
+  background-image: url(/assets/toolbar/sitemap.png);
+}

@@ -5,6 +5,7 @@ require 'formtastic'
 require 'mercury-rails'
 require 'spine-rails'
 require 'cells'
+require 'haml_coffee_assets'
 
 module Cmsimple
   class Configuration

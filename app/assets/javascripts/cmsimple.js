@@ -16,6 +16,9 @@
   *= require spine/relation
   *= require spine/route
   *
+  * Haml Coffee Templates
+  *= require hamlcoffee
+  *
   * Mercury specifics
   *
   * Add all requires for the support libraries that integrate nicely with Mercury Editor.
@@ -40,6 +43,8 @@
   *= require lib/support
   *
   *= require panels/page_metadata
+  *= require panels/sitemap
   *= require controllers/editor
   *= require models/page
+  *= require_tree ./views
   */

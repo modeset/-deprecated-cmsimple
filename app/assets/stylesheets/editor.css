@@ -1,0 +1,15 @@
+.mercury-panel ul.sitemap {
+  list-style: none;
+  width: 300px;
+  padding: 0;
+}
+.mercury-panel ul.sitemap li {
+  list-style: none;
+  background-color: #333;
+  padding: 10px;
+  margin-bottom: 2px;
+  border-radius: 4px;
+}
+.mercury-panel ul.sitemap li a {
+  float: right;
+}
