@@ -45,6 +45,8 @@ describe 'CMSimple.Page', ->
 
     it 'can grab all the roots', ->
       roots = CMSimple.Page.roots()
+      titles = _.compact(_.pluck(roots, 'title'))
       expect(roots.length).toEqual(2)
-      expect(_.compact(_.pluck(roots, 'title'))).toEqual(['Parent', 'Single'])
+      expect(titles).toContain('Parent')
+      expect(titles).toContain('Single')
 
