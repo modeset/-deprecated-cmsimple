@@ -1,3 +1,13 @@
+
+.mercury-panel {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.mercury-panel h1 {
+  color: #f5f5f5;
+}
+
 .mercury-panel ul.sitemap {
   list-style: none;
   width: 350px;
@@ -9,10 +19,16 @@
 }
 .mercury-panel ul.sitemap > li article {
   background-color: #666;
+  color: #f5f5f5;
   padding: 8px;
   margin-bottom: 2px;
-  border-radius: 16px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
   cursor: pointer;
+}
+.mercury-panel ul.sitemap > li article:hover {
+  background-color: #777;
 }
 .mercury-panel ul.sitemap > li article .path {
   float: right
@@ -28,5 +44,29 @@
   padding: 0;
 }
 .mercury-panel ul.sitemap > li ul li article {
-  background-color: #333;
+  background-color: #444;
 }
+
+.mercury-panel .mercury-panel-pane button.add {
+  padding: 8px 14px 9px !important;
+  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #ddd;
+  display: block;
+  color: #333;
+  text-decoration: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  text-shadow: 0 -1px 1px rgba(255,255,255, 0.25);
+  border: 1px solid #555;
+  position: relative;
+  cursor: pointer;
+  line-height: normal;
+}
+
+.mercury-panel .mercury-panel-pane button.add:hover {
+  background-color: #fff;
+}
+
