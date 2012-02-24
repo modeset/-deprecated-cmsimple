@@ -1,2 +1,3 @@
-%button.btn.important.add Add Page
+%header.panel-actions
+  %button.btn.important.add Add Page
 %ul.sitemap

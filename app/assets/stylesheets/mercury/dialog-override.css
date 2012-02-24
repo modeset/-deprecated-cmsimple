@@ -16,6 +16,19 @@
 /*
  * Sitemap Panel
  *----------------------------------------------------------------------------*/
+.mercury-panel .panel-actions {
+  background-color: #eaeaea;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  border-radius: 0.5em;
+  padding: 1em;
+  overflow: hidden;
+}
+.mercury-panel .panel-actions .btn {
+  float: right;
+}
+
 .mercury-panel ul.sitemap {
   width: 400px;
   padding: 0;
