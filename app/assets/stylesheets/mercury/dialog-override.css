@@ -1,0 +1,75 @@
+
+/* Dialogs */
+.mercury-panel {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.mercury-panel h1 {
+  color: #f5f5f5;
+  border-bottom: 1px solid #222;
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/*
+ * Sitemap Panel
+ *----------------------------------------------------------------------------*/
+.mercury-panel ul.sitemap {
+  width: 350px;
+  padding: 0;
+}
+.mercury-panel ul.sitemap li {
+  list-style: none;
+  padding: 0;
+}
+.mercury-panel ul.sitemap > li article {
+  background-color: #666;
+  color: #f5f5f5;
+  padding: 0.25em 0.5em;
+  margin-bottom: 2px;
+  -webkit-border-radius: 0.25em;
+  -moz-border-radius: 0.25em;
+  border-radius: 0.25em;
+  cursor: default;
+}
+.mercury-panel ul.sitemap > li article:hover {
+  background-color: #777;
+}
+.mercury-panel ul.sitemap > li article span {
+}
+.mercury-panel ul.sitemap > li article .path {
+  color: #999;
+  margin-left: 0.5em;
+}
+.mercury-panel ul.sitemap li article ul {
+  margin-left: 2px;
+  padding: 0;
+}
+.mercury-panel ul.sitemap > li ul li article {
+  background-color: #444;
+}
+
+/* Increase the gap for top level pages */
+.mercury-panel ul.sitemap > li {
+  margin-bottom: 16px;
+}
+
+.mercury-panel ul.child {
+  *zoom: 1;
+}
+.mercury-panel ul.child:before,
+.mercury-panel ul.child:after {
+  content: "";
+  display: table;
+}
+.mercury-panel ul.child:after {
+  clear: both;
+}
+
+/* Bug in the generated html output is making this appear not to work, but it is legit */
+.mercury-panel ul.sitemap ul.child {
+  margin-bottom: 8px;
+}
+

@@ -4,8 +4,9 @@
     %meta(name="viewport" content="width=device-width, maximum-scale=1.0, initial-scale=1.0")
     = csrf_meta_tags
     %title Mercury Editor
-    = stylesheet_link_tag    'mercury', 'mercury_overrides', 'editor'
+    = stylesheet_link_tag    'mercury', 'mercury_overrides'
     = javascript_include_tag 'cmsimple'
   %body
     :javascript
       new CMSimple.Editor( new CMSimple.Page(#{@page.to_json}) )
+
