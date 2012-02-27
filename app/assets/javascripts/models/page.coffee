@@ -15,6 +15,8 @@ class CMSimple.Page extends Spine.Model
   fromForm: (form)->
     values = form.toJSON()
     values = values.page if values.page
+    #fix for views depending on realtime change events of children
+    values.parent_id = parseInt(values.parent_id, 0) if values.parent_id
     @load(values)
 
   reload: (options)->

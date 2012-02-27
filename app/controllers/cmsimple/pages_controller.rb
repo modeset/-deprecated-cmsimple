@@ -10,6 +10,11 @@ module Cmsimple
       respond_with @pages
     end
 
+    def show
+      @page = Page.find_by_path!("/#{params[:page]}")
+      respond_with @page
+    end
+
     def update_content
       @page = Page.find_by_path!("/#{params[:page]}")
       @page.update_content(params[:content])
@@ -26,6 +31,11 @@ module Cmsimple
       render :edit, :layout => false
     end
 
+    def new
+      @page = Page.new
+      render :new, :layout => false
+    end
+
     def update
       @page = Page.find(params[:id])
       if @page.update_attributes(params[:page])
@@ -35,9 +45,14 @@ module Cmsimple
       end
     end
 
-    def show
-      @page = Page.find_by_path!("/#{params[:page]}")
-      respond_with @page
+    def create
+      @page = Page.new(params[:page])
+      if @page.save
+        respond_with(@page)
+      else
+        render :new, layout: false
+      end
     end
+
   end
 end

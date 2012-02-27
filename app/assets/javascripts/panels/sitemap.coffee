@@ -7,19 +7,27 @@ class CMSimple.Panels.Sitemap extends Mercury.Panel
     super(null, 'Sitemap', title: 'Site Map', appendTo: '.mercury-toolbar-container', closeButton: true)
     @button = $('.mercury-sitemap-button')
 
+    @loadContent JST['views/sitemap']()
+    @sitemap = $('ul.sitemap', @element)
+    @bindAddPage()
+
+    CMSimple.Page.bind 'refresh change', => @render()
+
   toggle: ->
     super
     @refresh() if @visible
 
   refresh: ->
-    CMSimple.Page.one 'refresh', => @render()
     CMSimple.Page.fetch()
 
   render: ->
-    @loadContent JST['views/sitemap']()
-    @sitemap = $('ul.sitemap', @element)
+    @sitemap.html ''
     @renderPages(@sitemap, CMSimple.Page.roots())
     @resize()
+
+  bindAddPage: ->
+    $('button.add').click ->
+      Mercury.trigger 'action', action: 'newPage'
 
   renderPages: (container, pages)->
     for page in pages

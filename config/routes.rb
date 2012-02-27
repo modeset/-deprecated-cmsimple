@@ -4,7 +4,7 @@ Cmsimple::Engine.routes.draw do
   match '/cmsimple/snippets/:name/options' => 'snippets#options'
   match '/cmsimple/snippets' => 'snippets#index', :as => :snippets
 
-  resources :pages, :only => [:index, :edit, :update]
+  resources :pages
 
   match '/mercury/:type/:resource' => "mercury#resource"
 
