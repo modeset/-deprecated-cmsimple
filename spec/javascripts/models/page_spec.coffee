@@ -50,3 +50,11 @@ describe 'CMSimple.Page', ->
       expect(titles).toContain('Parent')
       expect(titles).toContain('Single')
 
+    describe 'update all positions', ->
+      it 'can bulk update to positions', ->
+        CMSimple.Page.updatePositions([1,2,3,4])
+        expect(@single.position).toEqual(3)
+        expect(@parent.position).toEqual(0)
+        expect(@child.position).toEqual(1)
+        expect(@grandchild.position).toEqual(2)
+

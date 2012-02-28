@@ -6,11 +6,22 @@ class CMSimple.Page extends Spine.Model
   @hasMany 'children', 'CMSimple.Page', 'parent_id'
 
   @roots: ->
-    @select (page)->
+    pages = @select (page)->
       not page.parent_id
+    _.sortBy pages, (record)-> record.position
+
+  @updatePositions: (ids, options={})->
+    for id in ids
+      position = ids.indexOf(id)
+      page = CMSimple.Page.find(id)
+      if page.position isnt position
+        page.updateAttributes(position: position)
 
   snippets: ->
     _.reduce @content, ((memo, region)-> _.extend(memo, region.snippets)), {}
+
+  sortedChildren: ->
+    _.sortBy @children().all(), (record)-> record.position
 
   fromForm: (form)->
     values = form.toJSON()

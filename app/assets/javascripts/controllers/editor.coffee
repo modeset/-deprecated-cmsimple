@@ -30,7 +30,7 @@ class CMSimple.Editor extends Spine.Controller
     @current_page.unbind() if @current_page
     @current_page = page
     CMSimple.Editor.current_page = @current_page
-    @current_page.save(ajax: false)
+    @current_page.save(ajax: false) if @current_page.isNew()
     @current_page.bind 'reload', @proxy @reload
 
   loadNewPageFromPath: (path)->

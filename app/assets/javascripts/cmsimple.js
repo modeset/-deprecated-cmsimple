@@ -30,6 +30,8 @@
   * Require Mercury Editor itself.
   *= require mercury/mercury
   *
+  *= require jquery.ui.nestedSortable-1.3.4
+  *
   * Require any localizations you wish to support
   * Example: es.locale, or fr.locale -- regional dialects are in each language file so never en_US for instance.
   * require mercury/locales/swedish_chef.locale
@@ -43,7 +45,7 @@
   *= require lib/support
   *
   *= require panels/page_metadata
-  *= require panels/sitemap
+  *= require_tree ./panels/sitemap
   *= require panels/image_library
   *= require controllers/editor
   *= require models/page

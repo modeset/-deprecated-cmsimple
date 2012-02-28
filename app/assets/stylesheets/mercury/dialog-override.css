@@ -234,16 +234,16 @@
   margin-bottom: 8px;
 }
 
-.mercury-panel ul.child {
+.mercury-panel ul.sitemap ul {
   padding: 0;
   *zoom: 1;
 }
-.mercury-panel ul.child:before,
-.mercury-panel ul.child:after {
+.mercury-panel ul.sitemap ul:before,
+.mercury-panel ul.sitemap ul:after {
   content: "";
   display: table;
 }
-.mercury-panel ul.child:after {
+.mercury-panel ul.sitemap ul:after {
   clear: both;
 }
 
