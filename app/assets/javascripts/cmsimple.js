@@ -44,6 +44,7 @@
   *
   *= require panels/page_metadata
   *= require panels/sitemap
+  *= require panels/image_library
   *= require controllers/editor
   *= require models/page
   *= require_tree ./views
