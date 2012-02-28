@@ -1,3 +1,10 @@
 %header.panel-actions
   %button.btn.important.add Add Image
+.image-filter
+  %input.filter(type="text")
+%ul.media-grid
+  - for num in [1..8]
+    %li
+      %a.media-item(href="#")
+        %img(src="http://placehold.it/182x182" alt="alt")
 

@@ -14,7 +14,7 @@
 }
 
 /*
- * Sitemap Panel
+ * Override Panel Settings
  *----------------------------------------------------------------------------*/
 .mercury-panel .panel-actions {
   background-color: #eaeaea;
@@ -29,6 +29,68 @@
   float: right;
 }
 
+/*
+ * Image Panel
+ *----------------------------------------------------------------------------*/
+.image-filter input.filter {
+  outline: none;
+  font-size: 1em;
+  border-radius: 30px;
+  moz-border-radius: 30px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  width: 100%;
+  padding-left: 20px;
+  background-color: #FFF;
+  background-repeat: no-repeat;
+  background-image: url(/assets/mercury/search-icon.png);
+  background-position: 4px center;
+  margin: 1em 0
+}
+
+.mercury-panel ul.media-grid {
+  width: 400px;
+  padding: 0;
+  overflow: hidden;
+  list-style: none;
+}
+
+.mercury-panel .media-grid > li {
+  float: left;
+  margin-bottom: 16px;
+}
+.mercury-panel .media-grid > li:nth-child(odd) {
+  margin-right: 16px;
+}
+
+.mercury-panel .media-item {
+  /* +box-shadow($drop_dark) */
+  display: block;
+  padding: 4px;
+  line-height: 1;
+  border: 1px solid #ccc;
+  cursor: default;
+}
+
+.mercury-panel .media-item:hover {
+  /* +box-shadow($focus_glow) */
+  border-color: #268bd2;
+  -webkit-box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+.mercury-panel .media-item > img {
+  display: block;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*
+ * Sitemap Panel
+ *----------------------------------------------------------------------------*/
 .mercury-panel ul.sitemap {
   width: 400px;
   padding: 0;
