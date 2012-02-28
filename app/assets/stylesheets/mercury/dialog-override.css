@@ -32,6 +32,38 @@
 /*
  * Image Panel
  *----------------------------------------------------------------------------*/
+.mercury-panel .add-image-action {
+  margin-top: 50px;
+  display: none;
+}
+.mercury-panel .add-image-action.active {
+  display: block;
+}
+.mercury-panel .add-image-action ol {
+  list-style: none;
+}
+
+.mercury-panel .add-image-action li {
+  margin: 0;
+  padding: 0;
+}
+
+.mercury-panel .add-image-action label {
+  font-size: 11px;
+  display: block;
+  float: none;
+  width: auto;
+  margin-right: 0;
+  text-align: left;
+  line-height: normal;
+  overflow: visible;
+  margin-top: 20px;
+}
+.mercury-panel .add-image-action textarea {
+  font-size: 1em;
+  width: 100%;
+}
+
 .image-filter input.filter {
   outline: none;
   font-size: 1em;
@@ -65,20 +97,57 @@
 }
 
 .mercury-panel .media-item {
-  /* +box-shadow($drop_dark) */
+  position: relative;
   display: block;
   padding: 4px;
   line-height: 1;
   border: 1px solid #ccc;
   cursor: default;
+  max-width: 182px;
 }
 
 .mercury-panel .media-item:hover {
-  /* +box-shadow($focus_glow) */
   border-color: #268bd2;
   -webkit-box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
   -moz-box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
   box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+.mercury-panel .media-item > .media-info {
+  position: absolute;
+  background-color: rgba(255,255,255,0.9);
+  z-index: 2;
+  width: 182px;
+  height: 182px;
+  overflow: hidden;
+  display: none;
+}
+.mercury-panel .media-item > .media-info .close {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  text-decoration: none;
+  color: #000;
+}
+
+.mercury-panel .media-item > .media-info.active {
+  display: block;
+}
+
+.mercury-panel .media-item > .media-info dl {
+  margin: 0;
+  padding: 0.5em 1em;
+}
+.mercury-panel .media-item > .media-info dt {
+  font-size: .75em;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 1em 0 0.25em;
+  padding: 0;
+}
+.mercury-panel .media-item > .media-info dd {
+  margin: 0;
+  padding: 0;
 }
 
 .mercury-panel .media-item > img {
@@ -86,6 +155,21 @@
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.mercury-panel .media-caption {
+  max-width: 182px;
+  margin: 0 5px;
+  font-size: 12px;
+  line-height: 0.25;
+}
+.mercury-panel .media-caption a {
+  color: #268bd2;
+  text-decoration: none;
+}
+.mercury-panel .media-caption a:hover {
+  color: #16527C;
+  text-decoration: underline;
 }
 
 /*
@@ -134,6 +218,9 @@
 .mercury-panel ul.sitemap > li article:hover {
   background-color: #444;
   border-color: #268bd2;
+  -webkit-box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
 }
 
 .mercury-panel ul.sitemap > li article span {

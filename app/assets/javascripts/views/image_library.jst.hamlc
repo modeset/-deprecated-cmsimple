@@ -1,10 +1,36 @@
 %header.panel-actions
-  %button.btn.important.add Add Image
+  %button.btn.important#add_image Add Image
+  %form.add-image-action
+    %ol
+      %li
+        %label(for="file_browser") Image Browser
+        %input(id="file_browser" name="file" type="file" value="file")
+      %li
+        %label(for="textarea") Meta Tags
+        %textarea(id="textarea" name="test[textarea]" placeholder="Enter meta tags for easier searching!" rows="6")
+      %li
+        %button.btn(type="submit") Upload
 .image-filter
   %input.filter(type="text")
 %ul.media-grid
-  - for num in [1..8]
+  - for num in [1..4]
     %li
-      %a.media-item(href="#")
+      .media-item
+        .media-info
+          %dl
+            %dt Meta Tags
+            %dd burritos, salsa, queso, healthy
+          %a.close(href="#") &times;
+
         %img(src="http://placehold.it/182x182" alt="alt")
+      .media-caption
+        %p.media-name
+          %strong="image-name-00#{num}.jpg"
+        %p.media-size 1920 x 1080
+        %p.media-actions
+          %a.info(href="#") info
+          |
+          %a.edit(href="#") edit
+          |
+          %a.delete(href="#") delete
 
