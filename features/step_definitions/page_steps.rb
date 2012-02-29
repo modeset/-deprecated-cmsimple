@@ -2,7 +2,7 @@
 Given 'a page exists at a custom path with custom content' do
   @content = '<h1>Hello!</h1>'
   @path    = '/about'
-  @page = Cmsimple::Page.create(path: @path, title: 'About')
+  @page = Cmsimple::Page.create(title: 'About', slug: @path.gsub(/\//,''))
   @page.update_content({:editable1 => {:value => @content}})
 end
 
@@ -63,7 +63,7 @@ When "I add a new page" do
   click_button 'Add Page'
   step %{the modal window should be visible}
   fill_in 'Title', :with => 'Some new page'
-  fill_in 'Path', :with => '/some_new_page'
+  fill_in 'Slug', :with => 'some_new_page'
   click_button 'Create Page'
 end
 
@@ -72,8 +72,8 @@ When /^I change the template to "([^"]*)"/ do |template|
   click_button 'Update Page'
 end
 
-When /^I change the path to "([^"]*)"/ do |path|
-  fill_in 'Path', :with => path
+When /^I change the slug to "([^"]*)"/ do |path|
+  fill_in 'Slug', :with => path
   click_button 'Update Page'
 end
 

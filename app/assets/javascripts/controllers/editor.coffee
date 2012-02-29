@@ -18,7 +18,7 @@ class CMSimple.Editor extends Spine.Controller
     @routes
       '/editor/*path': (params)=>
         path = "/#{params.match[1]}"
-        if @current_page and @current_page.path is path
+        if @current_page and @current_page.path() is path
           @loadPath(path)
         else
           @loadNewPageFromPath(path)
@@ -34,7 +34,7 @@ class CMSimple.Editor extends Spine.Controller
     @current_page.bind 'reload', @proxy @reload
 
   loadNewPageFromPath: (path)->
-    @setCurrentPage(CMSimple.Page.findByAttribute('path', path))
+    @setCurrentPage(CMSimple.Page.forPath(path))
     @loadCurrentSnippets()
     @loadPath(path)
 
@@ -50,7 +50,7 @@ class CMSimple.Editor extends Spine.Controller
     if @pathChange(@current_page.editPath())
       @navigate @current_page.editPath()
     else
-      @loadPath @current_page.path
+      @loadPath @current_page.path()
 
   loadPath: (path)->
     return unless path

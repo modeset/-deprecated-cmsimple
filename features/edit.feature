@@ -35,7 +35,7 @@ Feature: As a user I should be able to edit pages on the site
     Given a page exists at a custom path with custom content
     And I visit that page's edit path
     When I edit the page's metadata
-    And I change the path to "/new_path"
+    And I change the slug to "new_path"
     Then I should be on "/editor/new_path"
 
   Scenario: As a user I want to be able to change the template of a page

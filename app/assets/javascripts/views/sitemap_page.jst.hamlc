@@ -1,5 +1,6 @@
 %li{id="page_#{@id}" data-id=@id}
   %article
     %span= @title
-    %span.path= @path
+    %span.path
+      = @path()
   %ul.child

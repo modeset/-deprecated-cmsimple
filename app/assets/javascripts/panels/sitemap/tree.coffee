@@ -14,7 +14,6 @@ class CMSimple.Panels.Sitemap.Tree extends Spine.Controller
     CMSimple.Page.fetch()
 
   render: ->
-    console.log 'render'
     @sitemap.html ''
     @renderPages(@sitemap, CMSimple.Page.roots())
     $('li', @sitemap).click @proxy @pageClick

@@ -2,7 +2,7 @@
   = f.inputs do
     = f.input :parent_id, collection: Cmsimple::Page.for_parent_select(@page), as: :select, prompt: 'None'
     = f.input :title
-    = f.input :path
+    = f.input :slug
     = f.input :template, collection: Cmsimple::TemplateResolver.all, prompt: 'None / Inherit'
     .mercury-display-controls
       = f.buttons do

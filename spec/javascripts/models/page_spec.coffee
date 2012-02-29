@@ -3,7 +3,7 @@ describe 'CMSimple.Page', ->
   describe 'snippets', ->
     beforeEach ->
       @page = new CMSimple.Page
-                        path: '/about'
+                        slug: 'about'
                         content:
                           example2:
                             value: 'HTML'
@@ -27,14 +27,26 @@ describe 'CMSimple.Page', ->
       expect(@page.snippets().snippet_1.options.first_name).toEqual('Fred')
       expect(@page.snippets().snippet_2.options.first_name).toEqual('Barny')
 
+  describe 'default slug', ->
+    it 'sets the slug from the title', ->
+      stubs.ajax()
+      about = CMSimple.Page.create title: 'About'
+      expect(about.slug).toEqual('about')
+
+    it 'does not change the slug if a title is not passed', ->
+      stubs.ajax()
+      about = CMSimple.Page.create title: 'About'
+      about.load {}
+      expect(about.slug).toEqual('about')
+
   describe 'acts as a tree', ->
     beforeEach ->
       stubs.ajax()
       CMSimple.Page.destroyAll()
-      @single     = CMSimple.Page.create path: '/single', title: 'Single', id: 4
-      @parent     = CMSimple.Page.create path: '/parent', title: 'Parent', id: 1
-      @child      = CMSimple.Page.create path: '/child', title: 'Child', parent_id: @parent.id, id: 2
-      @grandchild = CMSimple.Page.create path: '/grandchild', title: 'grandchild', parent_id: @child.id, id: 3
+      @single     = CMSimple.Page.create title: 'Single', id: 4
+      @parent     = CMSimple.Page.create title: 'Parent', id: 1
+      @child      = CMSimple.Page.create title: 'Child', parent_id: @parent.id, id: 2
+      @grandchild = CMSimple.Page.create title: 'Grand Child', parent_id: @child.id, id: 3
 
     it 'can grab a child', ->
       expect(@parent.children().first()).toEqual(@child)

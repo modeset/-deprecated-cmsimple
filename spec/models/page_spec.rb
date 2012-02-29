@@ -1,7 +1,6 @@
 require 'spec_helper'
 describe Cmsimple::Page do
   subject { Cmsimple::Page.new }
-  it {should validate_presence_of(:path) }
   it {should validate_presence_of(:title) }
   it {should have_many(:children)}
   it {should belong_to(:parent)}
@@ -46,5 +45,36 @@ describe Cmsimple::Page do
     end
   end
 
+  describe 'path generation' do
+    it 'returns a default slug from the title' do
+      subject.title = 'About Us'
+      subject.slug.should == 'about-us'
+    end
 
+    it "doesn't override the slug if it is manually set" do
+      subject.slug = 'about'
+      subject.title = 'About Us'
+      subject.slug.should == 'about'
+    end
+
+    it 'saves the default slug' do
+      subject.title = 'About Us'
+      subject.save
+      Cmsimple::Page.find(subject.id).slug.should == 'about-us'
+    end
+
+    it 'sets the path to the the slug on save if no parent' do
+      subject.title = 'About Us'
+      subject.save
+      Cmsimple::Page.find(subject.id).path.should == '/about-us'
+    end
+
+    it 'sets the path to the the slug on save if no parent' do
+      about = Cmsimple::Page.create title: 'About'
+      subject.parent = about
+      subject.title = 'Contact Us'
+      subject.save
+      Cmsimple::Page.find(subject.id).path.should == '/about/contact-us'
+    end
+  end
 end

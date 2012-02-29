@@ -1,6 +1,6 @@
 describe 'CMSimple.Editor', ->
   beforeEach ->
-    @page = new CMSimple.Page path: '/about'
+    @page = new CMSimple.Page slug: 'about'
     spyOn(CMSimple.Editor::, 'initializeMercury')
     @editor = new CMSimple.Editor @page
     @editor.mercury =
@@ -37,7 +37,7 @@ describe 'CMSimple.Editor', ->
 
   describe 'loading a new page', ->
     beforeEach ->
-      @otherPage = new CMSimple.Page path: '/contact'
+      @otherPage = new CMSimple.Page slug: 'contact'
       @otherPage.save ajax: false
       spyOn(Mercury.Snippet, 'clearAll').andCallThrough()
       spyOn(Mercury.Snippet, 'load')
@@ -51,5 +51,5 @@ describe 'CMSimple.Editor', ->
       expect(Mercury.Snippet.load).toHaveBeenCalled()
 
     it 'loads the new path in mercury', ->
-      expect(@editor.mercury.path).toEqual(@otherPage.path)
+      expect(@editor.mercury.path).toEqual(@otherPage.path())
 

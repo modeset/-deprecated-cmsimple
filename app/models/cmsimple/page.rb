@@ -9,6 +9,10 @@ module Cmsimple
               :title,
               :presence => true
 
+    validates :path, :uniqueness => true
+
+    before_validation :set_path
+
     def self.for_parent_select(page)
       scope = scoped
       unless page.new_record?
@@ -30,6 +34,25 @@ module Cmsimple
 
     def update_content(content)
       update_attributes(content: content)
+    end
+
+    def slug
+      self[:slug] || escape(title)
+    end
+
+    protected
+
+    def escape(string)
+      result = string.to_s.dup
+      result.gsub!(/[^\x00-\x7F]+/, '') # Remove anything non-ASCII entirely (e.g. diacritics).
+      result.gsub!(/[^\w_ \-]+/i, '') # Remove unwanted chars.
+      result.gsub!(/[ \-]+/i, '-') # No more than one of the separator in a row.
+      result.gsub!(/^\-|\-$/i, '') # Remove leading/trailing separator.
+      result.downcase
+    end
+
+    def set_path
+      self.path = [self.parent.try(:path), slug].join('/')
     end
 
   end
