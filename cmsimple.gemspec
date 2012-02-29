@@ -5,11 +5,11 @@ require "cmsimple/version"
 Gem::Specification.new do |s|
   s.name        = "cmsimple"
   s.version     = Cmsimple::VERSION
-  s.authors     = ["Gabe Varela", "Jay Zeschin"]
+  s.authors     = ["Gabe Varela", "Jay Zeschin", "Matt Kitt"]
   s.email       = ["info@modeset.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{A simple CMS based on the Mercury editor}
+  s.description = %q{A simple CMS based on the Mercury editor}
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
