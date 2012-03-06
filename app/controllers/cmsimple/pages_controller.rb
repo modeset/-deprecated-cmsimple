@@ -41,7 +41,7 @@ module Cmsimple
       if @page.update_attributes(params[:page])
         respond_with(@page)
       else
-        render :edit, layout: false
+        render :edit, layout: false, status: 422
       end
     end
 
@@ -50,7 +50,7 @@ module Cmsimple
       if @page.save
         respond_with(@page)
       else
-        render :new, layout: false
+        render :new, layout: false, status: 422
       end
     end
 

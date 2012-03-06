@@ -4,6 +4,7 @@
   *
   * Minimum jQuery requirements are 1.7
   *= require mercury/dependencies/jquery-1.7
+  *= require jquery_ujs
   *
   *= require jquery.to-json
   *
