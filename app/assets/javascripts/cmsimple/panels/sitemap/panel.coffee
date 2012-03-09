@@ -12,10 +12,10 @@ class CMSimple.Panels.Sitemap.Panel extends Mercury.Panel
 
   initializeTree: ->
     @tree = new CMSimple.Panels.Sitemap.Tree(@element)
-    @tree.bind 'redraw', => @resize()
 
   render: ->
-    @loadContent JST['views/sitemap']()
+    @loadContent JST['cmsimple/views/sitemap']()
+    @resize()
 
   # Overwriting the bindEvents to prevent the mousedown trap in the parent class
   bindEvents: ->
@@ -31,9 +31,6 @@ class CMSimple.Panels.Sitemap.Panel extends Mercury.Panel
       Mercury.trigger('hide:panels')
 
   toggle: ->
+    @tree.refresh() unless @visible
     super
-    @refresh() if @visible
-
-  refresh: ->
-    @tree.refresh()
 

@@ -26,7 +26,7 @@
   * require mercury/support/history
   *
   * Mercury configuration
-  *= require mercury/config
+  *= require cmsimple/mercury/config
   *
   * Require Mercury Editor itself.
   *= require mercury/mercury
@@ -38,17 +38,17 @@
   * require mercury/locales/swedish_chef.locale
   *
   * Custom Mercury handlers for CMSimple
-  *= require mercury/handlers
+  *= require cmsimple/mercury/handlers
   *
   * CMSimple Editor
   *
-  *= require lib/namespaces
-  *= require lib/support
+  *= require cmsimple/lib/namespaces
+  *= require cmsimple/lib/support
   *
-  *= require panels/page_metadata
-  *= require_tree ./panels/sitemap
-  *= require panels/image_library
-  *= require controllers/editor
-  *= require models/page
-  *= require_tree ./views
+  *= require cmsimple/panels/page_metadata
+  *= require_tree ./cmsimple/panels/sitemap
+  *= require cmsimple/panels/image_library
+  *= require cmsimple/controllers/editor
+  *= require cmsimple/models/page
+  *= require_tree ./cmsimple/views
   */
