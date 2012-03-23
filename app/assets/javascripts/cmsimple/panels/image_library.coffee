@@ -7,7 +7,7 @@ class CMSimple.Panels.ImageLibrary extends Mercury.Panel
   constructor: ()->
     super(null, 'insertMedia', title: 'Image Library', appendTo: '.mercury-toolbar-container', closeButton: true)
     @button = $('.mercury-insertMedia-button')
-    @loadContent JST['views/image_library']()
+    @loadContent JST['cmsimple/views/image_library']()
 
     # MK junk!
     @testActions()
