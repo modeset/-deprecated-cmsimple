@@ -1,5 +1,5 @@
 class CMSimple.Page extends Spine.Model
-  @configure 'Page', 'template', 'title', 'parent_id', 'position', 'slug'
+  @configure 'Page', 'template', 'title', 'parent_id', 'position', 'slug', 'is_root'
   @extend Spine.Model.Ajax
 
   @belongsTo 'parent', 'CMSimple.Page', 'parent_id'
@@ -38,11 +38,16 @@ class CMSimple.Page extends Spine.Model
   editPath: ->
     "/editor#{@path()}"
 
+  isRoot: ->
+    # handle the form values pre refresh from server
+    @is_root is true or @is_root is '1'
+
   load: (values)->
     values = @normalizeSlug(values)
     super
 
   path: ->
+    return '/' if @isRoot()
     parent_path = if @parent() then @parent().path() else ''
     path = [parent_path, @slug].join('/')
     path = path.replace(/\/+/, '/')

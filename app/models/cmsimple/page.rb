@@ -11,7 +11,19 @@ module Cmsimple
 
     validates :path, :uniqueness => true
 
+    validate :is_root_set
+
     before_validation :set_path
+    before_save :ensure_only_one_root
+
+    def self.from_path(path)
+      path = "/#{path}".gsub(/\/+/, '/')
+      if path == '/'
+        where(is_root: true).first!
+      else
+        where(path: path).first!
+      end
+    end
 
     def self.for_parent_select(page)
       scope = scoped
@@ -53,6 +65,18 @@ module Cmsimple
 
     def set_path
       self.path = [self.parent.try(:path), slug].join('/')
+    end
+
+    def ensure_only_one_root
+      if is_root_changed? && is_root?
+        self.class.where(is_root: true).update_all(is_root: false)
+      end
+    end
+
+    def is_root_set
+      if is_root_changed? && !is_root?
+        errors[:is_root] << "can't unset home page"
+      end
     end
 
   end

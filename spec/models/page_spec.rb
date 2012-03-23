@@ -77,4 +77,47 @@ describe Cmsimple::Page do
       Cmsimple::Page.find(subject.id).path.should == '/about/contact-us'
     end
   end
+
+  describe 'find a page from a path' do
+    before do
+      subject.title = 'About Us'
+    end
+
+    it 'finds the page when there is a normal path' do
+      subject.slug = 'about-us'
+      subject.save
+      Cmsimple::Page.from_path('/about-us').slug.should == 'about-us'
+    end
+
+    it 'add the leading / if missing' do
+      subject.slug = 'about-us'
+      subject.save
+      Cmsimple::Page.from_path('about-us').slug.should == 'about-us'
+    end
+
+    it "finds it by is_root if the path is /" do
+      subject.slug = 'about-us'
+      subject.is_root = true
+      subject.save
+      Cmsimple::Page.from_path('/').slug.should == 'about-us'
+    end
+  end
+
+  describe 'can only have one root page' do
+    before do
+      subject.title = 'About Us'
+      subject.is_root = true
+      subject.save
+    end
+
+    it 'can only have one root' do
+      Cmsimple::Page.create title: 'About', is_root: true
+      Cmsimple::Page.where(is_root: true).count.should == 1
+    end
+
+    it 'must have at least one root' do
+      subject.is_root = false
+      subject.should_not be_valid
+    end
+  end
 end

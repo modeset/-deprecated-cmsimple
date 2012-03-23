@@ -18,12 +18,17 @@ class CMSimple.Editor extends Spine.Controller
     @routes
       '/editor/*path': (params)=>
         path = "/#{params.match[1]}"
-        if @current_page and @current_page.path() is path
-          @loadPath(path)
-        else
-          @loadNewPageFromPath(path)
+        @routeToPath(path)
+      '/editor': (params)=>
+        @routeToPath('/')
 
     Spine.Route.setup(history: true)
+
+  routeToPath: (path)->
+    if @current_page and @current_page.path() is path
+      @loadPath(path)
+    else
+      @loadNewPageFromPath(path)
 
   setCurrentPage: (page)->
     return unless page
@@ -57,7 +62,7 @@ class CMSimple.Editor extends Spine.Controller
     @mercury.setFrameSource(path)
 
   pathChange: (path)->
-    matches = window.location.href.match(/[http|https]:\/\/.[^\/]*(\/editor\/.*)/)
+    matches = window.location.href.match(/[http|https]:\/\/.[^\/]*(\/editor\/?.*)/)
     currentPath = matches[1]
     currentPath isnt path
 

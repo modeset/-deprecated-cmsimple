@@ -39,6 +39,13 @@ describe 'CMSimple.Page', ->
       about.load {}
       expect(about.slug).toEqual('about')
 
+  describe 'is root', ->
+    it 'finds the page with is root set to true for the path /', ->
+      stubs.ajax()
+      about = CMSimple.Page.create title: 'About', is_root: true
+      page = CMSimple.Page.forPath('/')
+      expect(about).toEqual(page)
+
   describe 'acts as a tree', ->
     beforeEach ->
       stubs.ajax()

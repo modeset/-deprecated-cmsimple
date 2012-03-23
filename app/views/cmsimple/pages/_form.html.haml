@@ -4,6 +4,7 @@
     = f.input :title
     = f.input :slug
     = f.input :template, collection: Cmsimple::TemplateResolver.all, prompt: 'None / Inherit'
+    = f.input :is_root, label: 'Home Page?'
     .mercury-display-controls
       = f.buttons do
         = f.commit_button

@@ -11,18 +11,18 @@ module Cmsimple
     end
 
     def show
-      @page = Page.find_by_path!("/#{params[:page]}")
+      @page = Page.from_path(params[:page])
       respond_with @page
     end
 
     def update_content
-      @page = Page.find_by_path!("/#{params[:page]}")
+      @page = Page.from_path(params[:page])
       @page.update_content(params[:content])
       respond_with @page, :location => @page.path
     end
 
     def editor
-      @page = Page.find_by_path!("/#{params[:page]}")
+      @page = Page.from_path(params[:page])
       render :nothing => true, :layout => 'editor'
     end
 
@@ -46,6 +46,7 @@ module Cmsimple
     end
 
     def create
+      params[:page].delete :id if params[:page] && params[:page].key?(:id)
       @page = Page.new(params[:page])
       if @page.save
         respond_with(@page)
