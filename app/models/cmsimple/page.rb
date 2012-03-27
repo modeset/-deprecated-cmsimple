@@ -33,11 +33,19 @@ module Cmsimple
       scope.all
     end
 
+    def root
+      parent = self.parent || self
+      while parent.try(:parent)
+        parent = parent.parent
+      end
+      parent
+    end
+
     def descendants
       children.all.inject([]) do |ary, child|
         ary << child
         ary + child.descendants
-      end
+      end.sort_by(&:position)
     end
 
     def regions

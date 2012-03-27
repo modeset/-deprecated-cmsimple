@@ -43,6 +43,16 @@ describe Cmsimple::Page do
         Cmsimple::Page.for_parent_select(@childless).map(&:title).should =~ ['Home', 'About', 'Contact']
       end
     end
+
+    describe '#root' do
+      it "returns the root of the page tree" do
+        @descendant.root.id.should == @page.id
+      end
+
+      it "returns the current page if it is a root" do
+        @page.root.id.should == @page.id
+      end
+    end
   end
 
   describe 'path generation' do
