@@ -1,7 +1,7 @@
 Mercury.PageEditor::setFrameSource = (url)->
   newUrl = "#{url}?_=#{new Date().getTime()}"
   @iframe.data('loaded', false)
-  @iframe.get(0).contentWindow.document.location.href = newUrl
+  @iframe.get(0).contentWindow.document.location.href = @iframeSrc(newUrl, true)
 
 Mercury.Snippet.clearAll = ->
   delete @all
