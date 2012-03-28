@@ -85,6 +85,24 @@ When /^I change the template to "([^"]*)"/ do |template|
   click_button 'Update Page'
 end
 
+When /^I change the seo info of the page/ do
+  fill_in 'Keywords', :with => 'some_keyword, someother_keyword'
+  fill_in 'Description', :with => 'This is a description of the page'
+  fill_in 'Browser title', :with => 'This is a new title for the browser'
+  click_button 'Update Page'
+end
+
+Then /^I should see that seo info on the page/ do
+  visit current_path.gsub('/editor', '')
+  within('title') do
+    page.should have_content('This is a new title for the browser')
+  end
+  page.should have_css('meta[name="keywords"]')
+  page.should have_css('meta[content="some_keyword, someother_keyword"]')
+  page.should have_css('meta[name="description"]')
+  page.should have_css('meta[content="This is a description of the page"]')
+end
+
 When /^I change the slug to "([^"]*)"/ do |path|
   fill_in 'Slug', :with => path
   click_button 'Update Page'

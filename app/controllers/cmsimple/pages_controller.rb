@@ -38,6 +38,7 @@ module Cmsimple
 
     def update
       @page = Page.find(params[:id])
+      params[:page].delete :id if params[:page] && params[:page].key?(:id)
       if @page.update_attributes(params[:page])
         respond_with(@page)
       else

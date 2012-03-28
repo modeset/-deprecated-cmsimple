@@ -1,7 +1,11 @@
 !!!
 %html
   %head
-    %title Cmsimple
+    %title= content_for :title || 'Cmsimple'
+    - if content_for :keywords
+      %meta(name="keywords" content="#{content_for(:keywords)}")
+    - if content_for :description
+      %meta(name="description" content="#{content_for(:description)}")
     = stylesheet_link_tag :application
     = javascript_include_tag :application
     = csrf_meta_tag
