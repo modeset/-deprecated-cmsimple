@@ -4,6 +4,7 @@ module Cmsimple
 
     belongs_to :parent, :class_name => '::Cmsimple::Page', :foreign_key => 'parent_id'
     has_many :children, :class_name => '::Cmsimple::Page', :foreign_key => 'parent_id', :dependent => :destroy
+    has_many :paths
 
     validates :path,
               :title,
@@ -13,17 +14,9 @@ module Cmsimple
 
     validate :is_root_set
 
-    before_validation :set_path
+    before_validation :set_internal_path
     before_save :ensure_only_one_root
-
-    def self.from_path(path)
-      path = "/#{path}".gsub(/\/+/, '/')
-      if path == '/'
-        where(is_root: true).first!
-      else
-        where(path: path).first!
-      end
-    end
+    after_save  :create_path
 
     def self.for_parent_select(page)
       scope = scoped
@@ -71,7 +64,7 @@ module Cmsimple
       result.downcase
     end
 
-    def set_path
+    def set_internal_path
       self.path = [self.parent.try(:path), slug].join('/')
     end
 
@@ -85,6 +78,13 @@ module Cmsimple
       if is_root_changed? && !is_root?
         errors[:is_root] << "can't unset home page"
       end
+    end
+
+    def create_path
+      associated_path = Cmsimple::Path.where(uri: self.path).first_or_initialize
+      associated_path.page = self
+      associated_path.redirect_uri = nil
+      associated_path.save!
     end
 
   end

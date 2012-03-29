@@ -11,19 +11,29 @@ module Cmsimple
     end
 
     def show
-      @page = Page.from_path(params[:page])
-      respond_with @page
+      @path = Path.from_request(request)
+      if @path.redirect?
+        redirect_to @path.destination.path
+      else
+        @page = @path.destination
+        respond_with @page
+      end
     end
 
     def update_content
-      @page = Page.from_path(params[:page])
+      @page = Path.from_request(params[:page]).destination
       @page.update_content(params[:content])
       respond_with @page, :location => @page.path
     end
 
     def editor
-      @page = Page.from_path(params[:page])
-      render :nothing => true, :layout => 'editor'
+      @path = Path.from_request(params[:page])
+      if @path.redirect?
+        redirect_to "/editor#{@path.destination.path}"
+      else
+        @page = @path.destination
+        render :nothing => true, :layout => 'editor'
+      end
     end
 
     def edit
