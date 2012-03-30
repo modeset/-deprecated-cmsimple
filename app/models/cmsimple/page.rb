@@ -53,6 +53,10 @@ module Cmsimple
       self[:slug] || escape(title)
     end
 
+    def slug=(val)
+      self[:slug] = escape(val)
+    end
+
     protected
 
     def escape(string)

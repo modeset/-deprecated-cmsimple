@@ -62,9 +62,9 @@ class CMSimple.Page extends Spine.Model
 
   escape: (string)->
     return '' unless string
-    string = string.replace(/[^\x00-\x7F]+/, '') # Remove anything non-ASCII entirely (e.g. diacritics).
-    string = string.replace(/[^\w_ \-]+/i, '') # Remove unwanted chars.
-    string = string.replace(/[ \-]+/i, '-') # No more than one of the separator in a row.
-    string = string.replace(/^\-|\-$/i, '') # Remove leading/trailing separator.
+    string = string.replace(/[^\x00-\x7F]+/g, '') # Remove anything non-ASCII entirely (e.g. diacritics).
+    string = string.replace(/[^\w_ \-]+/ig, '') # Remove unwanted chars.
+    string = string.replace(/[\s\-]+/ig, '-') # No more than one of the separator in a row.
+    string = string.replace(/^\-|\-$/ig, '') # Remove leading/trailing separator.
     string.toLowerCase()
 

@@ -39,6 +39,12 @@ describe 'CMSimple.Page', ->
       about.load {}
       expect(about.slug).toEqual('about')
 
+    it 'removes multiple spaces', ->
+      stubs.ajax()
+      about = CMSimple.Page.create title: 'About a dog'
+      about.load {}
+      expect(about.slug).toEqual('about-a-dog')
+
   describe 'is root', ->
     it 'finds the page with is root set to true for the path /', ->
       stubs.ajax()
