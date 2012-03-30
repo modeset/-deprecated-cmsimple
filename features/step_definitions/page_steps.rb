@@ -63,10 +63,30 @@ Then "I should see the path in the redirects" do
   end
 end
 
+Then "I should not see the duplicate path in the redirects" do
+  within '.mercury-panel' do
+    page.should_not have_content '/about'
+  end
+end
+
+Then "I should be alerted to the duplicate redirect" do
+  page.should have_content 'Source URL must be unique'
+end
+
 When "I add a new redirect" do
+  step %(the editor won't prompt when leaving the page)
   click_button 'Add Redirect'
   fill_in 'From', :with => '/redirect-path'
   fill_in 'To', :with => '/about'
+  click_button 'Create'
+end
+
+When "I add a new duplicate redirect" do
+  step %(the editor won't prompt when leaving the page)
+  page.driver.execute_script("window.alert = function(message){jQuery('body').append('<span>' + message + '</span>')}")
+  click_button 'Add Redirect'
+  fill_in 'From', :with => '/about'
+  fill_in 'To', :with => '/about-us'
   click_button 'Create'
 end
 
