@@ -247,3 +247,35 @@
   clear: both;
 }
 
+.mercury-panel ul.redirects {
+  width: 300px;
+  padding: 0;
+}
+
+.mercury-panel ul.redirects li {
+  list-style: none;
+}
+
+.mercury-panel ul.redirects > li article {
+  background-color: #666;
+  color: #fff;
+  padding: 0.25em 0.5em;
+  margin-bottom: 2px;
+  -webkit-border-radius: 0.25em;
+  -moz-border-radius: 0.25em;
+  border-radius: 0.25em;
+  border: 1px solid transparent;
+}
+
+.mercury-panel ul.redirects > li article span {
+  display: inline-block;
+}
+
+.mercury-panel ul.redirects > li article .path {
+  width: 6.5em;
+}
+
+.mercury-panel ul.redirects > li article .arrow {
+  width: 4.5em;
+}
+

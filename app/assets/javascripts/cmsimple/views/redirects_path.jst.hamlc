@@ -1,0 +1,7 @@
+%li{id="path_#{@id}" data-id=@id}
+  %article
+    %span.path= @uri
+    %span.arrow &rarr;
+    %span.destination= @destinationPath()
+    %a.close(href='#') &times;
+

@@ -108,6 +108,8 @@ window.Mercury = {
         historyPanel:          ['History', 'Page Version History', { panel: '/mercury/panels/history.html' }],
         sep4:                  ' ',
         sitemap:               ['Site Map', 'List of pages in the site', {toggle: true}],
+        sep5:                  ' ',
+        redirects:             ['Redirects', 'List of redirects in the site', {toggle: true}],
         // sep4:                  ' ',
         // notesPanel:            ['Notes', 'Page Notes', { panel: '/mercury/panels/notes.html' }]
         },
@@ -313,6 +315,7 @@ window.Mercury = {
       htmlEditor: function() { Mercury.modal('/mercury/modals/htmleditor.html', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); },
       editMetadata: function() { Mercury.modal('/pages/'+ CMSimple.Editor.current_page.id + '/edit', { title: 'Page Metadata', handler: 'editMetadata' }); },
       sitemap: function(){ CMSimple.Panels.Sitemap.toggle(this) },
+      redirects: function(){ CMSimple.Panels.Redirects.toggle(this) },
       insertMedia: function(){ CMSimple.Panels.ImageLibrary.toggle(this) }
       },
 

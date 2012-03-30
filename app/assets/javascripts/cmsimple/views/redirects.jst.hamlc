@@ -1,0 +1,14 @@
+%header.panel-actions.add-redirect-form
+  %button.btn.important.add Add Redirect
+  %form(style='display: none')
+    %legend Create a redirect
+    %ol
+      %li
+        %label(for="uri") From
+        %input(id='uri' name='uri' type='text' placeholder='/path')
+      %li
+        %label(for="redirect_uri") To
+        %input(id='redirect_uri' name='redirect_uri' type='text' placeholder='/new-path')
+    %input.btn.important(type='submit' value='Create')
+    %button.btn.cancel Cancel
+%ul.redirects

@@ -7,6 +7,9 @@
   background-image: url(/assets/toolbar/sitemap.png);
 }
 
+.mercury-redirects-button em {
+  background-image: url(/assets/toolbar/redirects.png);
+}
 /* Override toolbar button images */
 .mercury-primary-toolbar .mercury-save-button em,
 .mercury-expander-button[data-button=save] em {

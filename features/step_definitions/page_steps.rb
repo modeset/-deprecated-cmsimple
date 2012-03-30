@@ -2,7 +2,7 @@
 Given 'a page exists at a custom path with custom content' do
   @content = '<h1>Hello!</h1>'
   @path    = '/about'
-  @page = Cmsimple::Page.create(title: 'About', slug: @path.gsub(/\//,''))
+  @page = Cmsimple::Page.create(title: 'About')
   @page.update_content({:editable1 => {:value => @content}})
 end
 
@@ -47,10 +47,32 @@ Then "I should be redirected to the home page" do
   current_path.should == '/editor/'
 end
 
+Then "I should be redirected to the about page" do
+  current_path.should == '/about'
+end
+
 Then "I should see the page in the sitemap" do
   within '.mercury-panel' do
     page.should have_content 'Some new page'
   end
+end
+
+Then "I should see the path in the redirects" do
+  within '.mercury-panel' do
+    page.should have_content '/redirect-path'
+  end
+end
+
+When "I add a new redirect" do
+  click_button 'Add Redirect'
+  fill_in 'From', :with => '/redirect-path'
+  fill_in 'To', :with => '/about'
+  click_button 'Create'
+end
+
+When "I visit the new redirect" do
+  step %(the editor won't prompt when leaving the page)
+  visit '/redirect-path'
 end
 
 When "I edit the page's metadata" do
@@ -61,6 +83,11 @@ end
 When "I open the sitemap" do
   step %{I click on the "sitemap" button}
   step %{the sitemap panel should be visible}
+end
+
+When "I open the redirects" do
+  step %{I click on the "redirects" button}
+  step %{the redirect panel should be visible}
 end
 
 When "I add a new page" do
