@@ -40,7 +40,7 @@ Then "I should be able to edit that page's content" do
 end
 
 Then "I should be redirected to the new page" do
-  current_path.should == '/editor/some_new_page'
+  current_path.should == '/editor/some-new-page'
 end
 
 Then "I should be redirected to the home page" do
@@ -114,7 +114,7 @@ When "I add a new page" do
   click_button 'Add Page'
   step %{the modal window should be visible}
   fill_in 'Title', :with => 'Some new page'
-  fill_in 'Slug', :with => 'some_new_page'
+  fill_in 'Slug', :with => 'some-new-page'
   click_button 'Create Page'
 end
 
@@ -122,7 +122,7 @@ When "I add a new home page" do
   click_button 'Add Page'
   step %{the modal window should be visible}
   fill_in 'Title', :with => 'Some new page'
-  fill_in 'Slug', :with => 'some_new_page'
+  fill_in 'Slug', :with => 'some-new-page'
   check 'Home Page'
   click_button 'Create Page'
 end

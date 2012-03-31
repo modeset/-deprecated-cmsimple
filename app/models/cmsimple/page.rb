@@ -7,6 +7,7 @@ module Cmsimple
     has_many :paths
 
     validates :path,
+              :slug,
               :title,
               :presence => true
 

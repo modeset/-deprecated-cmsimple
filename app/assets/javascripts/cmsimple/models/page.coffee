@@ -44,7 +44,7 @@ class CMSimple.Page extends Spine.Model
 
   load: (values)->
     values = @normalizeSlug(values)
-    super
+    super(values)
 
   path: ->
     return '/' if @isRoot()
@@ -56,7 +56,8 @@ class CMSimple.Page extends Spine.Model
 
   normalizeSlug: (values)->
     return values unless values.title
-    values.slug = values.title unless @slug || values.slug
+    if Spine.isBlank(@slug) || Spine.isBlank(values.slug)
+      values.slug = values.title
     values.slug = @escape(values.slug)
     values
 
@@ -64,7 +65,7 @@ class CMSimple.Page extends Spine.Model
     return '' unless string
     string = string.replace(/[^\x00-\x7F]+/g, '') # Remove anything non-ASCII entirely (e.g. diacritics).
     string = string.replace(/[^\w_ \-]+/ig, '') # Remove unwanted chars.
-    string = string.replace(/[\s\-]+/ig, '-') # No more than one of the separator in a row.
+    string = string.replace(/[ \-]+/ig, '-') # No more than one of the separator in a row.
     string = string.replace(/^\-|\-$/ig, '') # Remove leading/trailing separator.
     string.toLowerCase()
 
