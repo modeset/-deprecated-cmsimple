@@ -19,3 +19,9 @@ Feature: As a user I should be able to add redirects on the site
     Then I should not see the duplicate path in the redirects
     And I should be alerted to the duplicate redirect
 
+  Scenario: As a user I delete a redirect from the redirects panel
+    Given I open the redirects
+    And I add a new redirect
+    When I delete the redirect
+    Then I should not see the path in the redirects
+

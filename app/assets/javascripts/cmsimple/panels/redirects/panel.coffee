@@ -6,36 +6,15 @@ class CMSimple.Panels.Redirects extends Mercury.Panel
 
   constructor: ()->
     super(null, 'redirects', title: 'Redirects', closeButton: true)
+    @button = $('.mercury-redirects-button')
     @loadContent JST['cmsimple/views/redirects']()
-    @setElements()
-    @bindPanelEvents()
 
     @form = new CMSimple.Panels.Redirects.Form($('.add-redirect-form'))
-
-    CMSimple.Path.bind 'refresh change', => @render()
-
-    if CMSimple.Page.count() > 1
-      CMSimple.Path.fetch()
-    else
-      CMSimple.Page.one 'refresh', -> CMSimple.Path.fetch()
-      CMSimple.Page.fetch()
-
-  render: ->
-    @list.html('')
-    @addPath path for path in CMSimple.Path.allRedirects()
-
-  addPath: (path)->
-    @list.append(JST['cmsimple/views/redirects_path'](path))
+    @list = new CMSimple.Panels.Redirects.List($('ul.redirects', @el))
 
   toggle: ->
     super
     @resize() if @visible
-
-  setElements: ->
-    @button = $('.mercury-redirects-button')
-    @list = $('ul.redirects', @el)
-
-  bindPanelEvents: ->
 
   # Overwriting the bindEvents to prevent the mousedown trap in the parent class
   bindEvents: ->

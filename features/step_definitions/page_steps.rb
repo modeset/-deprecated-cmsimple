@@ -63,6 +63,12 @@ Then "I should see the path in the redirects" do
   end
 end
 
+Then "I should not see the path in the redirects" do
+  within '.mercury-panel' do
+    page.should_not have_content '/redirect-path'
+  end
+end
+
 Then "I should not see the duplicate path in the redirects" do
   within '.mercury-panel' do
     page.should_not have_content '/about'
@@ -79,6 +85,13 @@ When "I add a new redirect" do
   fill_in 'From', :with => '/redirect-path'
   fill_in 'To', :with => '/about'
   click_button 'Create'
+end
+
+When "I delete the redirect" do
+  within '.mercury-panel' do
+    link = find '.remove'
+    link.click
+  end
 end
 
 When "I add a new duplicate redirect" do

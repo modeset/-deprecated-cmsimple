@@ -3,5 +3,5 @@
     %span.path= @uri
     %span.arrow &rarr;
     %span.destination= @destinationPath()
-    %a.close(href='#') &times;
+    %a.remove(href='#') &times;
 
