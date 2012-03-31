@@ -8,16 +8,15 @@ class CMSimple.Path extends Spine.Model
     results = @select (item)-> not item.page()?.isRoot() && item.uri isnt item.destinationPath()
     _(results).sortBy (item)-> item.uri
 
-  @pathUriExists: (sourcePath)->
-    uri = sourcePath.uri
-    _(@all()).any (path)->
-      path.uri is uri and not sourcePath.eql(path)
+  uriIsUnique: ->
+    not _(@constructor.all()).any (path)=>
+      path.uri is @uri and not @eql(path)
 
   validate: ->
     unless @uri
       return "Source URL is required"
 
-    if CMSimple.Path.pathUriExists(@)
+    unless @uriIsUnique()
       return "Source URL must be unique"
 
     unless @redirect_uri || @page_id
