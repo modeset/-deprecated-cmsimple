@@ -1,7 +1,6 @@
 %li{id="path_#{@id}" data-id=@id}
-  %article
-    %span.path= @uri
-    %span.arrow &rarr;
-    %span.destination= @destinationPath()
+  %article(title="direct #{@uri} to #{@destinationPath()}")
+    %p.path= @uri
+    %p.destination &rarr; #{@destinationPath()}
     %a.remove(href='#') &times;
 

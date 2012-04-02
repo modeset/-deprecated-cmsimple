@@ -1,3 +1,4 @@
+
 %header.panel-actions.add-redirect-form
   %button.btn.important.add Add Redirect
   %form(style='display: none')
@@ -12,3 +13,4 @@
     %input.btn.important(type='submit' value='Create')
     %button.btn.cancel Cancel
 %ul.redirects
+
