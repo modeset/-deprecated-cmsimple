@@ -8,7 +8,7 @@
 }
 
 .mercury-redirects-button em {
-  background-image: url(/assets/toolbar/redirects.png);
+  background-image: url(/assets/toolbar/redirect.png);
 }
 /* Override toolbar button images */
 .mercury-primary-toolbar .mercury-save-button em,
