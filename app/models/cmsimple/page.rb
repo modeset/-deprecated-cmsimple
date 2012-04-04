@@ -51,7 +51,7 @@ module Cmsimple
     end
 
     def slug
-      self[:slug] || escape(title)
+      self[:slug] ||= escape(title)
     end
 
     def slug=(val)

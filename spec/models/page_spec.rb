@@ -56,6 +56,7 @@ describe Cmsimple::Page do
   end
 
   describe 'path generation' do
+
     it 'returns a default slug from the title' do
       subject.title = 'About Us'
       subject.slug.should == 'about-us'
