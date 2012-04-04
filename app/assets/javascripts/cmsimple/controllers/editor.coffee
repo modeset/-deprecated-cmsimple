@@ -45,6 +45,8 @@ class CMSimple.Editor extends Spine.Controller
 
   initializeMercury: ->
     @mercury = new Mercury.PageEditor(null, saveStyle: 'form')
+    Mercury.on 'saved', =>
+      CMSimple.Page.fetch(@current_page.id)
     @loadCurrentSnippets()
 
   loadCurrentSnippets: ->
