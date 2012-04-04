@@ -21,9 +21,14 @@ module Cmsimple
     end
 
     def update_content
-      @page = Path.from_request(params[:page]).destination
-      @page.update_content(params[:content])
-      respond_with @page, :location => @page.path
+      @path = Path.from_request(params[:page])
+      if @path.redirect?
+        redirect_to @path.destination.path
+      else
+        @page = @path.destination
+        @page.update_content(params[:content])
+        respond_with @page, :location => @page.path
+      end
     end
 
     def editor

@@ -27,7 +27,7 @@ module Cmsimple
     end
 
     def redirect?
-      !self.page || (self.page.try(:path) != self.uri)
+      self.page.blank? || !(self.page.is_root || self.page.path == self.uri)
     end
 
     protected
