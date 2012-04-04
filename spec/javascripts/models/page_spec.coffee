@@ -28,21 +28,25 @@ describe 'CMSimple.Page', ->
       expect(@page.snippets().snippet_2.options.first_name).toEqual('Barny')
 
   describe 'default slug', ->
-    it 'sets the slug from the title', ->
+    beforeEach ->
       stubs.ajax()
+
+    it 'sets the slug from the title', ->
       about = CMSimple.Page.create title: 'About'
       expect(about.slug).toEqual('about')
 
     it 'does not change the slug if a title is not passed', ->
-      stubs.ajax()
       about = CMSimple.Page.create title: 'About'
       about.load {}
       expect(about.slug).toEqual('about')
 
+    it 'does not overrite the slug with the title if there is a slug', ->
+      about = CMSimple.Page.create title: 'About', slug: 'something-else'
+      about.load {title: 'A Different title'}
+      expect(about.slug).toEqual('something-else')
+
     it 'removes multiple spaces', ->
-      stubs.ajax()
       about = CMSimple.Page.create title: 'About a dog'
-      about.load {}
       expect(about.slug).toEqual('about-a-dog')
 
   describe 'is root', ->

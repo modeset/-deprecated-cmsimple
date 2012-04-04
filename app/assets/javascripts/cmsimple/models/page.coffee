@@ -56,10 +56,14 @@ class CMSimple.Page extends Spine.Model
 
   normalizeSlug: (values)->
     return values unless values.title
-    if Spine.isBlank(@slug) || Spine.isBlank(values.slug)
+
+    if Spine.isBlank(values.slug) && Spine.isBlank(@slug)
       values.slug = values.title
-    values.slug = @escape(values.slug)
-    values
+
+    unless Spine.isBlank(values.slug)
+      values.slug = @escape(values.slug)
+
+    return values
 
   escape: (string)->
     return '' unless string
