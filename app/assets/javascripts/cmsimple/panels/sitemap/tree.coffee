@@ -18,6 +18,7 @@ class CMSimple.Panels.Sitemap.Tree extends Spine.Controller
     @renderPages(@sitemap, CMSimple.Page.roots())
     $('li', @sitemap).click @proxy @pageClick
     @initializeSortable()
+    @trigger 'redraw'
 
   initializeSortable: ->
     new CMSimple.Panels.Sitemap.Sortable(@sitemap)
