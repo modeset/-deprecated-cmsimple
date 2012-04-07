@@ -1,11 +1,16 @@
 require "cmsimple/version"
 require 'rails'
+require 'mercury-rails'
+require 'cells'
+require 'carrierwave'
+
+# dependencies we want to reduce the
+# need of after codebase stabilizes
+require 'spine-rails'
 require 'haml-rails'
 require 'formtastic'
-require 'mercury-rails'
-require 'spine-rails'
-require 'cells'
 require 'haml_coffee_assets'
+require 'rmagick'
 
 module Cmsimple
   class Configuration
@@ -13,9 +18,10 @@ module Cmsimple
       self.parent_controller = 'ApplicationController'
       self.template_path = 'cmsimple/templates'
       self.template_strategy = :basic
+      self.asset_path = 'uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}'
     end
 
-    attr_accessor :parent_controller, :template_path
+    attr_accessor :parent_controller, :template_path, :asset_path
     attr_writer :template_strategy
 
     def template_strategy

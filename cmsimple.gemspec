@@ -17,13 +17,16 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency "rails", "~> 3.2.1"
-  s.add_runtime_dependency "haml-rails"
   s.add_runtime_dependency 'jquery-rails'
-  s.add_runtime_dependency "formtastic"
   s.add_runtime_dependency "mercury-rails"
   s.add_runtime_dependency "cells", "~> 3.8"
+  s.add_runtime_dependency "carrierwave", "~> 0.5.8"
+
   s.add_runtime_dependency "spine-rails", "~> 0.1"
+  s.add_runtime_dependency "haml-rails"
+  s.add_runtime_dependency "formtastic"
   s.add_runtime_dependency "haml_coffee_assets"
+  s.add_runtime_dependency "rmagick"
 
 
   # specify any dependencies here; for example:
