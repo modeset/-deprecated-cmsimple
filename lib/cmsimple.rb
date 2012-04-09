@@ -10,7 +10,7 @@ require 'spine-rails'
 require 'haml-rails'
 require 'formtastic'
 require 'haml_coffee_assets'
-require 'rmagick'
+require 'RMagick'
 
 module Cmsimple
   class Configuration
