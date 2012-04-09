@@ -48,7 +48,7 @@
   *= require cmsimple/panels/page_metadata
   *= require_tree ./cmsimple/panels/sitemap
   *= require_tree ./cmsimple/panels/redirects
-  *= require cmsimple/panels/image_library
+  *= require_tree ./cmsimple/panels/images
   *
   *= require cmsimple/controllers/editor
   *= require_tree ./cmsimple/models

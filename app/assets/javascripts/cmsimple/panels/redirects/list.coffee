@@ -20,7 +20,7 @@ class CMSimple.Panels.Redirects.List extends Spine.Controller
     @addPath path for path in CMSimple.Path.allRedirects()
 
   addPath: (path)->
-    @append(JST['cmsimple/views/redirects_path'](path))
+    @append JST['cmsimple/views/redirects_path'](path)
 
   destroy: (e)->
     e.preventDefault()

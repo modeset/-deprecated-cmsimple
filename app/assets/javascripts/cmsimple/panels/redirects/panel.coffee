@@ -10,7 +10,7 @@ class CMSimple.Panels.Redirects extends Mercury.Panel
     @loadContent JST['cmsimple/views/redirects']()
 
     @form = new CMSimple.Panels.Redirects.Form($('.add-redirect-form'))
-    @list = new CMSimple.Panels.Redirects.List($('ul.redirects', @el))
+    @list = new CMSimple.Panels.Redirects.List($('ul.redirects', @element))
 
   toggle: ->
     super

@@ -1,0 +1,24 @@
+%li(data-id="#{@id}")
+  .media-item
+    .media-info
+      %dl
+        %dt Title
+        %dd= @title
+        %dt Url
+        %dd= @attachment.url
+        -# %dt Meta Tags
+        -# %dd burritos, salsa, queso, healthy
+      %a.close(href="#") &times;
+
+    %img(src="#{@attachment.panel.url}" alt="#{@title}" data-id="#{@id}" data-full-url="#{@attachment.url}")
+  .media-caption
+    %p.media-name
+      %strong=@title
+    %p.media-size #{@width} x #{@height}
+    %p.media-actions(data-id)
+      %a.info(href="#") info
+      |
+      -# %a.edit(href="#") edit
+      -# |
+      %a.delete(href="#") delete
+
