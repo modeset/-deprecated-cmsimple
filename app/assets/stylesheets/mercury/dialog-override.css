@@ -1,16 +1,35 @@
 
 /* Dialogs */
-.mercury-panel {
+.mercury-panel, .mercury-framed-panel {
   background-color: #f5f5f5;
   color: #333;
 }
 
-.mercury-panel h1 {
+.mercury-panel h1, .mercury-framed-panel h1 {
   color: #f5f5f5;
   border-bottom: 1px solid #222;
   -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.mercury-framed-panel {
+  font-family: Helvetica, Tahoma, Arial, sans-serif;
+  font-size: 9.5pt;
+}
+
+.mercury-framed-panel.embedded {
+  background-color: #eaeaea;
+}
+.mercury-framed-panel.embedded fieldset {
+  background: none;
+  border: none;
+}
+.mercury-framed-panel.embedded h2 {
+  border-bottom: 1px solid #ccc;
+}
+.mercury-framed-panel.embedded .btn {
+  float: right;
 }
 
 /*
@@ -33,9 +52,15 @@
  * Image Panel
  *----------------------------------------------------------------------------*/
 .mercury-panel .add-image-action {
-  margin-top: 50px;
+  /* margin-top: 50px; */
   display: none;
 }
+
+.mercury-panel .add-image-action iframe {
+  width: 100%;
+  height: 192px;
+}
+
 .mercury-panel .add-image-action.active {
   display: block;
 }

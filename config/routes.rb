@@ -6,6 +6,9 @@ Cmsimple::Engine.routes.draw do
 
   resources :pages
   resources :paths, :only => [:index, :create, :destroy]
+  scope '/cmsimple' do
+    resources :images
+  end
 
   match '/mercury/:type/:resource' => "mercury#resource"
 

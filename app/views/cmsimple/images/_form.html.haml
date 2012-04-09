@@ -1,0 +1,5 @@
+= semantic_form_for @image do |f|
+  = f.inputs do
+    = f.input :title
+    = f.input :attachment
+    = f.commit_button 'Upload', button_html: {class: 'btn'}

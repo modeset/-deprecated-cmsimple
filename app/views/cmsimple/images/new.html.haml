@@ -1,0 +1,6 @@
+.mercury-framed-panel.embedded
+  %h2 Upload a new image
+  = render partial: 'form'
+
+:javascript
+  parent.$('body').trigger('cmsimple:images:uploaded');
