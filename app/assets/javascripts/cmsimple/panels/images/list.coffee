@@ -30,8 +30,6 @@ class CMSimple.Panels.ImageLibrary.List extends Spine.Controller
     @trigger 'image:selected',
         src: img.data('full-url'),
         alt: image.title,
-        width: image.width,
-        height: image.height,
         'image-id': image.id
 
   deleteImage: (e)->
