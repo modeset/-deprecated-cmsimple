@@ -5,7 +5,8 @@ class CMSimple.Path extends Spine.Model
   @belongsTo 'page', 'CMSimple.Page', 'page_id'
 
   @allRedirects: ->
-    results = @select (item)-> not item.page()?.isRoot() && item.uri isnt item.destinationPath()
+    results = @select (item)->
+      not (item.page() && item.page().isRoot()) && item.uri isnt item.destinationPath()
     _(results).sortBy (item)-> item.uri
 
   uriIsUnique: ->
