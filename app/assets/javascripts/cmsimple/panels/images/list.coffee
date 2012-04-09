@@ -26,7 +26,13 @@ class CMSimple.Panels.ImageLibrary.List extends Spine.Controller
 
   triggerImage: (e)->
     img = $(e.target)
-    @trigger 'image:selected', src: img.data('full-url'), 'image-id': img.data('id')
+    image = CMSimple.Image.find(img.data('id'))
+    @trigger 'image:selected',
+        src: img.data('full-url'),
+        alt: image.title,
+        width: image.width,
+        height: image.height,
+        'image-id': image.id
 
   deleteImage: (e)->
     e.preventDefault()
