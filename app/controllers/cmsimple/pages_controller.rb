@@ -13,7 +13,7 @@ module Cmsimple
     def show
       @path = Path.from_request(request)
       if @path.redirect?
-        redirect_to @path.destination.path
+        redirect_to @path.destination.path, status: 301
       else
         @page = @path.destination
         respond_with @page
