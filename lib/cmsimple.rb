@@ -18,10 +18,13 @@ module Cmsimple
       self.parent_controller = 'ApplicationController'
       self.template_path = 'cmsimple/templates'
       self.template_strategy = :basic
+      # the path carrierwave will use to store image assets
       self.asset_path = 'uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}'
+      # set this to change layouts or pass other params into rendering a template
+      self.template_render_options = {}
     end
 
-    attr_accessor :parent_controller, :template_path, :asset_path
+    attr_accessor :parent_controller, :template_path, :asset_path, :template_render_options
     attr_writer :template_strategy
 
     def template_strategy

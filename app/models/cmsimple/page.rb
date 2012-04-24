@@ -58,6 +58,12 @@ module Cmsimple
       self[:slug] = escape(val)
     end
 
+    # override in app to set optional rendering parameters like layouts
+    # on a per page basis
+    def template_render_options
+      Cmsimple.configuration.template_render_options
+    end
+
     protected
 
     def escape(string)
