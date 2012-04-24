@@ -11,5 +11,5 @@
     = f.input :description, input_html: {rows: 5}
   = render partial: 'form_extras', locals: {f: f}
   .mercury-display-controls
-    = f.buttons do
-      = f.commit_button
+    = f.actions do
+      = f.action :submit, button_html: {class: 'btn'}

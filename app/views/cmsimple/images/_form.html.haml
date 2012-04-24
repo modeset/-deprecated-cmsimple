@@ -2,4 +2,4 @@
   = f.inputs do
     = f.input :title
     = f.input :attachment
-    = f.commit_button 'Upload', button_html: {class: 'btn'}
+    = f.action :submit, label: 'Upload', button_html: {class: 'btn'}
