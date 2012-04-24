@@ -2,6 +2,18 @@ module Cmsimple
   class Page < ActiveRecord::Base
     serialize :content, Hash
 
+    attr_accessible :path,
+                    :slug,
+                    :title,
+                    :content,
+                    :template,
+                    :parent_id,
+                    :is_root,
+                    :position,
+                    :keywords,
+                    :description,
+                    :browser_title
+
     belongs_to :parent, :class_name => '::Cmsimple::Page', :foreign_key => 'parent_id'
     has_many :children, :class_name => '::Cmsimple::Page', :foreign_key => 'parent_id', :dependent => :destroy
     has_many :paths

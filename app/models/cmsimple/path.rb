@@ -1,5 +1,7 @@
 module Cmsimple
   class Path < ActiveRecord::Base
+    attr_accessible :uri, :page_id, :redirect_uri
+
     belongs_to :page
 
     validates :uri, presence: true
