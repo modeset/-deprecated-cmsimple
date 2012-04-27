@@ -13,6 +13,7 @@ database.yml
 schema.rb
 
 # Logs
+log
 log/*.log
 log/*.pid
 
