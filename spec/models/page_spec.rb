@@ -117,4 +117,47 @@ describe Cmsimple::Page do
       expect { Cmsimple::Page.create title: 'About' }.to change{ Cmsimple::Path.count }.by(0)
     end
   end
+
+  describe 'publishing' do
+    let(:page) { Cmsimple::Page.create title: 'About' }
+
+    it "has published_at set to nil by default" do
+      page.published_at.should be_nil
+    end
+
+    describe '#publish!' do
+      it 'sets the published_at date to now' do
+        page.publish!
+        page.published_at.to_s.should == Time.zone.now.to_s
+      end
+    end
+
+    describe '#unpublish!' do
+      before do
+        page.publish!
+      end
+
+      it 'sets published_at to nil' do
+        page.unpublish!
+        page.published_at.should be_nil
+      end
+    end
+
+    describe 'published scope' do
+      it 'returns the published page' do
+        page.publish!
+        Cmsimple::Page.published.first.should == page
+      end
+
+      it 'does not return the page if it is not published' do
+        Cmsimple::Page.published.first.should be_nil
+      end
+
+      it 'does not return the page if it is to be published in the future' do
+        page.published_at = 2.weeks.from_now
+        page.save!
+        Cmsimple::Page.published.first.should be_nil
+      end
+    end
+  end
 end

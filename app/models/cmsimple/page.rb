@@ -10,6 +10,7 @@ module Cmsimple
                     :parent_id,
                     :is_root,
                     :position,
+                    :published,
                     :keywords,
                     :description,
                     :browser_title
@@ -37,6 +38,18 @@ module Cmsimple
         scope = scope.where('id NOT IN (?)', page.descendants.map(&:id) + [page.id])
       end
       scope.all
+    end
+
+    def self.root
+      where('cmsimple_pages.is_root = ?', true).limit(1)
+    end
+
+    def self.published
+      where('cmsimple_pages.published_at <= ?', Time.zone.now.utc)
+    end
+
+    def self.unpublished
+      where('cmsimple_pages.published_at IS NULL')
     end
 
     def root
@@ -74,6 +87,28 @@ module Cmsimple
     # on a per page basis
     def template_render_options
       Cmsimple.configuration.template_render_options
+    end
+
+    def publish!
+      self.published = true
+      self.save!
+    end
+
+    def unpublish!
+      self.published = false
+      self.save!
+    end
+
+    def published?
+      self.published_at.present? && self.published_at <= Time.zone.now
+    end
+
+    def published=(val)
+      if val.to_bool
+        self.published_at = Time.zone.now
+      else
+        self.published_at = nil
+      end
     end
 
     protected

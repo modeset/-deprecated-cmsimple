@@ -4,8 +4,14 @@ Cmsimple::Engine.routes.draw do
   match '/cmsimple/snippets/:name/options' => 'snippets#options'
   match '/cmsimple/snippets' => 'snippets#index', :as => :snippets
 
-  resources :pages
+  resources :pages do
+    member do
+      get :publish
+    end
+  end
+
   resources :paths, :only => [:index, :create, :destroy]
+
   scope '/cmsimple' do
     resources :images
   end

@@ -1,7 +1,7 @@
 
 Given 'a page exists at a custom path with custom content' do
   @content = '<h1>Hello!</h1>'
-  @page = Cmsimple::Page.create!(title: 'About')
+  @page = Cmsimple::Page.create!(title: 'About', published: true)
   @path = @page.path
   @page.update_content({:editable1 => {:value => @content}})
 end
@@ -19,64 +19,12 @@ When "I visit that page's edit path" do
   visit ['/editor', @path].join
 end
 
-Then "I should see that page's content" do
-  page.driver.response.body.should =~ /#{@content}/
+When "I visit the current page's public path" do
+  visit current_path.gsub('/editor', '')
 end
 
-Then "I should see that page's content in it's template" do
-  page.driver.response.body.should =~ /#{@content}/
-  template = "<section class='mercury-region' data-type='editable' id='editable1'>"
-  page.driver.response.body.should =~ /#{template}/
-  puts page.driver.response.body
-end
-
-Then "I should be able to edit that page's content" do
-  sleep(1)
-  within_frame 'mercury_iframe' do
-    within '.mercury-region' do
-      page.body.should =~ /#{@content}/
-    end
-  end
-end
-
-Then "I should be redirected to the new page" do
-  current_path.should == '/editor/some-new-page'
-end
-
-Then "I should be redirected to the home page" do
-  current_path.should == '/editor/'
-end
-
-Then "I should be redirected to the about page" do
-  current_path.should == '/about'
-end
-
-Then "I should see the page in the sitemap" do
-  within '.mercury-panel' do
-    page.should have_content 'Some new page'
-  end
-end
-
-Then "I should see the path in the redirects" do
-  within '.mercury-panel' do
-    page.should have_content '/redirect-path'
-  end
-end
-
-Then "I should not see the path in the redirects" do
-  within '.mercury-panel' do
-    page.should_not have_content '/redirect-path'
-  end
-end
-
-Then "I should not see the duplicate path in the redirects" do
-  within '.mercury-panel' do
-    page.should_not have_content '/about'
-  end
-end
-
-Then "I should be alerted to the duplicate redirect" do
-  page.should have_content 'Source URL must be unique'
+When "I visit the current page's edit path" do
+  visit ['/editor', current_path].join
 end
 
 When "I add a new redirect" do
@@ -140,6 +88,14 @@ When "I add a new home page" do
   click_button 'Create Page'
 end
 
+When "I publish the current page" do
+  step %{I change the contents of editable1 to "This is a published page"}
+  step %{I click on the "save" button}
+  step %{I click on the "publish" button}
+  step %{the modal window should be visible}
+  click_button 'Publish'
+end
+
 When /^I change the template to "([^"]*)"/ do |template|
   select template, :from => 'Template'
   click_button 'Update Page'
@@ -150,6 +106,71 @@ When /^I change the seo info of the page/ do
   fill_in 'Description', :with => 'This is a description of the page'
   fill_in 'Browser title', :with => 'This is a new title for the browser'
   click_button 'Update Page'
+end
+
+When /^I change the slug to "([^"]*)"/ do |path|
+  fill_in 'Slug', :with => path
+  click_button 'Update Page'
+end
+
+Then "I should see that page's content" do
+  page.driver.response.body.should =~ /#{@content}/
+end
+
+Then "I should see that page's content in it's template" do
+  page.driver.response.body.should =~ /#{@content}/
+  template = "<section class='mercury-region' data-type='editable' id='editable1'>"
+  page.driver.response.body.should =~ /#{template}/
+  puts page.driver.response.body
+end
+
+Then "I should be able to edit that page's content" do
+  sleep(1)
+  within_frame 'mercury_iframe' do
+    within '.mercury-region' do
+      page.body.should =~ /#{@content}/
+    end
+  end
+end
+
+Then "I should be redirected to the new page" do
+  current_path.should == '/editor/some-new-page'
+end
+
+Then "I should be redirected to the home page" do
+  current_path.should == '/editor/'
+end
+
+Then "I should be redirected to the about page" do
+  current_path.should == '/about'
+end
+
+Then "I should see the page in the sitemap" do
+  within '.mercury-panel' do
+    page.should have_content 'Some new page'
+  end
+end
+
+Then "I should see the path in the redirects" do
+  within '.mercury-panel' do
+    page.should have_content '/redirect-path'
+  end
+end
+
+Then "I should not see the path in the redirects" do
+  within '.mercury-panel' do
+    page.should_not have_content '/redirect-path'
+  end
+end
+
+Then "I should not see the duplicate path in the redirects" do
+  within '.mercury-panel' do
+    page.should_not have_content '/about'
+  end
+end
+
+Then "I should be alerted to the duplicate redirect" do
+  page.should have_content 'Source URL must be unique'
 end
 
 Then /^I should see that seo info on the page/ do
@@ -163,8 +184,9 @@ Then /^I should see that seo info on the page/ do
   page.should have_css('meta[content="This is a description of the page"]')
 end
 
-When /^I change the slug to "([^"]*)"/ do |path|
-  fill_in 'Slug', :with => path
-  click_button 'Update Page'
+Then "the current page should be publicly available" do
+  step %(I visit the current page's public path)
+  current_path.should_not =~ /\/editor/
+  page.should have_content('This is a published page')
 end
 

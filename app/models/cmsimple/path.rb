@@ -14,10 +14,14 @@ module Cmsimple
       path = request.is_a?(String) ? request : ( request.try(:path) || '' )
       path = "/#{path.gsub(/\/$/,'')}".gsub(/\/+/, '/')
       if path == '/'
-        includes(:page).where('cmsimple_pages.is_root = ?', true).first!
+        with_pages.merge(Cmsimple::Page.root).first!
       else
-        includes(:page).where(uri: path).first!
+        with_pages.where(uri: path).first!
       end
+    end
+
+    def self.with_pages
+      includes(:page)
     end
 
     def destination

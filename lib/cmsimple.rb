@@ -54,3 +54,5 @@ require 'cmsimple/template_resolver'
 require 'cmsimple/template_responder'
 require 'cmsimple/regions_proxy'
 
+require 'cmsimple/exts/to_bool'
+

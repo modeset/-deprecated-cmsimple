@@ -7,6 +7,10 @@
   background-image: url(/assets/toolbar/sitemap.png);
 }
 
+.mercury-publish-button em {
+  background-image: url(/assets/toolbar/publish.png);
+}
+
 .mercury-redirects-button em {
   background-image: url(/assets/toolbar/redirect.png);
 }
