@@ -15,9 +15,10 @@ module Cmsimple
                     :description,
                     :browser_title
 
-    belongs_to :parent, :class_name => '::Cmsimple::Page', :foreign_key => 'parent_id'
-    has_many :children, :class_name => '::Cmsimple::Page', :foreign_key => 'parent_id', :dependent => :destroy
-    has_many :paths
+    belongs_to :parent,   :class_name => '::Cmsimple::Page', :foreign_key => 'parent_id'
+    has_many   :children, :class_name => '::Cmsimple::Page', :foreign_key => 'parent_id', :dependent => :destroy
+    has_many   :paths,    :dependent => :destroy
+    has_many   :versions, :dependent => :destroy
 
     validates :path,
               :slug,
@@ -90,12 +91,13 @@ module Cmsimple
     end
 
     def publish!
-      self.published = true
+      self.published_at = Time.zone.now
       self.save!
+      create_new_version
     end
 
     def unpublish!
-      self.published = false
+      self.published_at = nil
       self.save!
     end
 
@@ -105,9 +107,9 @@ module Cmsimple
 
     def published=(val)
       if val.to_bool
-        self.published_at = Time.zone.now
+        self.publish!
       else
-        self.published_at = nil
+        self.unpublish!
       end
     end
 
@@ -143,6 +145,10 @@ module Cmsimple
       associated_path.page = self
       associated_path.redirect_uri = nil
       associated_path.save!
+    end
+
+    def create_new_version
+      self.versions.create! content: self.content, template: self.template, published_at: self.published_at
     end
 
   end

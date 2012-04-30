@@ -4,6 +4,7 @@ describe Cmsimple::Page do
   it {should validate_presence_of(:title) }
   it {should have_many(:children)}
   it {should belong_to(:parent)}
+  it {should have_many(:versions)}
 
   describe '#update_content' do
     before do
@@ -129,6 +130,10 @@ describe Cmsimple::Page do
       it 'sets the published_at date to now' do
         page.publish!
         page.published_at.to_s.should == Time.zone.now.to_s
+      end
+
+      it 'creates a new published verson' do
+        expect { page.publish! }.to change { page.versions.count }.by(1)
       end
     end
 
