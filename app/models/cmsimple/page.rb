@@ -105,12 +105,42 @@ module Cmsimple
       self.published_at.present? && self.published_at <= Time.zone.now
     end
 
+    #TODO: refactor me, this smells
     def published=(val)
       if val.to_bool
         self.publish!
       else
         self.unpublish!
       end
+    end
+
+    def as_published!
+      return false unless published?
+
+      readonly!
+      reify versions.published.first
+      return true
+    end
+
+    def at_version!(version_id)
+      return false unless published?
+
+      readonly!
+      reify versions.find(version_id)
+      return true
+    end
+
+    def reify(version)
+      return unless version.present?
+      self.content = version.content
+      self.template = version.template
+      @regions = RegionsProxy.new(self.content)
+    end
+
+    def revert_to!(version_id)
+      version = self.versions.find(version_id)
+      reify version
+      save!
     end
 
     protected

@@ -1,12 +1,9 @@
 module Cmsimple
   class PagesController < Cmsimple.configuration.parent_controller.constantize
-    self.responder = Cmsimple.configuration.template_strategy
-    helper Cmsimple::RegionsHelper
-    helper_method :in_editor_iframe?
+    helper_method :current_page
 
+    before_filter :check_for_redirect, :only => [:editor, :update_content]
     respond_to :html, :json, :js
-
-    before_filter :find_page_from_request, only: [:show, :update_content, :editor]
 
     def index
       @pages = Page.all
@@ -14,15 +11,12 @@ module Cmsimple
     end
 
     def show
-      if current_page_is_viewable?
-        respond_with @page
-      else
-        raise ActiveRecord::RecordNotFound
-      end
+      @page = Page.find(params[:id])
+      respond_with @page
     end
 
     def update_content
-      @page.update_content(params[:content])
+      current_page.update_content(params[:content])
       respond_with @page, :location => @page.path
     end
 
@@ -65,23 +59,20 @@ module Cmsimple
       end
     end
 
-    protected
-    def in_editor_iframe?
-      params[:mercury_frame] && (params[:mercury_frame] == true || params[:mercury_frame] == 'true')
+    def current_path
+      @path ||= Path.from_request(params[:path])
     end
 
-    def current_page_is_viewable?
-      in_editor_iframe? || @page.published?
+    def current_page
+      @page ||= current_path.destination
     end
 
-    def find_page_from_request
-      @path = Path.from_request(params[:page])
-      if @path.redirect?
-        path = @path.destination.path
+    def check_for_redirect
+      return true if params[:id].present?
+      if current_path.redirect?
+        path = current_path.destination.path
         path = "/editor#{path}" if action_name == 'editor'
         redirect_to path, status: 301
-      else
-        @page = @path.destination
       end
     end
 

@@ -1,7 +1,6 @@
 class CMSimple.Panels.Publish extends Spine.Controller
 
   elements:
-    'form' : 'form'
     '.mercury-modal-content' : 'content'
 
   events:
@@ -12,7 +11,8 @@ class CMSimple.Panels.Publish extends Spine.Controller
 
   submit: (e)->
     e.preventDefault()
-    @page = CMSimple.Editor.current_page.fromForm(@form)
+    form = $(e.target)
+    @page = CMSimple.Editor.current_page.fromForm(form)
     @page.save
       ajax:
         error: @proxy @error

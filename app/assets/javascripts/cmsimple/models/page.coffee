@@ -25,6 +25,9 @@ class CMSimple.Page extends Spine.Model
   sortedChildren: ->
     _(@children().all()).sortBy (record)-> record.position
 
+  versions: ->
+    CMSimple.Version.allForPage(@)
+
   fromForm: (form)->
     values = form.toJSON()
     values = values.page if values.page
@@ -32,8 +35,9 @@ class CMSimple.Page extends Spine.Model
     values.parent_id = parseInt(values.parent_id, 0) if values.parent_id
     @load(values)
 
-  reload: (options)->
-    @trigger 'reload', options
+  reload: ->
+    @ajax().reload()
+    @trigger 'reload'
 
   editPath: ->
     "/editor#{@path()}"

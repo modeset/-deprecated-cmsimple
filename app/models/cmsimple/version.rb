@@ -10,5 +10,9 @@ module Cmsimple
 
     validates :published_at, presence: true
 
+    def self.published
+      order('published_at DESC')
+    end
+
   end
 end

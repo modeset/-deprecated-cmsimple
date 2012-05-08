@@ -16,6 +16,7 @@ module Cmsimple
   class Configuration
     def initialize
       self.parent_controller = 'ApplicationController'
+      self.parent_front_controller = 'ApplicationController'
       self.template_path = 'cmsimple/templates'
       self.template_strategy = :basic
       # the path carrierwave will use to store image assets
@@ -24,7 +25,7 @@ module Cmsimple
       self.template_render_options = {}
     end
 
-    attr_accessor :parent_controller, :template_path, :asset_path, :template_render_options
+    attr_accessor :parent_controller, :parent_front_controller, :template_path, :asset_path, :template_render_options
     attr_writer :template_strategy
 
     def template_strategy
@@ -52,6 +53,7 @@ end
 require 'cmsimple/rails'
 require 'cmsimple/template_resolver'
 require 'cmsimple/template_responder'
+require 'cmsimple/page_responder'
 require 'cmsimple/regions_proxy'
 
 require 'cmsimple/exts/to_bool'

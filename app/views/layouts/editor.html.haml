@@ -8,5 +8,5 @@
     = javascript_include_tag 'cmsimple'
   %body
     :javascript
-      new CMSimple.Editor( new CMSimple.Page(#{@page.to_json}) )
+      new CMSimple.Editor( new CMSimple.Page(#{current_page.to_json}) )
 

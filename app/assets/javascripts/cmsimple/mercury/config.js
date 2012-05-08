@@ -105,7 +105,7 @@ window.Mercury = {
         snippetPanel:          ['Snippet', 'Snippet Panel', { panel: '/cmsimple/snippets' }],
         sep2:                  ' ',
         editMetadata:          ['Page Metadata', 'Edit Page Metadata'],
-        historyPanel:          ['History', 'Page Version History', { panel: '/mercury/panels/history.html' }],
+        historyPanel:          ['History', 'Page Version History', {toggle: true}],
         sep4:                  ' ',
         sitemap:               ['Site Map', 'List of pages in the site', {toggle: true}],
         redirects:             ['Redirects', 'List of redirects in the site', {toggle: true}],
@@ -316,7 +316,8 @@ window.Mercury = {
       publish: function() { Mercury.modal('/pages/'+ CMSimple.Editor.current_page.id + '/publish', { title: 'Publish Page', handler: 'publish' }); },
       sitemap: function(){ CMSimple.Panels.Sitemap.toggle(this) },
       redirects: function(){ CMSimple.Panels.Redirects.toggle(this) },
-      insertMedia: function(){ CMSimple.Panels.ImageLibrary.toggle(this) }
+      insertMedia: function(){ CMSimple.Panels.ImageLibrary.toggle(this) },
+      historyPanel: function(){ CMSimple.Panels.Versions.toggle(this) }
       },
 
 

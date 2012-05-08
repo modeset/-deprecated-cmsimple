@@ -164,5 +164,60 @@ describe Cmsimple::Page do
         Cmsimple::Page.published.first.should be_nil
       end
     end
+
+    describe 'consuming published content' do
+      before do
+        page.update_content({:content => {:value => 'content version 1'}})
+        page.publish!
+      end
+
+      it 'returns puslished content when in published mode if there are unpublished changes' do
+        page.update_content({:content => {:value => 'content version 2'}})
+        page.as_published!
+        page.regions.content.to_s.should == 'content version 1'
+      end
+    end
+  end
+
+  describe 'versioning' do
+    let(:page) { Cmsimple::Page.create title: 'About' }
+
+    before do
+      page.update_content({:content => {:value => 'content version 1'}})
+      page.publish!
+      page.update_content({:content => {:value => 'content version 2'}})
+      page.publish!
+      page.update_content({:content => {:value => 'content version 3'}})
+      page.publish!
+    end
+
+    describe 'can return a page at a specific version' do
+      it 'returns the page with the content from the requested version' do
+        version = page.versions.first
+        page.at_version!(version.id)
+        page.regions.content.to_s.should == 'content version 1'
+      end
+
+      it 'returns the page with the content from another requested version' do
+        version = page.versions.second
+        page.at_version!(version.id)
+        page.regions.content.to_s.should == 'content version 2'
+      end
+    end
+
+    describe 'reverting' do
+      it 'can revert to a specific version' do
+        version = page.versions.first
+        page.revert_to!(version.id)
+        Cmsimple::Page.find(page.id).regions.content.to_s.should == 'content version 1'
+      end
+
+      it 'can not revert to a version that is not from the pages history' do
+        other_page = Cmsimple::Page.create title: 'Contact'
+        other_page.update_content({:content => {:value => 'content version 1'}})
+        other_page.publish!
+        expect{ page.revert_to!(other_page.versions.first.id) }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
   end
 end

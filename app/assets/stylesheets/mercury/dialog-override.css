@@ -320,3 +320,34 @@
   font-weight: bold;
 }
 
+/* Versions panel */
+.mercury-panel ul.versions {
+  width: 400px;
+  padding: 0;
+}
+
+.mercury-panel ul.versions li {
+  position: relative;
+  list-style: none;
+}
+
+.mercury-panel ul.versions > li article {
+  background-color: #666;
+  color: #fff;
+  padding: 0 0.5em;
+  margin-bottom: 2px;
+  -webkit-border-radius: 0.25em;
+  -moz-border-radius: 0.25em;
+  border-radius: 0.25em;
+  border: 1px solid transparent;
+  cursor: default;
+}
+.mercury-panel ul.versions > li article .view,
+.mercury-panel ul.versions > li article .revert {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.mercury-panel ul.versions > li article .revert {
+  display: none;
+}

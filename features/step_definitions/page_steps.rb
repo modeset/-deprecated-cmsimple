@@ -4,6 +4,7 @@ Given 'a page exists at a custom path with custom content' do
   @page = Cmsimple::Page.create!(title: 'About', published: true)
   @path = @page.path
   @page.update_content({:editable1 => {:value => @content}})
+  @page.publish!
 end
 
 When "I visit that page's path" do
@@ -11,7 +12,7 @@ When "I visit that page's path" do
 end
 
 When "I save and reload the page" do
-  step(%{I click on the "Save" button})
+  step(%{I click on the "save" button})
   visit current_path
 end
 
@@ -71,11 +72,19 @@ When "I open the redirects" do
   step %{the redirect panel should be visible}
 end
 
+When "I open the page's history" do
+  step %{I click on the "history" button}
+  step %{the history panel should be visible}
+end
+
+When "I view the old version" do
+  step %{I press "ul.versions button.view"}
+end
+
 When "I add a new page" do
   click_button 'Add Page'
   step %{the modal window should be visible}
   fill_in 'Title', :with => 'Some new page'
-  fill_in 'Slug', :with => 'some-new-page'
   click_button 'Create Page'
 end
 
@@ -83,17 +92,8 @@ When "I add a new home page" do
   click_button 'Add Page'
   step %{the modal window should be visible}
   fill_in 'Title', :with => 'Some new page'
-  fill_in 'Slug', :with => 'some-new-page'
   check 'Home Page'
   click_button 'Create Page'
-end
-
-When "I publish the current page" do
-  step %{I change the contents of editable1 to "This is a published page"}
-  step %{I click on the "save" button}
-  step %{I click on the "publish" button}
-  step %{the modal window should be visible}
-  click_button 'Publish'
 end
 
 When /^I change the template to "([^"]*)"/ do |template|
@@ -113,14 +113,38 @@ When /^I change the slug to "([^"]*)"/ do |path|
   click_button 'Update Page'
 end
 
+When "I publish the current page" do
+  step %{I change the contents of editable1 to "This is a published page"}
+  step %{I click on the "save" button}
+  step %{I click on the "publish" button}
+  step %{the modal window should be visible}
+  click_button 'Publish'
+end
+
+When "I make changes to the current page" do
+  step %{I change the contents of editable1 to "This is changed content"}
+  step %{I click on the "save" button}
+end
+
+When "I publish a new version of the current page" do
+  step %{I change the contents of editable1 to "This is a new version"}
+  step %{I click on the "save" button}
+  step %{I click on the "publish" button}
+  step %{the modal window should be visible}
+  click_button 'Publish'
+end
+
 Then "I should see that page's content" do
   page.driver.response.body.should =~ /#{@content}/
 end
 
 Then "I should see that page's content in it's template" do
-  page.driver.response.body.should =~ /#{@content}/
-  template = "<section class='mercury-region' data-type='editable' id='editable1'>"
-  page.driver.response.body.should =~ /#{template}/
+  region = <<-HTML
+<section class='mercury-region' data-type='editable' id='editable1'>
+#{@content}
+</section>
+  HTML
+  page.driver.response.body.should =~ /#{region}/
   puts page.driver.response.body
 end
 
@@ -190,3 +214,24 @@ Then "the current page should be publicly available" do
   page.should have_content('This is a published page')
 end
 
+Then "the current page should only show published content" do
+  step %(the current page should be publicly available)
+end
+
+Then "the current page should only show published content" do
+  step %(the current page should be publicly available)
+end
+
+Then "I there should be one version in the history panel" do
+  within '.mercury-panel' do
+    page.should have_selector 'ul.versions li', count: 1
+  end
+end
+
+Then "I should see the old version" do
+  within_frame 'mercury_iframe' do
+    within '.mercury-region' do
+      page.should have_content('This is a published page')
+    end
+  end
+end

@@ -8,6 +8,11 @@ Cmsimple::Engine.routes.draw do
     member do
       get :publish
     end
+    resources :versions, :only => [:index] do
+      member do
+        put :revert_to
+      end
+    end
   end
 
   resources :paths, :only => [:index, :create, :destroy]
@@ -16,14 +21,14 @@ Cmsimple::Engine.routes.draw do
     resources :images
   end
 
-  match '/mercury/:type/:resource' => "mercury#resource"
+  get '/mercury/:type/:resource' => "mercury#resource"
 
-  match '/editor(/*page)' => "pages#editor", :as => :mercury_editor
+  get '/editor(/*path)' => "pages#editor", :as => :mercury_editor
 
-  match '*page' => 'pages#show', :via => :get
-  root :to => 'pages#show', :via => :get
+  get '*path' => 'front#show'
+  root :to => 'front#show', :via => :get
 
-  match '*page' => 'pages#update_content', :via => :post
+  post '*path' => 'pages#update_content'
   root :to => 'pages#update_content', :via => :post
 
 end

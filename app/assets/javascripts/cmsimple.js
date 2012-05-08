@@ -11,6 +11,9 @@
   * Underscore.js
   *= require underscore-1.3.1
   *
+  * Moment.js
+  *= require moment-1.6.2
+  *
   * Spine.js (spine-rails)
   *= require spine
   *= require spine/ajax
@@ -50,6 +53,7 @@
   *= require_tree ./cmsimple/panels/sitemap
   *= require_tree ./cmsimple/panels/redirects
   *= require_tree ./cmsimple/panels/images
+  *= require_tree ./cmsimple/panels/versions
   *
   *= require cmsimple/controllers/editor
   *= require_tree ./cmsimple/models
