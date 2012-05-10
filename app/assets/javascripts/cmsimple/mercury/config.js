@@ -91,7 +91,7 @@ window.Mercury = {
       primary: {
         save:                  ['Save', 'Save this page'],
         preview:               ['Preview', 'Preview this page', { toggle: true, mode: true }],
-        publish:               ['Publish', 'Publish this page'],
+        publish:               ['Publishing', 'Manage the publishing of this page'],
         sep1:                  ' ',
         undoredo:              {
           undo:                ['Undo', 'Undo your last action'],
@@ -104,7 +104,7 @@ window.Mercury = {
         insertCharacter:       ['Character', 'Special Characters', { modal: '/mercury/modals/character.html', regions: ['editable', 'markupable'] }],
         snippetPanel:          ['Snippet', 'Snippet Panel', { panel: '/cmsimple/snippets' }],
         sep2:                  ' ',
-        editMetadata:          ['Page Metadata', 'Edit Page Metadata'],
+        editMetadata:          ['Page Info', 'Edit Page Metadata'],
         historyPanel:          ['History', 'Page Version History', {toggle: true}],
         sep4:                  ' ',
         sitemap:               ['Site Map', 'List of pages in the site', {toggle: true}],

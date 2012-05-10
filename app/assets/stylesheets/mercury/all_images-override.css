@@ -11,6 +11,10 @@
   background-image: url(/assets/toolbar/publish.png);
 }
 
+.mercury-publish-button.unpublished em {
+  background-image: url(/assets/toolbar/unpublished.png);
+}
+
 .mercury-redirects-button em {
   background-image: url(/assets/toolbar/redirect.png);
 }

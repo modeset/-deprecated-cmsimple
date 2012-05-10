@@ -137,6 +137,18 @@ describe Cmsimple::Page do
       end
     end
 
+    describe '#unpublished_changes?' do
+      it 'has unpublished changes if it was never published' do
+        page.published_at.should be_nil
+        page.unpublished_changes?.should be_true
+      end
+
+      it 'does not have unpublished changes once it is published' do
+        page.publish!
+        page.unpublished_changes?.should be_false
+      end
+    end
+
     describe '#unpublish!' do
       before do
         page.publish!

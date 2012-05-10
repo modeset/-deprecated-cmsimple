@@ -27,6 +27,11 @@ class CMSimple.Editor extends Spine.Controller
         @routeToPath('/')
 
     @bind 'pathLoaded', @proxy @ensureProperState
+    @bind 'pathLoaded', =>
+      console?.log 'pathLoaded'
+      @checkPublishedState()
+
+    CMSimple.Page.bind 'refresh', @proxy @checkPublishedState
 
     @initialLoad ->
       Spine.Route.setup(history: true)
@@ -58,8 +63,12 @@ class CMSimple.Editor extends Spine.Controller
 
   initializeMercury: ->
     @mercury = new Mercury.PageEditor(null, saveStyle: 'form')
+
     Mercury.on 'saved', =>
-      CMSimple.Page.fetch(@current_page.id)
+      CMSimple.Page.fetch(id: @current_page.id)
+    Mercury.one 'ready', =>
+      @checkPublishedState()
+
     @loadCurrentSnippets()
 
   loadCurrentSnippets: ->
@@ -97,4 +106,11 @@ class CMSimple.Editor extends Spine.Controller
     else
       $('.mercury-button').not('.mercury-historyPanel-button').removeClass('disabled')
 
+  checkPublishedState: (record)->
+    publishButton = $('.mercury-publish-button')
+    console?.log @current_page.reinflate().unpublished_changes, publishButton
+    if @current_page.reinflate().unpublished_changes
+      publishButton.addClass('unpublished')
+    else
+      publishButton.removeClass('unpublished')
 

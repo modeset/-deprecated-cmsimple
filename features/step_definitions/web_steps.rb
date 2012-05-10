@@ -239,3 +239,9 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+When /^(?:|I )wait for ajax requests to complete/ do
+  wait_until do
+    page.evaluate_script('$.active') == 0
+  end
+end

@@ -18,3 +18,14 @@ Feature: As a user I should be able to create pages on the site
     When I make changes to the current page
     Then the current page should only show published content
 
+  Scenario: A user should see an indication of having unpublished changes
+    Given I open the sitemap
+    When I add a new page
+    Then there should be an indication of unpublished changes
+
+    When I publish the current page
+    Then there should not be an indication of unpublished changes
+
+    When I make changes to the current page
+    Then there should be an indication of unpublished changes
+

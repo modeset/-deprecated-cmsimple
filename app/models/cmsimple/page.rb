@@ -104,6 +104,12 @@ module Cmsimple
     def published?
       self.published_at.present? && self.published_at <= Time.zone.now
     end
+    alias :published :published?
+
+    def unpublished_changes?
+      self.published_at.blank? || (self.updated_at - self.published_at).abs > 1.second
+    end
+    alias :unpublished_changes :unpublished_changes?
 
     #TODO: refactor me, this smells
     def published=(val)
@@ -141,6 +147,10 @@ module Cmsimple
       version = self.versions.find(version_id)
       reify version
       save!
+    end
+
+    def as_json(options={})
+      super(options.merge({:methods => [:unpublished_changes, :published]}))
     end
 
     protected

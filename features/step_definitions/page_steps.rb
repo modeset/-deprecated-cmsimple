@@ -78,7 +78,10 @@ When "I open the page's history" do
 end
 
 When "I view the old version" do
-  step %{I press "ul.versions button.view"}
+  within '.mercury-panel' do
+    link = all('ul.versions .view').last
+    link.click
+  end
 end
 
 When "I add a new page" do
@@ -118,12 +121,16 @@ When "I publish the current page" do
   step %{I click on the "save" button}
   step %{I click on the "publish" button}
   step %{the modal window should be visible}
-  click_button 'Publish'
+  wait_for_client_page_refresh do
+    click_button 'Publish'
+  end
 end
 
 When "I make changes to the current page" do
   step %{I change the contents of editable1 to "This is changed content"}
-  step %{I click on the "save" button}
+  wait_for_client_page_refresh do
+    step %{I click on the "save" button}
+  end
 end
 
 When "I publish a new version of the current page" do
@@ -218,10 +225,6 @@ Then "the current page should only show published content" do
   step %(the current page should be publicly available)
 end
 
-Then "the current page should only show published content" do
-  step %(the current page should be publicly available)
-end
-
 Then "I there should be one version in the history panel" do
   within '.mercury-panel' do
     page.should have_selector 'ul.versions li', count: 1
@@ -233,5 +236,18 @@ Then "I should see the old version" do
     within '.mercury-region' do
       page.should have_content('This is a published page')
     end
+  end
+end
+
+Then "there should be an indication of unpublished changes" do
+  step %{I wait for ajax requests to complete}
+  within '.mercury-toolbar' do
+    page.should have_selector '.mercury-publish-button.unpublished'
+  end
+end
+
+Then "there should not be an indication of unpublished changes" do
+  within '.mercury-toolbar' do
+    page.should_not have_selector '.mercury-publish-button.unpublished'
   end
 end

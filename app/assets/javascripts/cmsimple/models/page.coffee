@@ -1,5 +1,5 @@
 class CMSimple.Page extends Spine.Model
-  @configure 'Page', 'template', 'title', 'parent_id', 'position', 'slug', 'is_root', 'browser_title', 'keywords', 'description', 'published'
+  @configure 'Page', 'template', 'title', 'parent_id', 'position', 'slug', 'is_root', 'browser_title', 'keywords', 'description', 'published', 'unpublished_changes'
   @extend Spine.Model.Ajax
 
   @belongsTo 'parent', 'CMSimple.Page', 'parent_id'
@@ -35,9 +35,12 @@ class CMSimple.Page extends Spine.Model
     values.parent_id = parseInt(values.parent_id, 0) if values.parent_id
     @load(values)
 
+  reinflate: @::reload
+
   reload: ->
-    @ajax().reload()
-    @trigger 'reload'
+    @constructor.fetch
+      id: @id
+      success: => @trigger 'reload'
 
   editPath: ->
     "/editor#{@path()}"
