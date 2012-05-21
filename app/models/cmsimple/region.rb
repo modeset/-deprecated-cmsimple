@@ -23,12 +23,19 @@ module Cmsimple
     end
 
     def value
-      @region_hash[:value]
+      begin
+        @region_hash[:value]
+      rescue => ex
+        raise RegionValueError, "Unable to access invalid region hash: #{@region_hash.inspect}"
+      end
     end
 
     def to_s
       @html.presence || ""
     end
 
+  end
+
+  class RegionValueError < StandardError
   end
 end

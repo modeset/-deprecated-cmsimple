@@ -1,6 +1,10 @@
 
 module Cmsimple
   module RegionsHelper
+    def resource_regions
+      @page.regions
+    end
+
     def region_content(region)
       region.render_snippets do |snippet|
         render_snippet(snippet)
@@ -9,7 +13,7 @@ module Cmsimple
     end
 
     def render_region(region_name, options={}, &block)
-      content = region_content(@page.regions.send(region_name))
+      content = region_content(resource_regions.send(region_name))
 
       if content.blank? && block_given?
         content = capture(&block)

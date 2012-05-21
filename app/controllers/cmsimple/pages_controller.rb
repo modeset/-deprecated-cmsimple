@@ -59,6 +59,8 @@ module Cmsimple
       end
     end
 
+
+    #helpers
     def current_path
       @path ||= Path.from_request(params[:path])
     end
