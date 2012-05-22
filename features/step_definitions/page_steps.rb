@@ -37,7 +37,7 @@ When "I add a new redirect" do
 end
 
 When "I delete the redirect" do
-  within '.mercury-panel' do
+  within '.mercury-panel .redirects' do
     link = find '.remove'
     link.click
   end
@@ -78,8 +78,8 @@ When "I open the page's history" do
 end
 
 When "I view the old version" do
-  within '.mercury-panel' do
-    link = all('ul.versions .view').last
+  within '.mercury-panel .versions' do
+    link = all('.view').last
     link.click
   end
 end
@@ -177,13 +177,13 @@ Then "I should be redirected to the about page" do
 end
 
 Then "I should see the page in the sitemap" do
-  within '.mercury-panel' do
+  within '.mercury-panel .sitemap' do
     page.should have_content 'Some new page'
   end
 end
 
 Then "I should see the path in the redirects" do
-  within '.mercury-panel' do
+  within '.mercury-panel .redirects' do
     page.should have_content '/redirect-path'
   end
 end
@@ -226,8 +226,8 @@ Then "the current page should only show published content" do
 end
 
 Then "I there should be one version in the history panel" do
-  within '.mercury-panel' do
-    page.should have_selector 'ul.versions li', count: 1
+  within '.mercury-panel .versions' do
+    page.should have_selector 'li', count: 1
   end
 end
 

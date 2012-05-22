@@ -1,4 +1,4 @@
-%li{id="version_#{@id}" data-id=@id}
+%li(id="version_#{@id}" data-id=@id)
   %article
     %p.published= moment(@published_at).format('dddd, MMMM Do YYYY, h:mm:ss a')
     %button.btn.view View

@@ -1,4 +1,4 @@
-%li{id="path_#{@id}" data-id=@id}
+%li(id="path_#{@id}" data-id=@id)
   %article(title="direct #{@uri} to #{@destinationPath()}")
     %p.path= @uri
     %p.destination &rarr; #{@destinationPath()}

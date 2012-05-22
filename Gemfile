@@ -2,11 +2,12 @@ source :rubygems
 
 gem 'mysql2'
 gem 'jquery-rails'
+gem 'haml', '3.1.4'
 gem 'jasminerice'
 
 gem 'multi_json', '>= 1.3.4'
 
-gem 'mercury-rails', :git => 'https://github.com/jejacks0n/mercury.git'
+# gem 'mercury-rails', :git => 'https://github.com/jejacks0n/mercury.git'
 
 # Gems used only for assets and not required
 # in production environments by default.
