@@ -15,7 +15,7 @@
     %p.media-name
       %strong=@title
     %p.media-size #{@width} x #{@height}
-    %p.media-actions(data-id)
+    %p.media-actions
       %a.info(href="#") info
       |
       -# %a.edit(href="#") edit
