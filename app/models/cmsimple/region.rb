@@ -34,6 +34,9 @@ module Cmsimple
       @html.presence || ""
     end
 
+    def as_json
+      @region_hash
+    end
   end
 
   class RegionValueError < StandardError
