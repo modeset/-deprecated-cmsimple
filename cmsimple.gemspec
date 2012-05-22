@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "carrierwave", "~> 0.5.8"
 
   s.add_runtime_dependency "spine-rails", "~> 0.1"
+  s.add_runtime_dependency "coffee-script-source", "~> 1.2.0"
   s.add_runtime_dependency "haml-rails"
   s.add_runtime_dependency "formtastic"
   s.add_runtime_dependency "haml_coffee_assets"
