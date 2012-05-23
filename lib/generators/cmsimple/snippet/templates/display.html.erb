@@ -1,0 +1,14 @@
+<h1>
+  <%= class_name %>#display
+</h1>
+<p>
+  Find me in <%= @path %>
+</p>
+
+<%- @fields.each do |field| -%>
+<p>
+  <%= field %>
+  <br/>
+  <%%= @<%= field %> %%>
+</p>
+<%- end -%>

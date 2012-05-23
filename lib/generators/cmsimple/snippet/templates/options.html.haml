@@ -1,0 +1,10 @@
+.mercury-display-pane(style='width: 500px')
+  %h2 <%= class_name %> Snippet
+  = semantic_form_for @snippet, :url => '#' do |f|
+    = f.inputs do
+    <%- @fields.each do |field| -%>
+      = f.input :<%= field %>
+    <%- end -%>
+    .mercury-display-controls
+      = f.actions do
+        = f.action :submit

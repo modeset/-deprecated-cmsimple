@@ -1,0 +1,11 @@
+%h1
+  <%= class_name %>#display
+%p
+  Find me in <%= @path %>
+
+<%- @fields.each do |field| -%>
+%p
+  <%= field.humanize %>
+  %br
+  = @<%= field %>
+<%- end -%>
