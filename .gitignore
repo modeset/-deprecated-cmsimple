@@ -3,6 +3,7 @@
 .idea
 .rake_tasks
 .rvmrc
+.powenv
 REVISION
 vendor/bundle
 .rake_tasks~

@@ -1,7 +1,7 @@
 
 %header.panel-actions.add-redirect-form
   %button.btn.important.add Add Redirect
-  %form(style='display: none')
+  %form.mercury-form(style='display: none')
     %legend Create a redirect
     %ol
       %li

@@ -58,4 +58,8 @@
   *= require cmsimple/controllers/editor
   *= require_tree ./cmsimple/models
   *= require_tree ./cmsimple/views
+  *
+  *
+  * Overrides for your project
+  *= require cmsimple/overrides
   */

@@ -1,3 +1,4 @@
+
 # Taken from /jejacks0n/mercury/master/features/step_definitions/mercury_steps.rb
 ## Generic web steps
 #------------------------------------------------------------------------------

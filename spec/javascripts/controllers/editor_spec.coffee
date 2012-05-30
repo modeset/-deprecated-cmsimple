@@ -6,7 +6,7 @@ describe 'CMSimple.Editor', ->
     @editor.mercury =
                 iframe:
                   data: (->)
-                setFrameSource: ((path)-> @path = path)
+                loadIframeSrc: ((path)-> @path = path)
 
   describe 'initialization', ->
 

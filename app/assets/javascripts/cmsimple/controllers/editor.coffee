@@ -1,16 +1,3 @@
-Mercury.one = (eventName, callback)->
-  jQuery(window).one("mercury:#{eventName}", callback)
-
-Mercury.PageEditor::setFrameSource = (url, queryParams)->
-  newUrl = "#{url}?_=#{new Date().getTime()}"
-  newUrl = "#{newUrl}&#{queryParams}" unless Spine.isBlank(queryParams)
-  @iframe.data('loaded', false)
-  @iframe.get(0).contentWindow.document.location.href = @iframeSrc(newUrl, true)
-
-Mercury.Snippet.clearAll = ->
-  delete @all
-  @all = []
-  $('.mercury-snippet-toolbar').remove()
 
 class CMSimple.Editor extends Spine.Controller
   el: 'body'
@@ -28,7 +15,6 @@ class CMSimple.Editor extends Spine.Controller
 
     @bind 'pathLoaded', @proxy @ensureProperState
     @bind 'pathLoaded', =>
-      console?.log 'pathLoaded'
       @checkPublishedState()
 
     CMSimple.Page.bind 'refresh', @proxy @checkPublishedState
@@ -91,7 +77,7 @@ class CMSimple.Editor extends Spine.Controller
       queryParams = window.location.search.replace('?', '')
     else
       [path, queryParams] = path.split('?')
-    @mercury.setFrameSource(path, queryParams)
+    @mercury.loadIframeSrc _([path, queryParams]).compact().join('?')
     @trigger 'pathLoaded', path, queryParams
 
   pathChange: (path)->
@@ -108,7 +94,6 @@ class CMSimple.Editor extends Spine.Controller
 
   checkPublishedState: (record)->
     publishButton = $('.mercury-publish-button')
-    console?.log @current_page.reinflate().unpublished_changes, publishButton
     if @current_page.reinflate().unpublished_changes
       publishButton.addClass('unpublished')
     else

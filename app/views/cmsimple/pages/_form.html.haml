@@ -1,4 +1,4 @@
-= semantic_form_for @page do |f|
+= semantic_form_for @page, html: {class: 'mercury-form'} do |f|
   = f.inputs 'Page Info' do
     = f.input :parent_id, collection: Cmsimple::Page.for_parent_select(@page), as: :select, prompt: 'None'
     = f.input :title
