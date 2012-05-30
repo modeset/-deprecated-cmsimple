@@ -18,6 +18,8 @@ end
 # steps to use the XPath syntax.
 Capybara.default_selector = :css
 
+Capybara.default_wait_time = 8
+
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how 
 # your application behaves in the production environment, where an error page will 
