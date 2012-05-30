@@ -1,0 +1,8 @@
+test: &test
+  adapter: mysql2
+  encoding: utf8
+  database: cmsimple_test
+  username: root
+
+cucumber:
+  <<: *test
