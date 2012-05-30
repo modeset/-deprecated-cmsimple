@@ -7,7 +7,7 @@ before_script:
   - bundle exec rake db:migrate
   - 'sh -e /etc/init.d/xvfb start'
 env:
-  - DISPLAY=':99.0' CUCUMBER_OPTS='-f progress'
+  - DISPLAY=':99.0' CUCUMBER_OPTS='-f progress' CI_WAIT_TIME=10
 script: bundle exec rake --trace
 notifications:
   email:
