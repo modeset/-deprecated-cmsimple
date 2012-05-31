@@ -16,12 +16,11 @@ module Cmsimple
       def flatten_options(options)
         return {} unless options.present?
         options = options.dup
-        if options.keys.length == 1
-           val = options[options.keys.first]
-           val.is_a?(Hash) ? val : options
-         else
-           options
-         end
+        if options.key?(:snippet)
+          options.merge(options[:snippet])
+        else
+          options
+        end
       end
 
       def method_missing method, *args, &block
