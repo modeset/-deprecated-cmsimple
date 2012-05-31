@@ -10,12 +10,8 @@
 
 /*
  *= require_self
- *= require mercury/buttons
- *= require mercury/dialog-override
- *= require mercury/modal-override
- *= require mercury/all_images-override
+ *= require mercury/panels
+ *= require mercury/toolbar-images
  */
 
-/* Disable text sizing in webkit (ipad/iphone etc -- should apply to mercury only) */
-html { -webkit-text-size-adjust: none; }
 

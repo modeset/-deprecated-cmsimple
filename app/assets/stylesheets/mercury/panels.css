@@ -1,11 +1,11 @@
 
 /* Dialogs */
-.mercury-panel, .mercury-framed-panel {
+.mercury-framed-panel {
   background-color: #f5f5f5;
   color: #333;
 }
 
-.mercury-panel h1, .mercury-framed-panel h1 {
+.mercury-framed-panel h1 {
   color: #f5f5f5;
   border-bottom: 1px solid #222;
   -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
