@@ -99,16 +99,16 @@ window.Mercury = {
           sep:                 ' '
           },
         insertLink:            ['Link', 'Insert Link', { modal: '/mercury/modals/link.html', regions: ['editable', 'markupable'] }],
-        insertMedia:          ['Media', 'Insert Media (images and videos)', {toggle: true}],
+        insertMedia:          ['Media', 'Insert Media (images and videos)', {panel: function(){ return new CMSimple.Panels.ImageLibrary('media'); }}],
         insertTable:           ['Table', 'Insert Table', { modal: '/mercury/modals/table.html', regions: ['editable', 'markupable'] }],
         insertCharacter:       ['Character', 'Special Characters', { modal: '/mercury/modals/character.html', regions: ['editable', 'markupable'] }],
         snippetPanel:          ['Snippet', 'Snippet Panel', { panel: '/cmsimple/snippets' }],
         sep2:                  ' ',
         editMetadata:          ['Page Info', 'Edit Page Metadata'],
-        historyPanel:          ['History', 'Page Version History', {toggle: true}],
+        historyPanel:          ['History', 'Page Version History', {panel: function(){ return new CMSimple.Panels.Versions('history'); }}],
         sep4:                  ' ',
-        sitemap:               ['Site Map', 'List of pages in the site', {toggle: true}],
-        redirects:             ['Redirects', 'List of redirects in the site', {toggle: true}],
+        sitemap:               ['Site Map', 'List of pages in the site', {panel: function(){ return new CMSimple.Panels.Sitemap('sitemap'); }}],
+        redirects:             ['Redirects', 'List of redirects in the site', {panel: function(){ return new CMSimple.Panels.Redirects('redirects'); }}],
         // sep4:                  ' ',
         // notesPanel:            ['Notes', 'Page Notes', { panel: '/mercury/panels/notes.html' }]
         },
@@ -314,10 +314,6 @@ window.Mercury = {
       htmlEditor: function() { Mercury.modal('/mercury/modals/htmleditor.html', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); },
       editMetadata: function() { Mercury.modal('/pages/'+ CMSimple.Editor.current_page.id + '/edit', { title: 'Page Metadata', handler: 'editMetadata' }); },
       publish: function() { Mercury.modal('/pages/'+ CMSimple.Editor.current_page.id + '/publish', { title: 'Publish Page', handler: 'publish' }); },
-      sitemap: function(){ CMSimple.Panels.Sitemap.toggle(this) },
-      redirects: function(){ CMSimple.Panels.Redirects.toggle(this) },
-      insertMedia: function(){ CMSimple.Panels.ImageLibrary.toggle(this) },
-      historyPanel: function(){ CMSimple.Panels.Versions.toggle(this) }
       },
 
 

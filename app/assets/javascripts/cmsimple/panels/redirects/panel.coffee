@@ -1,9 +1,5 @@
 class CMSimple.Panels.Redirects extends Mercury.Panel
 
-  @toggle: (region)->
-    @instance ?= new CMSimple.Panels.Redirects()
-    @instance.toggle()
-
   constructor: ()->
     super(null, 'redirects', title: 'Redirects', closeButton: true)
     @button = $('.mercury-redirects-button')
@@ -14,7 +10,9 @@ class CMSimple.Panels.Redirects extends Mercury.Panel
 
   toggle: ->
     super
-    @resize() if @visible
+    if @visible
+      @list.refresh()
+      @resize()
 
   # Overwriting the bindEvents to prevent the mousedown trap in the parent class
   bindEvents: ->

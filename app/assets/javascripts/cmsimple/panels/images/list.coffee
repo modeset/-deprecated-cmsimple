@@ -10,7 +10,6 @@ class CMSimple.Panels.ImageLibrary.List extends Spine.Controller
     super el: $(el)
 
     CMSimple.Image.bind 'refresh change', => @render()
-    CMSimple.Image.fetch()
 
   render: ->
     @html('')

@@ -17,6 +17,7 @@ end
 # prefer to use XPath just remove this line and adjust any selectors in your
 # steps to use the XPath syntax.
 Capybara.default_selector = :css
+Capybara.ignore_hidden_elements = true
 
 Capybara.default_wait_time = ENV['CI_WAIT_TIME'].try(:to_i) || 4
 
@@ -62,3 +63,10 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+Before('@allow_hidden_elements') do
+  Capybara.ignore_hidden_elements = false
+end
+
+After('@allow_hidden_elements') do
+  Capybara.ignore_hidden_elements = true
+end

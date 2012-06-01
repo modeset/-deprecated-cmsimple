@@ -1,9 +1,5 @@
 class CMSimple.Panels.ImageLibrary extends Mercury.Panel
 
-  @toggle: (region)->
-    @instance ?= new CMSimple.Panels.ImageLibrary()
-    @instance.toggle(region)
-
   constructor: ()->
     super(null, 'insertMedia', title: 'Image Library', appendTo: '.mercury-toolbar-container', closeButton: true)
     @button = $('.mercury-insertMedia-button')
@@ -17,14 +13,18 @@ class CMSimple.Panels.ImageLibrary extends Mercury.Panel
 
     @bindPanelEvents()
 
-  toggle: (region)->
-    @region = region
+  toggle: ->
     super
-    @resize() if @visible
+    if @visible
+      CMSimple.Image.fetch()
+      @resize()
 
   bindPanelEvents: ->
     $('#add_image', @element).on('click', @toggleUploader)
     $(window).bind 'cmsimple:images:uploaded', => @imageUploaded()
+
+    Mercury.on 'region:focused', (event, options) =>
+      @region = options.region
 
   toggleUploader: (e) ->
     target = $(e.target)

@@ -45,6 +45,7 @@ Feature: As a user I should be able to edit pages on the site
     And I change the template to "test"
     Then I should see "Test template with content" in the content frame
 
+  @allow_hidden_elements
   Scenario: As a user I want to be able to change the SEO info of a page
     Given a page exists at a custom path with custom content
     And I visit that page's edit path

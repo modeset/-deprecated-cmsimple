@@ -8,7 +8,6 @@ class CMSimple.Panels.Versions.List extends Spine.Controller
     super el: $(el)
 
     CMSimple.Version.bind 'refresh change', => @render()
-    CMSimple.Version.fetch(CMSimple.Editor.current_page)
 
   render: ->
     @html('')

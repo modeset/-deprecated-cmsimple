@@ -1,9 +1,4 @@
-class CMSimple.Panels.Sitemap
-  @toggle: (region)->
-    @instance ?= new CMSimple.Panels.Sitemap.Panel()
-    @instance.toggle()
-
-class CMSimple.Panels.Sitemap.Panel extends Mercury.Panel
+class CMSimple.Panels.Sitemap extends Mercury.Panel
   constructor: ->
     super(null, 'Sitemap', title: 'Site Map', appendTo: '.mercury-toolbar-container', closeButton: true)
     @button = $('.mercury-sitemap-button')

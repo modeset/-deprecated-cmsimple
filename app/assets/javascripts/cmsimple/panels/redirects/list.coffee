@@ -8,6 +8,7 @@ class CMSimple.Panels.Redirects.List extends Spine.Controller
 
     CMSimple.Path.bind 'refresh change', => @render()
 
+  refresh: ->
     # TODO: should this be a model method?
     if CMSimple.Page.count() > 1
       CMSimple.Path.fetch()

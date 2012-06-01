@@ -1,9 +1,5 @@
 class CMSimple.Panels.Versions extends Mercury.Panel
 
-  @toggle: (region)->
-    @instance ?= new CMSimple.Panels.Versions()
-    @instance.toggle()
-
   constructor: ()->
     super(null, 'historyPanel', title: 'History', closeButton: true)
 
@@ -20,7 +16,9 @@ class CMSimple.Panels.Versions extends Mercury.Panel
 
   toggle: ->
     super
-    @resize() if @visible
+    if @visible
+      CMSimple.Version.fetch(CMSimple.Editor.current_page)
+      @resize()
 
   # Overwriting the bindEvents to prevent the mousedown trap in the parent class
   bindEvents: ->
