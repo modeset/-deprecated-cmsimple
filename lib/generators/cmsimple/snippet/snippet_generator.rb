@@ -31,7 +31,7 @@ class Cmsimple::SnippetGenerator < Rails::Generators::NamedBase
 %li(data-filter="#{class_name.underscore}, snippet, name")
   %img(alt="#{class_name.humanize} Snippet" data-snippet="#{class_name.underscore}" src="/assets/toolbar/snippets.png")
   %h4>#{class_name.humanize}
-  .description A one or two line long description of what this snippet does.</div>
+  .description A one or two line long description of what this snippet does.
       HTML
     elsif handler.to_sym == :erb
       html = <<-HTML
