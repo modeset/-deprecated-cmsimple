@@ -3,5 +3,6 @@
   .add-image-action
     %iframe(src='/cmsimple/images/new' seamless="true" frameborder="0")
 .image-filter
-  %input.filter(type="text")
+  %form
+    %input.filter(type="text" placeholder="e.g. <500 x 200")
 %ul.media-grid

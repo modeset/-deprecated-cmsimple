@@ -6,12 +6,10 @@ class CMSimple.Panels.ImageLibrary extends Mercury.Panel
     @loadContent JST['cmsimple/views/image_library']()
 
     @list = new CMSimple.Panels.ImageLibrary.List($('ul.media-grid'))
-
-    @list.bind 'image:selected', (img)=>
-      options = {value: img}
-      @region.execCommand 'insertImage', options
+    @selection = new CMSimple.Panels.ImageLibrary.Selection()
 
     @bindPanelEvents()
+
 
   toggle: ->
     super
@@ -19,12 +17,19 @@ class CMSimple.Panels.ImageLibrary extends Mercury.Panel
       CMSimple.Image.fetch()
       @resize()
 
+
   bindPanelEvents: ->
     $('#add_image', @element).on('click', @toggleUploader)
+    $('.image-filter', @element).on('submit', @filterImages)
     $(window).bind 'cmsimple:images:uploaded', => @imageUploaded()
 
-    Mercury.on 'region:focused', (event, options) =>
-      @region = options.region
+    @list.bind 'image:selected', (img)=>
+      @selection.set(img)
+
+    @selection.bind 'filter', (geometry)=>
+      @list.filterByGeometry(geometry)
+      $('.filter', @element).val(geometry)
+
 
   toggleUploader: (e) ->
     target = $(e.target)
@@ -35,11 +40,22 @@ class CMSimple.Panels.ImageLibrary extends Mercury.Panel
     else
       target.text('Add Image')
 
+
   imageUploaded: ->
     CMSimple.Image.fetch()
     @closeUploader()
 
+
   closeUploader: ->
     $('#add_image', @element).text('Add Image')
     $('.add-image-action', @element).removeClass('active')
+
+
+  filterImages: (e)=>
+    e.preventDefault()
+    query = $(e.target).find('input.filter').val()
+    if Spine.isBlank(query)
+      @list.render()
+    else
+      @list.filterByGeometry(query)
 

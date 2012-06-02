@@ -99,7 +99,7 @@ window.Mercury = {
           sep:                 ' '
           },
         insertLink:            ['Link', 'Insert Link', { modal: '/mercury/modals/link.html', regions: ['editable', 'markupable'] }],
-        insertMedia:          ['Media', 'Insert Media (images and videos)', {panel: function(){ return new CMSimple.Panels.ImageLibrary('media'); }}],
+        insertMedia:           ['Images', 'Insert Media (images and videos)', {panel: function(){ return new CMSimple.Panels.ImageLibrary('media'); }}],
         insertTable:           ['Table', 'Insert Table', { modal: '/mercury/modals/table.html', regions: ['editable', 'markupable'] }],
         insertCharacter:       ['Character', 'Special Characters', { modal: '/mercury/modals/character.html', regions: ['editable', 'markupable'] }],
         snippetPanel:          ['Snippet', 'Snippet Panel', { panel: '/cmsimple/snippets' }],
@@ -434,7 +434,8 @@ window.Mercury = {
       '.{{regionClass}}:after { content: "."; display: block; visibility: hidden; clear: both; height: 0; overflow: hidden; }' +
       '.{{regionClass}} table, .{{regionClass}} td, .{{regionClass}} th { border: 1px dotted red; min-width: 6px; }' +
       '.mercury-textarea { border: 0; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; resize: none; }' +
-      '.mercury-textarea:focus { outline: none; }'
+      '.mercury-textarea:focus { outline: none; }' +
+      '.selected-image { outline: 2px dotted #ff00ff }'
   },
 
   // ## Silent Mode

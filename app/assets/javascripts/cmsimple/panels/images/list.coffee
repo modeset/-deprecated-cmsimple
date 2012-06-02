@@ -15,6 +15,10 @@ class CMSimple.Panels.ImageLibrary.List extends Spine.Controller
     @html('')
     @addImage image for image in CMSimple.Image.all()
 
+  filterByGeometry: (geometry)->
+    @html('')
+    @addImage image for image in CMSimple.Image.allWithinGeometry(geometry)
+
   addImage: (image)->
     @append JST['cmsimple/views/image_library_item'](image)
 
