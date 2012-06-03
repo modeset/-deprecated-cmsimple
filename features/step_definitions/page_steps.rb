@@ -18,6 +18,7 @@ end
 
 When "I visit that page's edit path" do
   visit ['/editor', @path].join
+  wait_for_mercury_ready
 end
 
 When "I visit the current page's public path" do
