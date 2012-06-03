@@ -18,7 +18,6 @@ end
 
 When "I visit that page's edit path" do
   visit ['/editor', @path].join
-  wait_for_mercury_ready
 end
 
 When "I visit the current page's public path" do
@@ -64,16 +63,19 @@ When "I edit the page's metadata" do
 end
 
 When "I open the sitemap" do
+  step %{the toolbar should be visible}
   step %{I click on the "sitemap" button}
   step %{the sitemap panel should be visible}
 end
 
 When "I open the redirects" do
+  step %{the toolbar should be visible}
   step %{I click on the "redirects" button}
   step %{the redirect panel should be visible}
 end
 
 When "I open the page's history" do
+  step %{the toolbar should be visible}
   step %{I click on the "history" button}
   step %{the history panel should be visible}
 end
