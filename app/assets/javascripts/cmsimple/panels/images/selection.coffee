@@ -7,6 +7,7 @@ class CMSimple.Panels.ImageLibrary.Selection extends Spine.Controller
   set: (img)->
     if @selectedImage
       @selectedImage.attr('src', img.src)
+      @selectedImage.attr('alt', img.alt)
       snippet = Mercury.Snippet.find @selectedImage.parents('[data-snippet]').data('snippet')
       snippet.options.snippet[@selectedImage.data('snippet-image')] = img.src
 
