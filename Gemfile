@@ -8,7 +8,7 @@ gem 'jasminerice'
 gem 'multi_json', '>= 1.3.4'
 
 # gem 'mercury-rails', :path => '~/work/libraries/ruby/gems/mercury'
-gem 'mercury-rails', git: 'git://github.com/jejacks0n/mercury.git'
+# gem 'mercury-rails', git: 'git://github.com/jejacks0n/mercury.git'
 
 # Gems used only for assets and not required
 # in production environments by default.
