@@ -311,9 +311,7 @@ window.Mercury = {
     // callback functions are executed within the scope of the given region, so you have access to all it's methods.
     behaviors: {
       //foreColor: function(selection, options) { selection.wrap('<span style="color:' + options.value.toHex() + '">', true) },
-      htmlEditor: function() { Mercury.modal('/mercury/modals/htmleditor.html', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); },
-      editMetadata: function() { Mercury.modal('/pages/'+ CMSimple.Editor.current_page.id + '/edit', { title: 'Page Metadata', handler: 'editMetadata' }); },
-      publish: function() { Mercury.modal('/pages/'+ CMSimple.Editor.current_page.id + '/publish', { title: 'Publish Page', handler: 'publish' }); },
+      htmlEditor: function() { Mercury.modal('/mercury/modals/htmleditor.html', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); }
       },
 
 
@@ -335,7 +333,9 @@ window.Mercury = {
     // button, or manually with `Mercury.trigger('action', {action: 'barrelRoll'})`
     globalBehaviors: {
       exit: function() { window.location.href = this.iframeSrc() },
-      newPage: function(){ Mercury.modal('/pages/new', { title: 'Create a New Page', handler: 'newPage' }); }
+      newPage: function(){ Mercury.modal('/pages/new', { title: 'Create a New Page', handler: 'newPage' }); },
+      editMetadata: function() { Mercury.modal('/pages/'+ CMSimple.Editor.current_page.id + '/edit', { title: 'Page Metadata', handler: 'editMetadata' }); },
+      publish: function() { Mercury.modal('/pages/'+ CMSimple.Editor.current_page.id + '/publish', { title: 'Publish Page', handler: 'publish' }); }
       },
 
 
