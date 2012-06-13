@@ -35,6 +35,7 @@
   *= require mercury/mercury
   *
   *= require jquery.ui.nestedSortable-1.3.4
+  *= require jquery-serializeObject
   *
   * Require any localizations you wish to support
   * Example: es.locale, or fr.locale -- regional dialects are in each language file so never en_US for instance.

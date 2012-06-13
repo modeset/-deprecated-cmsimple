@@ -73,6 +73,9 @@ module Cmsimple
     end
 
     def update_content(content)
+      if content.is_a?(String)
+        content = JSON.parse(content)
+      end
       update_attributes(content: content)
     end
 

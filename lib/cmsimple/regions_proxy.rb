@@ -4,15 +4,14 @@ module Cmsimple
 
     def initialize(regions_hash)
       if regions_hash.is_a?(Hash)
-        @regions_hash = regions_hash.dup
-        # @regions_hash.symbolize_keys!
+        @regions_hash = ActiveSupport::HashWithIndifferentAccess.new(regions_hash.dup)
         define_regions
       end
     end
 
     def snippets_hash
       return {} unless @regions_hash.present?
-      @regions_hash.inject({}){|h, (k,v)| h.merge(v[:snippets].presence || {})}
+      @regions_hash.inject(ActiveSupport::HashWithIndifferentAccess.new){|h, (k,v)| h.merge(v[:snippets].presence || {})}
     end
 
     def define_regions

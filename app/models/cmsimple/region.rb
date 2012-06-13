@@ -3,7 +3,6 @@ module Cmsimple
     attr_reader :snippets
     def initialize(region_hash=nil)
       @region_hash = (region_hash.presence || {}).dup
-      # @region_hash.symbolize_keys! if region_hash.is_a?(Hash)
       @snippets = []
       @html = value
       build_snippets
