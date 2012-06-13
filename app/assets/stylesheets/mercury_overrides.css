@@ -1,10 +1,6 @@
 /*!
  * Mercury Editor is a Coffeescript and jQuery based WYSIWYG editor.  Documentation and other useful information can be
  * found at https://github.com/jejacks0n/mercury
- *
- * This file is intended to provide a standard way to override the CSS that comes default with Mercury Editor, and
- * includes an example button style, should you ever need to add new ones yourself.  Read the toolbar configuration in
- * mercury.js for more on how to add your own buttons to the toolbar.
  */
 
 
@@ -12,6 +8,10 @@
  *= require_self
  *= require mercury/panels
  *= require mercury/toolbar-images
+ *
+ * The cmsimple.css file is intended to be a project specific css for integrating the mercury editor via cmsimple.
+ * The main use case is most likely custom form styling for snippet options forms.
+ *= require cmsimple
  */
 
 
