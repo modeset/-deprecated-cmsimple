@@ -28,7 +28,7 @@ Cmsimple::Engine.routes.draw do
   get '*path' => 'front#show'
   root :to => 'front#show', :via => :get
 
-  post '*path' => 'pages#update_content'
-  root :to => 'pages#update_content', :via => :post
+  put '*path' => 'pages#update_content'
+  root :to => 'pages#update_content', :via => :put
 
 end

@@ -21,10 +21,10 @@ Feature: As a user I should be able to edit pages on the site
     And fill in "Last name" with "Flinstone"
     And press "Create Snippet"
     Then the modal window should not be visible
-    And the contents of the editable region should be "this is <div data-version='1' data-snippet='snippet_0' class='mercury-snippet example-snippet' contenteditable='false'><h1>Fred Flinstone</h1></div><span>simple</span> <b>content</b>"
+    And the contents of the editable region should be "this is <div data-version='1' data-snippet='snippet_0' class='example-snippet' contenteditable='false'><h1>Fred Flinstone</h1></div><span>simple</span> <b>content</b>"
 
     When I save and reload the page
-    Then the contents of the editable region should be "this is <div data-version='1' data-snippet='snippet_0' class='mercury-snippet example-snippet' contenteditable='false'><h1>Fred Flinstone</h1></div><span>simple</span> <b>content</b>"
+    Then the contents of the editable region should be "this is <div data-version='1' data-snippet='snippet_0' class='example-snippet' contenteditable='false'><h1>Fred Flinstone</h1></div><span>simple</span> <b>content</b>"
 
     When I edit the snippet
     Then the "First name" field should contain "Fred"

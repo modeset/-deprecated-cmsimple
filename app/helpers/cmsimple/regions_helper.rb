@@ -20,10 +20,8 @@ module Cmsimple
       end
 
       if options[:tag]
-        html_class = 'mercury-region '
         html_options = options[:html].presence || {}
-        html_class << html_options[:class] if html_options[:class]
-        html_options = html_options.merge(:id => region_name, :'data-type' => 'editable', :class => html_class)
+        html_options = html_options.merge(:id => region_name, :'data-mercury' => options[:region_type] || 'full')
 
         content = content_tag options[:tag], content, html_options
       end

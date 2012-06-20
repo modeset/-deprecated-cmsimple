@@ -1,6 +1,6 @@
 .mercury-display-pane(style='width: 500px')
   %h2 Image Example Snippet
-  = semantic_form_for @snippet, :url => '#' do |f|
+  = semantic_form_for @snippet, :url => '#', html: {class: 'mercury-form'} do |f|
     = f.inputs do
       = f.input :title
       = f.input :summary

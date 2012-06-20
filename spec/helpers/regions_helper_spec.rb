@@ -32,14 +32,15 @@ describe Cmsimple::RegionsHelper do
     it 'renders the region with a wrapper if a tag is specified' do
       content = render_region(:body, tag: :section)
       content.should have_selector('h1', content: 'Fred Flinstone')
-      content.should have_selector('section.mercury-region')
+      content.should have_selector("section[data-mercury='full']")
       content.should have_selector('section#body')
     end
 
-    it 'renders the region with a wrapper and retains the class if a tag is specified' do
-      content = render_region(:body, tag: :section, html: {class: 'blah'})
+    it 'renders the region with a wrapper and set class and region type from options' do
+      content = render_region(:body, tag: :section, html: {class: 'blah'}, region_type: 'snippets')
       content.should have_selector('h1', content: 'Fred Flinstone')
-      content.should have_selector('section.mercury-region.blah')
+      content.should have_selector('section.blah')
+      content.should have_selector("section[data-mercury='snippets']")
       content.should have_selector('section#body')
     end
   end

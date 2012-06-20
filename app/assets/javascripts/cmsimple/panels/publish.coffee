@@ -8,6 +8,7 @@ class CMSimple.Panels.Publish extends Spine.Controller
 
   constructor: (container, @modal)->
     super el: container
+    @el.off 'ajax:beforeSend'
 
   submit: (e)->
     e.preventDefault()

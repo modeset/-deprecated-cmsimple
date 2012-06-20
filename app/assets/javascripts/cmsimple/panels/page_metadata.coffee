@@ -9,6 +9,7 @@ class CMSimple.Panels.PageMetadata extends Spine.Controller
 
   constructor: (container, @modal, @action)->
     super el: container
+    @el.off 'ajax:beforeSend'
 
   submit: (e)->
     e.preventDefault()

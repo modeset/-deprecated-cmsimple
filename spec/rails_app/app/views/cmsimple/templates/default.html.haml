@@ -6,14 +6,14 @@
   = @page.description
 
 %h2 Editable
-%section#editable1.mercury-region(data-type='editable')
+%section#editable1(data-mercury='full')
   =region_content @page.regions.editable1
 
 %h2 Snippetable
-%section#snippetable1.mercury-region(data-type='snippetable')
+%section#snippetable1(data-mercury='snippets')
   =region_content @page.regions.snippetable1
 
 %h2 Markupable
-%section#markupable1.mercury-region(data-type='markupable')
+%section#markupable1(data-mercury='markdown')
   =region_content @page.regions.markupable1
 

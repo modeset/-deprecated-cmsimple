@@ -80,7 +80,7 @@ When /^(?:|I )(?:change|set) the contents? of (.*?) to (.*?)$/ do |region_locato
     find("##{region_id}", :message => "Unable to locate a region matching '##{region_id}'")
     page.driver.execute_script <<-JAVASCRIPT
       var element = top.jQuery(document).find('##{region_id}');
-      if (element.data('type') == 'markupable') {
+      if (element.data('mercury') == 'markdown') {
         element.find('textarea').val(#{content});
       } else {
         var region = top.mercuryInstance.getRegionByName('#{region_id}');
@@ -104,12 +104,12 @@ When /^(?:|I )(?:make|have) a selection (?:in (.*?) )?for "([^"]*)"$/ do |region
     find("#{region_selector} #{selector}", :message => "Unable to locate a match for '#{selector}' inside '#{region_locator}'")
     page.driver.execute_script <<-JAVASCRIPT
       var element = top.jQuery(document).find('#{region_selector}');
-      if (element.data('type') == 'markupable') {
+      if (element.data('mercury') == 'markdown') {
         alert('unimplemented');
         throw('unimplemented');
       } else {
         var selectedElement = element.find('#{selector}');
-        var selection = new top.Mercury.Regions.Editable.Selection(window.getSelection(), document);
+        var selection = new top.Mercury.Regions.Full.Selection(window.getSelection(), document);
         selection.selectNode(selectedElement.get(0));
         selectedElement.simulate('mouseup');
       }
@@ -139,7 +139,7 @@ Then /^the contents? of (.*?) should be "([^"]*)"$/ do |region_locator, content|
     find("#{region_selector}", :message => "Unable to locate a region matching '#{region_selector}'")
     results = page.driver.execute_script <<-JAVASCRIPT
       var element = top.jQuery(document).find('#{region_selector}');
-      if (element.data('type') == 'markupable') {
+      if (element.data('mercury') == 'markdown') {
         return element.find('textarea').val();
       } else {
         return element.html();
@@ -223,7 +223,7 @@ When /^(?:|I )(?:drag|drop) (.*?) (?:into|on) (.*?)$/ do |snippet_locator, regio
     find("##{region_id}", :message => "Unable to locate a region matching '##{region_id}'")
     page.driver.execute_script <<-JAVASCRIPT
       var element = top.jQuery(document).find('##{region_id}');
-      if (element.data('type') == 'markupable') {
+      if (element.data('mercury') == 'markdown') {
         alert('unimplemented');
         throw('unimplemented');
       } else {
@@ -244,7 +244,7 @@ When /^(?:|I )hover over (.*?)(?: in (.*?))?$/ do |locator, region_locator|
     find("#{region_selector}", :message => "Unable to locate a region matching '#{region_selector}'")
     page.driver.execute_script <<-JAVASCRIPT
       var element = top.jQuery(document).find('#{region_selector}');
-      if (element.data('type') == 'markupable') {
+      if (element.data('mercury') == 'markdown') {
         alert('unimplemented');
         throw('unimplemented');
       } else {

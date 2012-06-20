@@ -150,7 +150,7 @@ end
 
 Then "I should see that page's content in it's template" do
   region = <<-HTML
-<section class='mercury-region' data-type='editable' id='editable1'>
+<section data-mercury='full' id='editable1'>
 #{@content}
 </section>
   HTML
@@ -161,7 +161,7 @@ end
 Then "I should be able to edit that page's content" do
   sleep(1)
   within_frame 'mercury_iframe' do
-    within '.mercury-region' do
+    within '[data-mercury]' do
       page.body.should =~ /#{@content}/
     end
   end
@@ -236,7 +236,7 @@ end
 
 Then "I should see the old version" do
   within_frame 'mercury_iframe' do
-    within '.mercury-region' do
+    within '[data-mercury]' do
       page.should have_content('This is a published page')
     end
   end

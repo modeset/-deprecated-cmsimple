@@ -6,6 +6,8 @@
 
 /*
  *= require_self
+ *= require mercury/buttons
+ *= require mercury/forms
  *= require mercury/panels
  *= require mercury/toolbar-images
  *
