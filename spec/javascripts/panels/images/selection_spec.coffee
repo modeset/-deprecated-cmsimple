@@ -74,7 +74,7 @@ describe 'CMSimple.Panels.ImageLibrary.Selection', ->
       @snippetMock = {options: {snippet: {}}}
       @snippetSpy = spyOn(Mercury.Snippet, 'find').andCallFake(=> @snippetMock)
 
-      @region = {element: @snippetHTML, type: 'editable'}
+      @region = {element: @snippetHTML, type: -> 'full'}
       @img = @snippetHTML.find('img')
 
       @selection = new CMSimple.Panels.ImageLibrary.Selection()

@@ -11,7 +11,7 @@ class CMSimple.Panels.ImageLibrary.Selection extends Spine.Controller
       snippet = Mercury.Snippet.find @selectedImage.parents('[data-snippet]').data('snippet')
       snippet.options.snippet[@selectedImage.data('snippet-image')] = img.src
 
-    else if @region.type == 'editable'
+    else if @region.type() is 'full'
       options = {value: img}
       @region.execCommand 'insertImage', options
 
