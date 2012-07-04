@@ -7,7 +7,7 @@ module MercurySelectorsHelpers
       when 'the toolbar' then '.mercury-toolbar-container'
 
       when /^the "(.*?)" button$/
-        ".mercury-primary-toolbar .mercury-#{mercury_button_mapping_for($1)}-button"
+        ".mercury-primary-toolbar .mercury-#{mercury_button_mapping_for($1)}-button, .mercury-primary-expander .mercury-expander-button[data-button='#{mercury_button_mapping_for($1)}']"
 
       when /^the (.*?) editor (button|dropdown|palette)$/
         ".mercury-editable-toolbar .mercury-#{mercury_button_mapping_for($1)}-button"

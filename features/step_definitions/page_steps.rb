@@ -57,25 +57,34 @@ When "I visit the new redirect" do
   visit '/redirect-path'
 end
 
+When "I expand the toolbar if necessary" do
+  page.first(:css, '.mercury-toolbar-expander').try(:click)
+end
+
 When "I edit the page's metadata" do
+  step %{the toolbar should be visible}
+  step %{I expand the toolbar if necessary}
   step %{I click on the "editMetadata" button}
   step %{the modal window should be visible}
 end
 
 When "I open the sitemap" do
   step %{the toolbar should be visible}
+  step %{I expand the toolbar if necessary}
   step %{I click on the "sitemap" button}
   step %{the sitemap panel should be visible}
 end
 
 When "I open the redirects" do
   step %{the toolbar should be visible}
+  step %{I expand the toolbar if necessary}
   step %{I click on the "redirects" button}
   step %{the redirect panel should be visible}
 end
 
 When "I open the page's history" do
   step %{the toolbar should be visible}
+  step %{I expand the toolbar if necessary}
   step %{I click on the "history" button}
   step %{the history panel should be visible}
 end
