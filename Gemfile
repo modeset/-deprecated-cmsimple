@@ -19,6 +19,7 @@ group :assets do
 end
 
 group :test do
+  gem 'pry'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'cucumber'
