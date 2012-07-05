@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency "spine-rails", "~> 0.1"
   s.add_runtime_dependency "coffee-script-source", "~> 1.2.0"
-  s.add_runtime_dependency "haml", "3.1.4"
+  s.add_runtime_dependency "haml", "~> 3.1.6"
   s.add_runtime_dependency "haml-rails", "0.3.4"
   s.add_runtime_dependency "formtastic", "~> 2.2.0"
   s.add_runtime_dependency "haml_coffee_assets", "~> 0.9.2"
