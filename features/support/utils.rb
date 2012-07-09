@@ -8,5 +8,11 @@ module StepUtils
       sleep(1)
     end
   end
+
+  def allow_hidden_elements
+    Capybara.ignore_hidden_elements = false
+    yield
+    Capybara.ignore_hidden_elements = true
+  end
 end
 World(StepUtils)

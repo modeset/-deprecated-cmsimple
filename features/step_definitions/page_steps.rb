@@ -217,14 +217,18 @@ Then "I should be alerted to the duplicate redirect" do
 end
 
 Then /^I should see that seo info on the page/ do
-  visit current_path.gsub('/editor', '')
-  within('title') do
-    page.should have_content('This is a new title for the browser')
+  allow_hidden_elements do
+
+    visit current_path.gsub('/editor', '')
+    within('title') do
+      page.should have_content('This is a new title for the browser')
+    end
+    page.should have_css('meta[name="keywords"]')
+    page.should have_css('meta[content="some_keyword, someother_keyword"]')
+    page.should have_css('meta[name="description"]')
+    page.should have_css('meta[content="This is a description of the page"]')
+
   end
-  page.should have_css('meta[name="keywords"]')
-  page.should have_css('meta[content="some_keyword, someother_keyword"]')
-  page.should have_css('meta[name="description"]')
-  page.should have_css('meta[content="This is a description of the page"]')
 end
 
 Then "the current page should be publicly available" do
