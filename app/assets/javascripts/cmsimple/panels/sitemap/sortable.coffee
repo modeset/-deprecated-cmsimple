@@ -5,11 +5,15 @@ class CMSimple.Panels.Sitemap.Sortable extends Spine.Controller
 
   setup: ->
     @el.nestedSortable
+              connectWith: 'ul.child'
+              forcePlaceholderSize: true
+              handle: 'article'
+              helper: 'clone'
               items: 'li'
               listType: 'ul'
-              helper: 'clone'
-              connectWith: 'ul.child'
-              update: @proxy @update
+              stop: @proxy @update
+              tolerance: 'pointer',
+              toleranceElement: '> article'
 
     @el.disableSelection()
 
