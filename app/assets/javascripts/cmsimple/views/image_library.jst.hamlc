@@ -1,7 +1,7 @@
 %header.panel-actions
   %button.btn.important#add_image Add Image
   .add-image-action
-    %iframe(src='/cmsimple/images/new' seamless="true" frameborder="0")
+    %iframe(src='/cmsimple/images/new' frameborder="0")
 .image-filter
   %form
     %input.filter(type="text" placeholder="e.g. <500 x 200")
