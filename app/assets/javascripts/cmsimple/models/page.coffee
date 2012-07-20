@@ -53,9 +53,9 @@ class CMSimple.Page extends Spine.Model
     values = @normalizeSlug(values)
     super(values)
 
-  path: ->
-    return '/' if @isRoot()
-    parent_path = if @parent() then @parent().path() else ''
+  path: (options={})->
+    return '/' if (not options.ignoreRoot) && @isRoot()
+    parent_path = if @parent() then @parent().path(ignoreRoot: true) else ''
     path = [parent_path, @slug].join('/')
     path = path.replace(/\/+/, '/')
     path = path.replace(/\/$/, '')

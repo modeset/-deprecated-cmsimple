@@ -50,11 +50,21 @@ describe 'CMSimple.Page', ->
       expect(about.slug).toEqual('about-a-dog')
 
   describe 'is root', ->
-    it 'finds the page with is root set to true for the path /', ->
+    beforeEach ->
       stubs.ajax()
-      about = CMSimple.Page.create title: 'About', is_root: true
+      @about = CMSimple.Page.create title: 'About', is_root: true, id: 1
+
+    it 'finds the page with is root set to true for the path /', ->
       page = CMSimple.Page.forPath('/')
-      expect(about).toEqual(page)
+      expect(@about).toEqual(page)
+
+    it 'can retrieve the original path when passed options to the path method', ->
+      expect(@about.path(ignoreRoot: true)).toEqual('/about')
+
+    it 'children request a parents path ignoring the root', ->
+      @child  = CMSimple.Page.create title: 'Child', parent_id: @about.id, id: 2
+      expect(@child.path()).toEqual('/about/child')
+
 
   describe 'acts as a tree', ->
     beforeEach ->
