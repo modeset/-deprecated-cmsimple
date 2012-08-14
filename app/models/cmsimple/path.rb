@@ -4,15 +4,17 @@ module Cmsimple
 
     belongs_to :page
 
-    validates :uri, presence: true
-    validates :uri, uniqueness: true
+    validates :uri, presence: true,
+                    uniqueness: true
 
     validate :require_destination
 
+    before_validation :downcase_uri
 
     def self.from_request(request)
       path = request.is_a?(String) ? request : ( request.try(:path) || '' )
       path = "/#{path.gsub(/\/$/,'')}".gsub(/\/+/, '/')
+      path.downcase!
       if path == '/'
         with_pages.merge(Cmsimple::Page.root).first!
       else
@@ -37,10 +39,15 @@ module Cmsimple
     end
 
     protected
+
     def require_destination
       unless destination.path.present?
         errors[:destination] << 'can\'t be blank'
       end
+    end
+
+    def downcase_uri
+      self.uri.downcase! if self.uri.present?
     end
 
     class Redirect

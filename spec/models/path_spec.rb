@@ -4,6 +4,12 @@ describe Cmsimple::Path do
   it { should validate_presence_of(:uri) }
   it { should belong_to(:page) }
 
+  it 'downcases its URI on save' do
+    page = Cmsimple::Page.create title: 'Test'
+    path = Cmsimple::Path.create page: page, uri: '/TestRedirect'
+    path.uri.should == '/testredirect'
+  end
+
   describe 'destination' do
 
     it 'is required' do
@@ -59,6 +65,7 @@ describe Cmsimple::Path do
       Cmsimple::Path.from_request(OpenStruct.new(path: '//path')).destination.path.should == '/some-other-path'
       Cmsimple::Path.from_request(OpenStruct.new(path: '//path/')).destination.path.should == '/some-other-path'
       Cmsimple::Path.from_request(OpenStruct.new(path: 'path')).destination.path.should == '/some-other-path'
+      Cmsimple::Path.from_request(OpenStruct.new(path: '/Path')).destination.path.should == '/some-other-path'
     end
   end
 end
