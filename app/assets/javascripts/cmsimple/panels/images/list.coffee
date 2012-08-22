@@ -1,4 +1,7 @@
-#= require cmsimple/panels/images/panel
+#= require cmsimple/models/image
+
+#= require cmsimple/views/image_library/_item
+
 class CMSimple.Panels.ImageLibrary.List extends Spine.Controller
   events:
     'click .media-actions > .info' : 'toggleInfo'
@@ -20,7 +23,7 @@ class CMSimple.Panels.ImageLibrary.List extends Spine.Controller
     @addImage image for image in CMSimple.Image.allWithinGeometry(geometry)
 
   addImage: (image)->
-    @append JST['cmsimple/views/image_library_item'](image)
+    @append JST['cmsimple/views/image_library/_item'](image)
 
   toggleInfo: (e) ->
     e.preventDefault()

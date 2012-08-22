@@ -1,3 +1,7 @@
+#= require cmsimple/panels/sitemap/sortable
+#= require cmsimple/models/page
+#= require cmsimple/views/sitemap/_page
+
 class CMSimple.Panels.Sitemap.Tree extends Spine.Controller
   elements:
     'ul.sitemap': 'sitemap'
@@ -31,7 +35,7 @@ class CMSimple.Panels.Sitemap.Tree extends Spine.Controller
         @renderPages($('ul.child', item), page.sortedChildren())
 
   renderPage: (page)->
-    $(JST['cmsimple/views/sitemap_page'](page))
+    $(JST['cmsimple/views/sitemap/_page'](page))
 
   pageClick: (e)->
     page_id = $(e.target).data('id') || $($(e.target).parents('[data-id]')).data('id')

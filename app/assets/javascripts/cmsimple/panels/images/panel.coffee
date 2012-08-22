@@ -1,9 +1,17 @@
+#= require_self
+#= require cmsimple/models/image
+#= require cmsimple/panels/images/list
+#= require cmsimple/panels/images/selection
+
+#= require cmsimple/views/image_library/list
+#= require cmsimple/views/image_library/_item
+
 class CMSimple.Panels.ImageLibrary extends Mercury.Panel
 
   constructor: ()->
     super(null, 'insertMedia', title: 'Image Library', appendTo: '.mercury-toolbar-container', closeButton: true)
     @button = $('.mercury-insertMedia-button')
-    @loadContent JST['cmsimple/views/image_library']()
+    @loadContent JST['cmsimple/views/image_library/list']()
 
     @list = new CMSimple.Panels.ImageLibrary.List($('ul.media-grid'))
     @selection = new CMSimple.Panels.ImageLibrary.Selection()

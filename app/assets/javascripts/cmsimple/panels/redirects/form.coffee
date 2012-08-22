@@ -1,4 +1,6 @@
-#= require cmsimple/panels/redirects/panel
+#= require cmsimple/models/page
+#= require cmsimple/models/path
+
 class CMSimple.Panels.Redirects.Form extends Spine.Controller
   elements:
     '.add' : 'addButton'

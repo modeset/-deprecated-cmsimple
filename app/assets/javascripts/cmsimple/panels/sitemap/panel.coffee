@@ -1,3 +1,10 @@
+#= require_self
+#= require cmsimple/models/page
+#= require cmsimple/panels/sitemap/tree
+#= require cmsimple/panels/sitemap/sortable
+#= require cmsimple/views/sitemap/tree
+#= require cmsimple/views/sitemap/_page
+
 class CMSimple.Panels.Sitemap extends Mercury.Panel
   constructor: ->
     super(null, 'Sitemap', title: 'Site Map', appendTo: '.mercury-toolbar-container', closeButton: true)
@@ -10,7 +17,7 @@ class CMSimple.Panels.Sitemap extends Mercury.Panel
     # @tree.bind 'redraw', => @resize()
 
   render: ->
-    @loadContent JST['cmsimple/views/sitemap']()
+    @loadContent JST['cmsimple/views/sitemap/tree']()
 
   # Overwriting the bindEvents to prevent the mousedown trap in the parent class
   bindEvents: ->

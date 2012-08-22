@@ -1,3 +1,5 @@
+#= require cmsimple/models/page
+
 class CMSimple.Panels.Publish extends Spine.Controller
 
   elements:

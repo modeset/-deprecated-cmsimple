@@ -51,16 +51,11 @@
   *
   *= require cmsimple/panels/page_metadata
   *= require cmsimple/panels/publish
-  *= require_tree ./cmsimple/panels/sitemap
-  *= require_tree ./cmsimple/panels/redirects
-  *= require_tree ./cmsimple/panels/images
-  *= require_tree ./cmsimple/panels/versions
+  *= require cmsimple/panels/sitemap
+  *= require cmsimple/panels/redirects
+  *= require cmsimple/panels/images
+  *= require cmsimple/panels/versions
   *
   *= require cmsimple/controllers/editor
-  *= require_tree ./cmsimple/models
-  *= require_tree ./cmsimple/views
   *
-  *
-  * Overrides for your project
-  *= require cmsimple/overrides
   */

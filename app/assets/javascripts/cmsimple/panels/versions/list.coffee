@@ -1,4 +1,8 @@
-#= require cmsimple/panels/versions/panel
+#= require cmsimple/models/page
+#= require cmsimple/models/version
+#= require cmsimple/panels/versions/list
+#= require cmsimple/views/versions/_item
+
 class CMSimple.Panels.Versions.List extends Spine.Controller
   events:
     'click .view' : 'viewVersion'
@@ -14,7 +18,7 @@ class CMSimple.Panels.Versions.List extends Spine.Controller
     @addVersion version for version in CMSimple.Editor.current_page.versions()
 
   addVersion: (version)->
-    @append JST['cmsimple/views/versions_item'](version)
+    @append JST['cmsimple/views/versions/_item'](version)
 
   viewVersion: (e)->
     e.preventDefault()

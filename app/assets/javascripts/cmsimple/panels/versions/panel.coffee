@@ -1,3 +1,10 @@
+#= require_self
+#= require cmsimple/models/page
+#= require cmsimple/models/version
+#= require cmsimple/panels/versions/list
+#= require cmsimple/views/versions/list
+#= require cmsimple/views/versions/_item
+
 class CMSimple.Panels.Versions extends Mercury.Panel
 
   constructor: ()->
@@ -5,7 +12,7 @@ class CMSimple.Panels.Versions extends Mercury.Panel
 
     @button = $('.mercury-historyPanel-button')
 
-    @loadContent JST['cmsimple/views/versions']()
+    @loadContent JST['cmsimple/views/versions/list']()
     @panelActions = $('.panel-actions', @element)
     @viewCurrentButton = $('.view-current', @panelActions)
 

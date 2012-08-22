@@ -1,3 +1,5 @@
+#= require cmsimple/models/page
+
 class CMSimple.Panels.Sitemap.Sortable extends Spine.Controller
   constructor: (@el)->
     super el: @el

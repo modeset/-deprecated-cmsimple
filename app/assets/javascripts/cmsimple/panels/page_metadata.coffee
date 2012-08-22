@@ -1,3 +1,5 @@
+#= require cmsimple/models/page
+
 class CMSimple.Panels.PageMetadata extends Spine.Controller
 
   elements:

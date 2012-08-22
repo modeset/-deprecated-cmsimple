@@ -1,3 +1,4 @@
+#= require cmsimple/models/page
 
 class CMSimple.Editor extends Spine.Controller
   el: 'body'
