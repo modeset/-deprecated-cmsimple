@@ -6,6 +6,9 @@ class CMSimple.Panels.Sitemap.Tree extends Spine.Controller
   elements:
     'ul.sitemap': 'sitemap'
 
+  events:
+    'click article .caret' : 'toggleChildren'
+
   constructor: (@el)->
     super el: @el
     @bindEvents()
@@ -38,9 +41,15 @@ class CMSimple.Panels.Sitemap.Tree extends Spine.Controller
     $(JST['cmsimple/views/sitemap/_page'](page))
 
   pageClick: (e)->
-    page_id = $(e.target).data('id') || $($(e.target).parents('[data-id]')).data('id')
-    @navigate(CMSimple.Page.find(page_id).editPath())
+    target = $(e.target)
+    unless target.hasClass('caret')
+      page_id = target.data('id') || $($(e.target).parents('[data-id]')).data('id')
+      @navigate(CMSimple.Page.find(page_id).editPath())
 
   addNewPage: ->
     Mercury.trigger 'action', action: 'newPage'
 
+  toggleChildren: (e)->
+    page = $(e.target).closest('[data-id]')
+    page.find('> ul.child').toggle()
+    page.find('> article .caret').toggleClass('north')

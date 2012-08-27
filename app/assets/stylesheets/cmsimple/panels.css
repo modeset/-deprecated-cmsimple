@@ -48,6 +48,16 @@
   float: right;
 }
 
+.mercury-panel-pane .loading {
+  text-align: center;
+  width: 100%;
+  float: left;
+  margin-top: 50%
+}
+
+.mercury-panel .hidden {
+  display: none;
+}
 /*
  * Image Panel
  *----------------------------------------------------------------------------*/
@@ -204,6 +214,7 @@
   width: 400px;
   padding: 0;
 }
+
 .mercury-panel ul.sitemap li {
   list-style: none;
   padding: 0;
@@ -254,6 +265,27 @@
   color: #ccc;
   margin-left: 0.5em;
 }
+.mercury-panel ul.sitemap .caret {
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  *display: inline;
+  *vertical-align: auto;
+  border-width: 4px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+  width: 0;
+  height: 0;
+  vertical-align: top;
+  float: right;
+  margin: 0.5em 0;
+}
+
+.mercury-panel ul.sitemap .caret.north {
+  margin: 0.2em 0;
+  border-color: transparent transparent #fff transparent;
+}
+
 /* Increase the gap for top level pages */
 .mercury-panel ul.sitemap > li {
   margin-bottom: 8px;

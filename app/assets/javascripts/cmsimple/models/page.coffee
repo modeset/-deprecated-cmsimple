@@ -25,6 +25,9 @@ class CMSimple.Page extends Spine.Model
   sortedChildren: ->
     _(@children().all()).sortBy (record)-> record.position
 
+  hasChildren: ->
+    @children().all().length > 0
+
   versions: ->
     CMSimple.Version.allForPage(@)
 
