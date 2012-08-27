@@ -38,7 +38,12 @@ module Cmsimple
       unless page.new_record?
         scope = scope.where('id NOT IN (?)', page.descendants.map(&:id) + [page.id])
       end
-      scope.all
+      scope.order('position').all
+    end
+
+    # TODO: move this to a view delegator/presenter
+    def select_label
+      "#{'&nbsp;&nbsp;' * (path ? (path.count('/') - 1) : 0)}#{title}".html_safe
     end
 
     def self.root
