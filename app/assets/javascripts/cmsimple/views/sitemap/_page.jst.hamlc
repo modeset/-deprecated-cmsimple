@@ -1,8 +1,8 @@
-%li(id="page_#{@id}" data-id=@id)
+%li(id="page_#{@page.id}" data-id="#{@page.id}")
   %article
-    - if @hasChildren()
+    - if @page.hasChildren()
       %span.caret
-    %span= @title
+    %span= @page.title
     %span.path
-      = @path()
-  %ul.child.hidden
+      = @page.path()
+  %ul.child(class="#{'hidden' unless @open }")

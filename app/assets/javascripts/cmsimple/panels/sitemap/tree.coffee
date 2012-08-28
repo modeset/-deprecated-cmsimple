@@ -12,6 +12,7 @@ class CMSimple.Panels.Sitemap.Tree extends Spine.Controller
   constructor: (@el)->
     super el: @el
     @bindEvents()
+    @openPages = {}
 
   bindEvents: ->
     $('button.add', @el).click @proxy @addNewPage
@@ -38,7 +39,7 @@ class CMSimple.Panels.Sitemap.Tree extends Spine.Controller
         @renderPages($('ul.child', item), page.sortedChildren())
 
   renderPage: (page)->
-    $(JST['cmsimple/views/sitemap/_page'](page))
+    $(JST['cmsimple/views/sitemap/_page'](page: page, open: @openPages[page.id]))
 
   pageClick: (e)->
     target = $(e.target)
@@ -50,6 +51,11 @@ class CMSimple.Panels.Sitemap.Tree extends Spine.Controller
     Mercury.trigger 'action', action: 'newPage'
 
   toggleChildren: (e)->
-    page = $(e.target).closest('[data-id]')
-    page.find('> ul.child').toggle()
-    page.find('> article .caret').toggleClass('north')
+    item = $(e.target).closest('[data-id]')
+    item.find('> ul.child').toggleClass('hidden')
+    item.find('> article .caret').toggleClass('north')
+    @toggleOpenReference(item.data('id'))
+
+  toggleOpenReference: (page_id)->
+    @openPages[page_id] = !@openPages[page_id]
+
