@@ -265,6 +265,20 @@
   color: #ccc;
   margin-left: 0.5em;
 }
+.mercury-panel ul.sitemap > li article .icon {
+  height: 16px;
+  width: 16px;
+  background: url('/assets/sitemap/unpublished.png') no-repeat left top;
+  background-size: 16px 16px;
+  margin-top: -1px;
+  margin-left: -4px;
+}
+.mercury-panel ul.sitemap > li article .icon.has-changes {
+  background-image: url('/assets/sitemap/has-changes.png');
+}
+.mercury-panel ul.sitemap > li article .icon.published {
+  background-image: url('/assets/sitemap/published.png');
+}
 .mercury-panel ul.sitemap .caret {
   display: inline-block;
   vertical-align: middle;

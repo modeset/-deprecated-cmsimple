@@ -2,6 +2,7 @@
   %article
     - if @page.hasChildren()
       %span.caret
+    %span.icon(class="#{@page.publishedState()}")
     %span= @page.title
     %span.path
       = @page.path()

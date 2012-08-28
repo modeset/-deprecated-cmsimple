@@ -28,6 +28,15 @@ class CMSimple.Page extends Spine.Model
   hasChildren: ->
     @children().all().length > 0
 
+  publishedState: ->
+    if @published
+      if @unpublished_changes
+        'has-changes'
+      else
+        'published'
+    else
+      'unpublished'
+
   versions: ->
     CMSimple.Version.allForPage(@)
 
