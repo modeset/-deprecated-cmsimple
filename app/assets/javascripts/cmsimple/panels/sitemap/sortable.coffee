@@ -14,10 +14,30 @@ class CMSimple.Panels.Sitemap.Sortable extends Spine.Controller
               items: 'li'
               listType: 'ul'
               stop: @proxy @update
+              activate: @proxy @activate
+              deactivate: @proxy @deactivate
               tolerance: 'pointer',
               toleranceElement: '> article'
 
     @el.disableSelection()
+
+    @el.bind 'sortable:refresh', => @el.nestedSortable('refreshPositions')
+
+  activate: ->
+    @el.find('> li').on 'hover', @over
+
+  deactivate: ->
+    @el.find('> li').off 'hover'
+
+  over: ->
+    item = $(@)
+
+    return if item.hasClass('ui-sortable-helper')
+
+    unless item.hasClass('open')
+      item.addClass('open')
+      item.find('ul.hidden').removeClass('hidden')
+      item.trigger('sortable:refresh')
 
   update: (e, sortable)->
     @updatePagePositions()
