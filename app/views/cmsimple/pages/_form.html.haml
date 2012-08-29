@@ -15,4 +15,7 @@
   = render partial: 'form_extras', locals: {f: f}
   .mercury-display-controls
     = f.actions do
+      - unless @page.new_record?
+        %li.action.delete
+          = link_to 'Delete', page_path(@page), method: :delete, class: 'btn', data: { confirm: "Are you sure you would like to permanently delete this page?\n\nIt will delete all versions and associated paths. If you are unsure you can unpublish a page to remove it from public access." }
       = f.action :submit

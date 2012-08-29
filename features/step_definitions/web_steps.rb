@@ -245,3 +245,10 @@ When /^(?:|I )wait for ajax requests to complete/ do
     page.evaluate_script('$.active') == 0
   end
 end
+
+And /^I accept confirmations$/ do
+  page.execute_script %Q{
+    window.confirm = function(){ return true };
+  }
+end
+

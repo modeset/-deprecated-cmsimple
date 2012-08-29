@@ -98,6 +98,7 @@
   margin: 0;
 }
 .mercury-form fieldset.buttons .commit input,
+.mercury-form fieldset.actions .btn,
 .mercury-form fieldset.actions .action input {
   -webkit-background-clip: padding;
   -moz-background-clip: padding;
@@ -115,6 +116,7 @@
   padding: 0.4em 0.8em;
 }
 .mercury-form fieldset.buttons .commit input:hover,
+.mercury-form fieldset.actions .btn:hover,
 .mercury-form fieldset.actions .action input:hover {
   color: #fff;
   background: #2482c5;
@@ -122,4 +124,9 @@
   -webkit-box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.7);
   -moz-box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.7);
   box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.7);
+}
+.mercury-form fieldset.actions .delete .btn {
+  background: #b22222;
+  margin-top: 2px;
+  font-weight: normal;
 }

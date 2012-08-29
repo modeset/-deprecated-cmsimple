@@ -59,6 +59,13 @@ module Cmsimple
       end
     end
 
+    def destroy
+      @page = Page.find(params[:id])
+      @page.destroy
+      respond_with(@page) do |format|
+        format.html{ redirect_to '/editor' }
+      end
+    end
 
     #helpers
     def current_path

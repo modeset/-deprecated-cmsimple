@@ -181,7 +181,7 @@ Then "I should be redirected to the new page" do
 end
 
 Then "I should be redirected to the home page" do
-  current_path.should == '/editor/'
+  current_path.should =~ /^\/editor\/?$/
 end
 
 Then "I should be redirected to the about page" do
