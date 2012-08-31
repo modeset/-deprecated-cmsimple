@@ -30,6 +30,7 @@ module Cmsimple
     end
 
     def render_snippet(snippet)
+      return '' unless snippet.name.present?
       render_cell snippet.name, :display, snippet
     end
   end
