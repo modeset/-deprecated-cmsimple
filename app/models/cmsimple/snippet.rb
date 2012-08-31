@@ -10,7 +10,10 @@ module Cmsimple
         # @snippet_hash.symbolize_keys!
 
         @name = @snippet_hash[:name]
-        @options = flatten_options(@snippet_hash[:options])
+
+        # the options prefix is to handle legacy snippets mercury
+        # changed how it serializes snippets
+        @options = flatten_options(@snippet_hash[:options].presence || @snippet_hash)
       end
 
       def flatten_options(options)

@@ -6,7 +6,7 @@ describe Cmsimple::Snippet do
   it_should_behave_like 'ActiveModel'
 
   describe 'options' do
-    let(:snippet) { Cmsimple::Snippet.new 'snippet_0', { name: 'example', options: {snippet: {first_name: 'Fred', last_name: 'Flintstone'}} } }
+    let(:snippet) { Cmsimple::Snippet.new 'snippet_0', { name: 'example', snippet: {first_name: 'Fred', last_name: 'Flintstone'} } }
 
     it "sets values for name" do
       snippet.name.should == 'example'
@@ -31,9 +31,9 @@ describe Cmsimple::Snippet do
     before do
       @region = Cmsimple::Region.new(value: "<div>some content</div><div>[snippet_0/0]</div>",
                                               snippets: {snippet_0: {name: 'example',
-                                                                     options: { first_name: 'Fred',
-                                                                                last_name: 'Flinstone'
-                                              }}})
+                                                                     first_name: 'Fred',
+                                                                     last_name: 'Flinstone'
+                                              }})
     end
 
     it "has an array of snippets" do

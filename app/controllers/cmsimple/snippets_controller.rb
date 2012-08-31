@@ -11,7 +11,11 @@ module Cmsimple
     end
 
     def options
-      @snippet = Cmsimple::Snippet.new params[:name], options: params[:snippet]
+      # the options prefix is to handle legacy snippets mercury
+      # changed how it serializes snippets
+      @options = params[:options][:snippet] if params[:options]
+      @options ||= params[:snippet]
+      @snippet = Cmsimple::Snippet.new params[:name], options: @options
       render text: render_cell(params[:name], :options, @snippet)
     end
 
