@@ -18,19 +18,19 @@ describe Cmsimple::Path do
     end
 
     it 'returns the destination path when a page is associated' do
-      subject.page = Cmsimple::Page.new path: '/some-path'
-      subject.destination.path.should == '/some-path'
+      subject.page = Cmsimple::Page.new uri: '/some-path'
+      subject.destination.uri.should == '/some-path'
     end
 
     it 'returns the destination path when it is a redirect' do
       subject.redirect_uri = '/some-other-path'
-      subject.destination.path.should == '/some-other-path'
+      subject.destination.uri.should == '/some-other-path'
       subject.should be_redirect
     end
 
     it 'returns a redirect if the path does not match the page path' do
       subject.uri = '/path'
-      subject.page = Cmsimple::Page.new path: '/some-other-path'
+      subject.page = Cmsimple::Page.new uri: '/some-other-path'
       subject.destination.should be_a(Cmsimple::Path::Redirect)
       subject.should be_redirect
     end
@@ -43,7 +43,7 @@ describe Cmsimple::Path do
       subject.uri = '/path'
       subject.redirect_uri = '/some-other-path'
       subject.save
-      Cmsimple::Path.from_request(OpenStruct.new(path: '/path')).destination.path.should == '/some-other-path'
+      Cmsimple::Path.from_request(OpenStruct.new(path: '/path')).destination.uri.should == '/some-other-path'
     end
 
     it "returns the path with the associated page" do
@@ -62,10 +62,10 @@ describe Cmsimple::Path do
       subject.uri = '/path'
       subject.redirect_uri = '/some-other-path'
       subject.save
-      Cmsimple::Path.from_request(OpenStruct.new(path: '//path')).destination.path.should == '/some-other-path'
-      Cmsimple::Path.from_request(OpenStruct.new(path: '//path/')).destination.path.should == '/some-other-path'
-      Cmsimple::Path.from_request(OpenStruct.new(path: 'path')).destination.path.should == '/some-other-path'
-      Cmsimple::Path.from_request(OpenStruct.new(path: '/Path')).destination.path.should == '/some-other-path'
+      Cmsimple::Path.from_request(OpenStruct.new(path: '//path')).destination.uri.should == '/some-other-path'
+      Cmsimple::Path.from_request(OpenStruct.new(path: '//path/')).destination.uri.should == '/some-other-path'
+      Cmsimple::Path.from_request(OpenStruct.new(path: 'path')).destination.uri.should == '/some-other-path'
+      Cmsimple::Path.from_request(OpenStruct.new(path: '/Path')).destination.uri.should == '/some-other-path'
     end
   end
 end

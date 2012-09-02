@@ -2,8 +2,8 @@ module Cmsimple
   class Page < ActiveRecord::Base
     serialize :content, Hash
 
-    attr_accessible :path,
-                    :slug,
+    attr_accessible :slug,
+                    :uri,
                     :title,
                     :content,
                     :template,
@@ -20,16 +20,16 @@ module Cmsimple
     has_many   :paths,    :dependent => :destroy
     has_many   :versions, :dependent => :destroy
 
-    validates :path,
+    validates :uri,
               :slug,
               :title,
               :presence => true
 
-    validates :path, :uniqueness => true
+    validates :uri, :uniqueness => true
 
     validate :is_root_set
 
-    before_validation :set_internal_path
+    before_validation :set_current_uri
     before_save :ensure_only_one_root
     after_save  :create_path
 
@@ -43,7 +43,7 @@ module Cmsimple
 
     # TODO: move this to a view delegator/presenter
     def select_label
-      "#{'&nbsp;&nbsp;' * (path ? (path.count('/') - 1) : 0)}#{title}".html_safe
+      "#{'&nbsp;&nbsp;' * (uri ? (uri.count('/') - 1) : 0)}#{title}".html_safe
     end
 
     def self.root
@@ -172,8 +172,8 @@ module Cmsimple
       result.downcase
     end
 
-    def set_internal_path
-      self.path = [self.parent.try(:path), slug].join('/')
+    def set_current_uri
+      self.uri = [self.parent.try(:uri), slug].join('/')
     end
 
     def ensure_only_one_root
@@ -189,7 +189,7 @@ module Cmsimple
     end
 
     def create_path
-      associated_path = Cmsimple::Path.where(uri: self.path).first_or_initialize
+      associated_path = Cmsimple::Path.where(uri: self.uri).first_or_initialize
       associated_path.page = self
       associated_path.redirect_uri = nil
       associated_path.save!

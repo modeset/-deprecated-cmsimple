@@ -8,7 +8,7 @@ describe Cmsimple::Page do
 
   describe '#update_content' do
     before do
-      subject.path = '/about'
+      subject.uri = '/about'
       subject.save
     end
 
@@ -21,11 +21,11 @@ describe Cmsimple::Page do
 
   describe '#descendants' do
     before do
-      @childless = Cmsimple::Page.create(title: 'Misc', path: '/Misc')
-      @page = Cmsimple::Page.create(title: 'Home', path: '/')
-      @child = Cmsimple::Page.create(title: 'About', path: '/about')
+      @childless = Cmsimple::Page.create(title: 'Misc', uri: '/Misc')
+      @page = Cmsimple::Page.create(title: 'Home', uri: '/')
+      @child = Cmsimple::Page.create(title: 'About', uri: '/about')
       @page.children << @child
-      @descendant = Cmsimple::Page.create(title: 'Contact', path: '/about/contact')
+      @descendant = Cmsimple::Page.create(title: 'Contact', uri: '/about/contact')
       @child.children << @descendant
     end
 
@@ -78,7 +78,7 @@ describe Cmsimple::Page do
     it 'sets the path to the the slug on save if no parent' do
       subject.title = 'About Us'
       subject.save
-      Cmsimple::Page.find(subject.id).path.should == '/about-us'
+      Cmsimple::Page.find(subject.id).uri.should == '/about-us'
     end
 
     it 'sets the path to the the slug on save if no parent' do
@@ -86,7 +86,7 @@ describe Cmsimple::Page do
       subject.parent = about
       subject.title = 'Contact Us'
       subject.save
-      Cmsimple::Page.find(subject.id).path.should == '/about/contact-us'
+      Cmsimple::Page.find(subject.id).uri.should == '/about/contact-us'
     end
   end
 

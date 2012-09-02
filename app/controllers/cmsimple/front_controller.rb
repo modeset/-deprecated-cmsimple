@@ -29,7 +29,7 @@ module Cmsimple
 
     def check_for_redirect
       if current_path.redirect?
-        path = current_path.destination.path
+        path = current_path.destination.uri
         path = "/editor#{path}" if action_name == 'editor'
         redirect_to path, status: 301
       end

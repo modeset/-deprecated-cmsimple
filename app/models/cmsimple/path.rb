@@ -35,13 +35,13 @@ module Cmsimple
     end
 
     def redirect?
-      self.page.blank? || !(self.page.is_root || self.page.path == self.uri)
+      self.page.blank? || !(self.page.is_root || self.page.uri == self.uri)
     end
 
     protected
 
     def require_destination
-      unless destination.path.present?
+      unless destination.uri.present?
         errors[:destination] << 'can\'t be blank'
       end
     end
@@ -55,8 +55,8 @@ module Cmsimple
         @path = path
       end
 
-      def path
-        @path.page.try(:path).presence || @path.redirect_uri
+      def uri
+        @path.page.try(:uri).presence || @path.redirect_uri
       end
     end
   end

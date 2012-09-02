@@ -17,7 +17,7 @@ module Cmsimple
 
     def update_content
       current_page.update_content(params[:content])
-      respond_with @page, :location => @page.path
+      respond_with @page, :location => @page.uri
     end
 
     def editor
@@ -79,7 +79,7 @@ module Cmsimple
     def check_for_redirect
       return true if params[:id].present?
       if current_path.redirect?
-        path = current_path.destination.path
+        path = current_path.destination.uri
         path = "/editor#{path}" if action_name == 'editor'
         redirect_to path, status: 301
       end
