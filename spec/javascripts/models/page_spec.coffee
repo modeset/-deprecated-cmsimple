@@ -97,3 +97,22 @@ describe 'CMSimple.Page', ->
         expect(@child.position).toEqual(1)
         expect(@grandchild.position).toEqual(2)
 
+  describe 'a pages path', ->
+    beforeEach ->
+      stubs.ajax()
+      CMSimple.Page.destroyAll()
+      @child  = CMSimple.Page.create title: 'Child', id: 4, parent_id: 1
+      @parent = CMSimple.Page.create title: 'Parent', id: 1
+
+    it 'gets the path from the parent', ->
+      spyOn(@child, 'parent').andCallThrough()
+      expect(@child.path()).toEqual('/parent/child')
+      expect(@child.parent).toHaveBeenCalled()
+
+    it 'gets the path from the uri', ->
+      @child.uri = '/parent/child-path'
+      @child.save()
+      spyOn(@child, 'parent').andCallFake ->
+        return null
+      expect(@child.path()).toEqual('/parent/child-path')
+

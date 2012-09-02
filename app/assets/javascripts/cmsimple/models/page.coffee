@@ -1,5 +1,5 @@
 class CMSimple.Page extends Spine.Model
-  @configure 'Page', 'template', 'title', 'parent_id', 'position', 'slug', 'is_root', 'browser_title', 'keywords', 'description', 'published', 'unpublished_changes'
+  @configure 'Page', 'template', 'title', 'parent_id', 'position', 'slug', 'is_root', 'browser_title', 'keywords', 'description', 'published', 'unpublished_changes', 'uri'
   @extend Spine.Model.Ajax
 
   @belongsTo 'parent', 'CMSimple.Page', 'parent_id'
@@ -67,8 +67,20 @@ class CMSimple.Page extends Spine.Model
 
   path: (options={})->
     return '/' if (not options.ignoreRoot) && @isRoot()
-    parent_path = if @parent() then @parent().path(ignoreRoot: true) else ''
-    path = [parent_path, @slug].join('/')
+
+    # if we have a client side parent compute the path
+    if @parent()
+      parent_path =  @parent().path(ignoreRoot: true)
+      path = [parent_path, @slug].join('/')
+
+    # if the parent isn't loaded fall back to the uri
+    else if @parent_id
+      path = @uri
+
+    # otherwise just use the slug
+    else
+      path = "/#{@slug}"
+
     path = path.replace(/\/+/, '/')
     path = path.replace(/\/$/, '')
     path
