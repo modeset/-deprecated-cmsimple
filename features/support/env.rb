@@ -70,3 +70,8 @@ end
 After('@allow_hidden_elements') do
   Capybara.ignore_hidden_elements = true
 end
+
+# Always run maximized so the toolbar is showing
+Before('@javascript') do
+  page.driver.browser.manage.window.maximize
+end
