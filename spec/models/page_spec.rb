@@ -128,8 +128,10 @@ describe Cmsimple::Page do
 
     describe '#publish!' do
       it 'sets the published_at date to now' do
-        page.publish!
-        page.published_at.to_s.should == Time.zone.now.to_s
+        Timecop.freeze(Time.now) do
+          page.publish!
+          page.published_at.to_s.should == Time.zone.now.to_s
+        end
       end
 
       it 'creates a new published verson' do

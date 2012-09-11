@@ -27,6 +27,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'selenium-webdriver',   '>= 2.21.2'
+  gem 'timecop'
 end
 
 # Specify your gem's dependencies in ..gemspec
