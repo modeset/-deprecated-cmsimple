@@ -181,3 +181,15 @@ Field1 and field2 are the options you want the author to be able to
 enter data for. The generator will create the cell and the display and
 options view as well as add itself to the snippet_list partial.
 
+Contributing
+============
+
+To run the test suite for CMSimple, you will need to do the following:
+
+1. Setup the DB for testing
+  1. Configure a `database.yml` in the demo rails app6 (see spec/rails_app/config/database.example.yml)
+  2. Run setup tasks: `rake app:db:setup` and `rake app:db:test:prepare`
+2. Run specs
+  1. `rake spec`
+  2. Wait.
+

@@ -3,5 +3,5 @@ Then /all jasmine specs should pass/ do
   wait_until 10 do
     page.evaluate_script('jasmine.getEnv().reporter.subReporters_[1].finished') == true
   end
-  page.should have_css(".runner.passed", :visible => true)
+  page.should have_css(".bar.passingAlert", :visible => true)
 end
