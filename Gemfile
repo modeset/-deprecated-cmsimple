@@ -23,7 +23,7 @@ group :test do
   gem 'rspec-rails'
   gem 'cucumber'
   gem 'cucumber-rails'
-  gem 'capybara'
+  gem 'capybara', '~> 1.1.3'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'selenium-webdriver',   '>= 2.21.2'
