@@ -1,11 +1,12 @@
 # encoding: utf-8
 
 class ImageAttachmentUploader < CarrierWave::Uploader::Base
+
+  # Include detection for content types
   include CarrierWave::MimeTypes
 
   # Include RMagick or MiniMagick support:
-  include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include Cmsimple.configuration.image_processor_mixin
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -34,11 +35,7 @@ class ImageAttachmentUploader < CarrierWave::Uploader::Base
 
   def store_geometry
     if @file
-      img = ::Magick::Image::read(@file.file).first
-      if model
-        model.width = img.columns
-        model.height = img.rows
-      end
+      model.width, model.height = Dimensions.dimensions(@file.file)
     end
   end
   # Add a white list of extensions which are allowed to be uploaded.
