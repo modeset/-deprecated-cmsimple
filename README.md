@@ -10,7 +10,7 @@ CMSimple is an easy-to-use but extensible CMS wrapped around the Mercury editor 
 Add the gem to your Gemfile
 
 ```ruby
-gem 'cmsimple', git: 'git://github.com/modeset/cmsimple.git'
+gem 'cmsimple', github: 'modeset/cmsimple'
 ```
 
 Run the install generator
