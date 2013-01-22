@@ -1,10 +1,15 @@
 .mercury-display-pane(style='width: 500px')
-  %h2 Full Name Snippet
-  = semantic_form_for @snippet, :url => '#', html: {class: 'mercury-form'} do |f|
-    = f.inputs do
-      = f.input :first_name
-      = f.input :last_name
-    .mercury-display-controls
-      = f.actions do
-        = f.action :submit
+  = form_for @snippet, :url => '#', html: { class: 'form-horizontal'} do |f|
+    %fieldset
+      %legend Full Name Snippet
+      .control-group
+        = f.label :first_name, class: 'control-label'
+        .controls
+          = f.text_field :first_name
+      .control-group
+        = f.label :last_name, class: 'control-label'
+        .controls
+          = f.text_field :last_name
+    .form-actions.mercury-display-controls
+      = f.submit class: 'btn btn-primary'
 

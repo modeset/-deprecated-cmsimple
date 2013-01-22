@@ -1,16 +1,19 @@
 
 %header.panel-actions.add-redirect-form
-  %button.btn.important.add Add Redirect
-  %form.mercury-form(style='display: none')
-    %legend Create a redirect
-    %ol
-      %li
-        %label(for="uri") From
-        %input(id='uri' name='uri' type='text' placeholder='/path')
-      %li
-        %label(for="redirect_uri") To
-        %input(id='redirect_uri' name='redirect_uri' type='text' placeholder='/new-path')
-    %input.btn.important(type='submit' value='Create')
-    %button.btn.cancel Cancel
+  %button.btn.btn-primary.add Add Redirect
+  %form.form-horizontal(style='display: none')
+    %fieldset
+      %legend Create a redirect
+      .control-group
+        %label.control-label(for="uri") From
+        .controls
+          %input(id='uri' name='uri' type='text' placeholder='/path')
+      .control-group
+        %label.control-label(for="redirect_uri") To
+        .controls
+          %input(id='redirect_uri' name='redirect_uri' type='text' placeholder='/new-path')
+    .form-actions.mercury-display-controls
+      %input.btn.btn-primary(type='submit' value='Create')
+      %button.btn Cancel
 %ul.redirects
 

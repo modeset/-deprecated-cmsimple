@@ -1,5 +1,5 @@
 %header.panel-actions
-  %button.btn.important.add Add Page
+  %button.btn.btn-primary.add Add Page
 %ul.sitemap
   .loading
     %img(src='/assets/mercury/loading-light.gif')

@@ -1,12 +1,12 @@
 .mercury-display-pane(style='width: 600px')
-  %h2 Publish the current page
   = form_for @page do |f|
-    = f.hidden_field :published, value: true
-    .mercury-display-controls
-      = f.submit 'Publish Changes', class: 'btn'
+    %fieldset
+      %legend Publish the current page
+      = f.hidden_field :published, value: true
+      = f.submit 'Publish Changes', class: 'btn btn-primary'
   - if @page.published?
-    %h2 Deactivate the current page by unpublishing
     = form_for @page do |f|
-      = f.hidden_field :published, value: false
-      .mercury-display-controls
-        = f.submit 'Unpublish', class: 'btn'
+      %fieldset
+        %legend Deactivate the current page by unpublishing
+        = f.hidden_field :published, value: false
+        = f.submit 'Unpublish', class: 'btn btn-danger'

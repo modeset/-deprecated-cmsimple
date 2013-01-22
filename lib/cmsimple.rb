@@ -1,4 +1,4 @@
-require "cmsimple/version"
+require 'cmsimple/version'
 require 'rails'
 require 'mercury-rails'
 require 'cells'
@@ -9,7 +9,6 @@ require 'dimensions'
 # need of after codebase stabilizes
 require 'spine-rails'
 require 'haml-rails'
-require 'formtastic'
 require 'haml_coffee_assets'
 require 'cmsimple/configuration'
 

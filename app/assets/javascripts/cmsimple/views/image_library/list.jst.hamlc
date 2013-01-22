@@ -1,5 +1,5 @@
 %header.panel-actions
-  %button.btn.important#add_image Add Image
+  %button.btn.btn-primary#add_image Add Image
   .add-image-action
     %iframe(src='/cmsimple/images/new' frameborder="0")
 .image-filter

@@ -1,4 +1,4 @@
 %header.panel-actions(style='display: none;')
-  %button.btn.important.view-current View Current Draft
+  %button.btn.btn-primary.view-current View Current Draft
 %ul.versions
 
