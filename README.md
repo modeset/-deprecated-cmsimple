@@ -2,6 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/modeset/cmsimple.png?branch=master)](http://travis-ci.org/modeset/cmsimple)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/modeset/cmsimple)
+[![Gem Version](https://badge.fury.io/rb/cmsimple.png)](http://badge.fury.io/rb/cmsimple)
 
 CMSimple is an easy-to-use but extensible CMS wrapped around the Mercury editor (https://github.com/jejacks0n/mercury), written as a Rails engine.
 
