@@ -16,22 +16,5 @@ group :assets do
   gem 'uglifier'
 end
 
-group :development, :test do
-  gem 'teabag'
-  gem 'pry'
-end
-
-group :test do
-  gem 'rspec'
-  gem 'rspec-rails', '~> 2.12.2'
-  gem 'cucumber'
-  gem 'cucumber-rails'
-  gem 'capybara', '~> 1.1.3'
-  gem 'shoulda-matchers'
-  gem 'database_cleaner'
-  gem 'selenium-webdriver',   '>= 2.21.2'
-  gem 'timecop'
-end
-
 # Specify your gem's dependencies in ..gemspec
 gemspec

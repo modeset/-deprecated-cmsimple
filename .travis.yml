@@ -1,6 +1,7 @@
 rvm:
   - 1.9.2
   - 1.9.3
+gemfile: Gemfile.ci
 before_script:
   - mysql -e 'create database cmsimple_test;'
   - 'cp spec/rails_app/config/database.travis.yml spec/rails_app/config/database.yml'

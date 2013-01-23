@@ -1,0 +1,5 @@
+eval File.read(File.join(File.dirname(__FILE__), 'Gemfile'))
+
+group :test do
+  gem "phantomjs-linux"
+end

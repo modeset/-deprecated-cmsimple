@@ -31,6 +31,14 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "mini_magick"
 
   # specify any dependencies here; for example:
-  # s.add_development_dependency "rspec"
+  s.add_development_dependency "rspec-rails", "~> 2.12.2"
+  s.add_development_dependency "cucumber-rails"
+  s.add_development_dependency "capybara", "~> 1.1.3"
+  s.add_development_dependency "database_cleaner"
+  s.add_development_dependency "shoulda-matchers"
+  s.add_development_dependency "timecop"
+  s.add_development_dependency "teabag"
+  s.add_development_dependency "pry"
+
   # s.add_runtime_dependency "rest-client"
 end
