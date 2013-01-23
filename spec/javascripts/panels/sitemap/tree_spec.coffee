@@ -1,3 +1,5 @@
+#= require cmsimple
+
 describe 'CMSimple.Panels.Sitemap.Tree', ->
   beforeEach ->
     stubs.ajax()
@@ -14,8 +16,8 @@ describe 'CMSimple.Panels.Sitemap.Tree', ->
         </ul>
       </div>
     '''
-    @container = $(html)
-    setFixtures(@container)
+    fixture.set html
+    @container = $(fixture.el)
 
   describe 'rendering', ->
     it 'renders each page in an li', ->

@@ -1,3 +1,5 @@
+#= require cmsimple
+
 describe 'CMSimple.Panels.Sitemap.Sortable', ->
   beforeEach ->
     @page1 = CMSimple.Page.create path: '/page1', title: 'Page 1', id: 1
@@ -33,8 +35,8 @@ describe 'CMSimple.Panels.Sitemap.Sortable', ->
         </li>
       </ul>
     '''
-    @treeHTML = $(html)
-    setFixtures(@treeHTML)
+    fixture.set html
+    @treeHTML = $(fixture.el)
 
   it 'binds to nestedSortable on initialization', ->
     pluginSpy = spyOn($.fn, 'nestedSortable').andCallThrough()
@@ -43,7 +45,7 @@ describe 'CMSimple.Panels.Sitemap.Sortable', ->
     expect(pluginSpy).toHaveBeenCalled()
     expect(selectionSpy).toHaveBeenCalled()
 
-  describe 'update', ->
+  describe '#update', ->
     beforeEach ->
       @sortable = new CMSimple.Panels.Sitemap.Sortable(@treeHTML)
 

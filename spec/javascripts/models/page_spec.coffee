@@ -1,3 +1,6 @@
+#= require cmsimple
+#= require support/stubs
+
 describe 'CMSimple.Page', ->
 
   describe 'snippets', ->

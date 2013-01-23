@@ -25,7 +25,14 @@ load 'rails/tasks/engine.rake'
 
 Bundler::GemHelper.install_tasks
 
+# Rspec
 require 'rspec/core/rake_task'
+
+# Teabag
+desc "Run the javascript specs"
+task :teabag => "app:teabag"
+
+# Cucumber
 require 'cucumber/rake/task'
 
 Cucumber::Rake::Task.new(:cucumber) do |t|
@@ -35,5 +42,6 @@ RSpec::Core::RakeTask.new(:spec) do |t|
   t.pattern = "./spec/**/*_spec.rb"
 end
 
-task :default => [:spec, :cucumber]
+# Default should run all three
+task :default => [:spec, :teabag, :cucumber]
 

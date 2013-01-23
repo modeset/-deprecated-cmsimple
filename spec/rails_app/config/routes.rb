@@ -1,6 +1,5 @@
 RailsTestApp::Application.routes.draw do
 
-  mount Jasminerice::Engine => "/jasmine"
   mount Cmsimple::Engine, :at => '/'
 
   # The priority is based upon order of creation:

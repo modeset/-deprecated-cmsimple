@@ -1,3 +1,5 @@
+#= require cmsimple
+
 describe 'CMSimple.Editor', ->
   beforeEach ->
     @page = new CMSimple.Page slug: 'about'

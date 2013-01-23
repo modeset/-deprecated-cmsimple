@@ -1,3 +1,5 @@
+#= require cmsimple
+
 describe 'CMSimple.Panels.ImageLibrary.Selection', ->
   beforeEach ->
 
@@ -11,7 +13,7 @@ describe 'CMSimple.Panels.ImageLibrary.Selection', ->
       </div>
     '''
     @snippetHTML = $(html)
-    setFixtures(@snippetHTML)
+    fixture.set @snippetHTML
 
   describe 'selecting snippet images', ->
 

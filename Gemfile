@@ -2,7 +2,6 @@ source :rubygems
 
 gem 'mysql2'
 gem 'jquery-rails'
-gem 'jasminerice'
 
 gem 'multi_json', '>= 1.3.4'
 
@@ -17,8 +16,12 @@ group :assets do
   gem 'uglifier'
 end
 
-group :test do
+group :development, :test do
+  gem 'teabag'
   gem 'pry'
+end
+
+group :test do
   gem 'rspec'
   gem 'rspec-rails', '~> 2.12.2'
   gem 'cucumber'

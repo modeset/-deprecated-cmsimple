@@ -10,7 +10,7 @@ if defined?(Bundler)
 end
 
 require 'cmsimple'
-require 'jasminerice'
+require 'teabag'
 
 module RailsTestApp
   class Application < Rails::Application

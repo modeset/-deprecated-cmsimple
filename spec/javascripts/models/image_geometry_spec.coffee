@@ -1,3 +1,5 @@
+#= require cmsimple
+
 describe 'CMSimple.Image.Geometry', ->
 
   describe 'absolute geometry', ->
