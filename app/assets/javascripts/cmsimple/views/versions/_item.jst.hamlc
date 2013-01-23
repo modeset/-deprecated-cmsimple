@@ -1,6 +1,6 @@
 %li(id="version_#{@id}" data-id=@id)
   %article
     %p.published= moment(@published_at).format('dddd, MMMM Do YYYY, h:mm:ss a')
-    %button.btn.view View
-    %button.btn.important.revert Revert to
+    %button.btn.btn-primary.view View
+    %button.btn.btn-danger.revert Revert to
 

@@ -1,4 +1,3 @@
-
 %header.panel-actions.add-redirect-form
   %button.btn.btn-primary.add Add Redirect
   %form.form-horizontal(style='display: none')

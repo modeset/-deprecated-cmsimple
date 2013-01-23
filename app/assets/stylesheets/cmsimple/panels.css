@@ -1,4 +1,3 @@
-
 /* Dialogs */
 .mercury-framed-panel {
   background-color: #f5f5f5;
@@ -8,8 +7,6 @@
 .mercury-framed-panel h1 {
   color: #f5f5f5;
   border-bottom: 1px solid #222;
-  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -38,8 +35,6 @@
 .mercury-panel .panel-actions {
   background-color: #eaeaea;
   border: 1px solid #ccc;
-  -webkit-border-radius: 0.5em;
-  -moz-border-radius: 0.5em;
   border-radius: 0.5em;
   padding: 1em;
   overflow: hidden;
@@ -50,9 +45,9 @@
 
 .mercury-panel-pane .loading {
   text-align: center;
-  width: 100%;
   float: left;
-  margin-top: 50%
+  margin-top: 50%;
+  width: 100%;
 }
 
 .mercury-panel .hidden {
@@ -62,7 +57,6 @@
  * Image Panel
  *----------------------------------------------------------------------------*/
 .mercury-panel .add-image-action {
-  /* margin-top: 50px; */
   display: none;
 }
 
@@ -85,14 +79,14 @@
 
 .mercury-panel .add-image-action label {
   font-size: 11px;
-  display: block;
-  float: none;
-  width: auto;
-  margin-right: 0;
   text-align: left;
-  line-height: normal;
+  display: block;
   overflow: visible;
+  float: none;
+  line-height: normal;
   margin-top: 20px;
+  margin-right: 0;
+  width: auto;
 }
 .mercury-panel .add-image-action textarea {
   font-size: 1em;
@@ -100,27 +94,26 @@
 }
 
 .image-filter input.filter {
-  outline: none;
-  font-size: 1em;
-  border-radius: 30px;
-  moz-border-radius: 30px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  width: 100%;
-  padding-left: 20px;
-  background-color: #FFF;
-  background-repeat: no-repeat;
+  background-color: white;
   background-image: url(/assets/mercury/search-icon.png);
   background-position: 4px center;
-  margin: 1em 0
+  background-repeat: no-repeat;
+  border-radius: 30px;
+  font-size: 1em;
+  outline: none;
+  margin: 1em 0;
+  padding-left: 20px;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .mercury-panel ul.media-grid {
-  width: 400px;
-  padding: 0;
-  overflow: hidden;
   list-style: none;
+  overflow: hidden;
+  padding: 0;
+  width: 400px;
 }
 
 .mercury-panel .media-grid > li {
@@ -132,37 +125,35 @@
 }
 
 .mercury-panel .media-item {
-  position: relative;
-  display: block;
-  padding: 4px;
-  line-height: 1;
   border: 1px solid #ccc;
   cursor: default;
+  line-height: 1;
+  display: block;
+  position: relative;
+  padding: 4px;
   max-width: 182px;
 }
 
 .mercury-panel .media-item:hover {
   border-color: #268bd2;
-  -webkit-box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
-  -moz-box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
   box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
 }
 
 .mercury-panel .media-item > .media-info {
-  position: absolute;
   background-color: rgba(255,255,255,0.9);
-  z-index: 2;
+  display: none;
+  overflow: hidden;
+  position: absolute;
   width: 182px;
   height: 182px;
-  overflow: hidden;
-  display: none;
+  z-index: 2;
 }
 .mercury-panel .media-item > .media-info .close {
   position: absolute;
   top: 0;
   right: 2px;
   text-decoration: none;
-  color: #000;
+  color: black;
 }
 
 .mercury-panel .media-item > .media-info.active {
@@ -175,8 +166,8 @@
 }
 .mercury-panel .media-item > .media-info dt {
   font-size: .75em;
-  text-transform: uppercase;
   font-weight: bold;
+  text-transform: uppercase;
   margin: 1em 0 0.25em;
   padding: 0;
 }
@@ -187,9 +178,9 @@
 
 .mercury-panel .media-item > img {
   display: block;
-  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
+  max-width: 100%;
 }
 
 .mercury-panel .media-caption {
@@ -211,16 +202,16 @@
  * Sitemap Panel
  *----------------------------------------------------------------------------*/
 .mercury-panel ul.sitemap {
-  width: 400px;
   padding: 0;
+  width: 400px;
 }
 
 .mercury-panel ul.sitemap li {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  padding-left: 2.5em;
   background: url(/assets/tree-line-horizontal.png) no-repeat left 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 2.5em;
 }
 .mercury-panel ul.sitemap li:last-child {
   background-image: url(/assets/tree-line-horizontal-last.png);
@@ -232,14 +223,12 @@
 
 .mercury-panel ul.sitemap > li article {
   background-color: #666;
-  color: #fff;
-  padding: 0.25em 0.5em;
-  margin-bottom: 2px;
-  -webkit-border-radius: 0.25em;
-  -moz-border-radius: 0.25em;
   border-radius: 0.25em;
-  cursor: default;
   border: 1px solid transparent;
+  color: white;
+  cursor: default;
+  margin-bottom: 2px;
+  padding: 0.25em 0.5em;
 }
 /* Nested coloring of pages */
 .mercury-panel ul.sitemap > li ul li article {
@@ -254,8 +243,6 @@
 .mercury-panel ul.sitemap > li article:hover {
   background-color: #444;
   border-color: #268bd2;
-  -webkit-box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
-  -moz-box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
   box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
 }
 
@@ -266,12 +253,12 @@
   margin-left: 0.5em;
 }
 .mercury-panel ul.sitemap > li article .icon {
-  height: 16px;
-  width: 16px;
   background: url('/assets/sitemap/unpublished.png') no-repeat left top;
   background-size: 16px 16px;
-  margin-top: -1px;
   margin-left: -4px;
+  margin-top: -1px;
+  width: 16px;
+  height: 16px;
 }
 .mercury-panel ul.sitemap > li article .icon.has-changes {
   background-image: url('/assets/sitemap/has-changes.png');
@@ -280,24 +267,19 @@
   background-image: url('/assets/sitemap/published.png');
 }
 .mercury-panel ul.sitemap .caret {
-  display: inline-block;
-  vertical-align: middle;
-  zoom: 1;
-  *display: inline;
-  *vertical-align: auto;
-  border-width: 4px;
+  border-color: white transparent transparent transparent;
   border-style: solid;
-  border-color: #fff transparent transparent transparent;
-  width: 0;
-  height: 0;
-  vertical-align: top;
+  border-width: 4px;
+  display: inline-block;
   float: right;
   margin: 0.5em 0;
+  width: 0;
+  height: 0;
 }
 
 .mercury-panel ul.sitemap .caret.north {
+  border-color: transparent transparent white transparent;
   margin: 0.2em 0;
-  border-color: transparent transparent #fff transparent;
 }
 
 /* Increase the gap for top level pages */
@@ -307,7 +289,6 @@
 
 .mercury-panel ul.sitemap ul {
   padding: 0;
-  *zoom: 1;
 }
 .mercury-panel ul.sitemap ul:before,
 .mercury-panel ul.sitemap ul:after {
@@ -331,21 +312,17 @@
 
 .mercury-panel ul.redirects > li article {
   background-color: #666;
-  color: #fff;
-  padding: 0 0.5em;
-  margin-bottom: 2px;
-  -webkit-border-radius: 0.25em;
-  -moz-border-radius: 0.25em;
   border-radius: 0.25em;
   border: 1px solid transparent;
+  color: white;
   cursor: default;
+  margin-bottom: 2px;
+  padding: 0 0.5em;
 }
 
 .mercury-panel ul.redirects > li article:hover {
   background-color: #444;
   border-color: #268bd2;
-  -webkit-box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
-  -moz-box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
   box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
 }
 
@@ -358,12 +335,12 @@
 }
 
 .mercury-panel ul.redirects > li article .remove {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
   position: absolute;
   top: 0;
   right: 5px;
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
 }
 
 /* Versions panel */
@@ -379,14 +356,12 @@
 
 .mercury-panel ul.versions > li article {
   background-color: #666;
-  color: #fff;
-  padding: 0 0.5em;
-  margin-bottom: 2px;
-  -webkit-border-radius: 0.25em;
-  -moz-border-radius: 0.25em;
   border-radius: 0.25em;
   border: 1px solid transparent;
+  color: white;
   cursor: default;
+  margin-bottom: 2px;
+  padding: 0 0.5em;
 }
 .mercury-panel ul.versions > li article .view,
 .mercury-panel ul.versions > li article .revert {
