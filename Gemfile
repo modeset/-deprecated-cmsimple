@@ -20,7 +20,7 @@ end
 group :test do
   gem 'pry'
   gem 'rspec'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.12.2'
   gem 'cucumber'
   gem 'cucumber-rails'
   gem 'capybara', '~> 1.1.3'
