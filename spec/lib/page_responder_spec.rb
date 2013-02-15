@@ -8,7 +8,7 @@ describe Cmsimple::PageResponder do
   it 'raises ActiveRecord::RecordnotFound if the page is not viewable' do
     responder = Cmsimple::PageResponder.new(controller)
     responder.should_receive(:current_page_is_viewable?).and_return(false)
-    expect { responder.respond }.to raise_error(ActiveRecord::RecordNotFound)
+    expect { responder.respond }.to raise_error(Cmsimple::Error::PageNotFound)
   end
 
   describe 'current page is viewable' do
