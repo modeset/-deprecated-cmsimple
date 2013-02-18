@@ -5,7 +5,8 @@ describe Cmsimple::PageResponder do
                                     current_page: @page,
                                     in_editor_iframe?: @editable }
 
-  it 'raises ActiveRecord::RecordnotFound if the page is not viewable' do
+  it 'raises Cmsimple::Error::PageNotFound if the page is not viewable' do
+    controller.request.expects(:fullpath).returns("/foo")
     responder = Cmsimple::PageResponder.new(controller)
     responder.should_receive(:current_page_is_viewable?).and_return(false)
     expect { responder.respond }.to raise_error(Cmsimple::Error::PageNotFound)

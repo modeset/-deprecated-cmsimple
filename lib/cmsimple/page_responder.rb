@@ -14,7 +14,7 @@ module Cmsimple
     end
 
     def page_for_context
-      raise Cmsimple::Error::PageNotFound unless current_page_is_viewable?
+      raise Cmsimple::Error::PageNotFound.new(@request.full_path) unless current_page_is_viewable?
 
       return published_context? ||
                version_context? ||
