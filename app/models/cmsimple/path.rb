@@ -11,15 +11,19 @@ module Cmsimple
 
     before_validation :downcase_uri
 
-    def self.from_request(request)
-      path = request.is_a?(String) ? request : ( request.try(:path) || '' )
-      path = "/#{path.gsub(/\/$/,'')}".gsub(/\/+/, '/')
-      path.downcase!
-      if path == '/'
-        with_pages.merge(Cmsimple::Page.root).first!
+    def self.from_request(request, raise_error=false)
+      if request.fullpath == '/'
+        with_pages.merge(Cmsimple::Page.root).first
+      elsif result = find_from_request(request)
+        result
       else
-        with_pages.where(uri: path).first!
+        raise ActiveRecord::RecordNotFound.new if raise_error
       end
+
+    end
+
+    def self.from_request!(request)
+      from_request(request, true)
     end
 
     def self.with_pages
@@ -39,6 +43,17 @@ module Cmsimple
     end
 
     protected
+
+    def self.find_from_request(request)
+      if found_with_fullpath = with_pages.where(uri: request.fullpath).first
+        found_with_fullpath
+      else
+        path = request.params[:path]
+        path = "/#{path.gsub(/\/$/,'')}".gsub(/\/+/, '/')
+        path.downcase!
+        with_pages.where(uri: path).first
+      end
+    end
 
     def require_destination
       unless destination.uri.present?

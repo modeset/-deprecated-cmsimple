@@ -16,7 +16,7 @@ module Cmsimple
     end
 
     def current_path
-      @path ||= Path.from_request(params[:path])
+      @path ||= Path.from_request!(request)
     end
 
     def current_page
