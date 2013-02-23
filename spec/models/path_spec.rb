@@ -119,17 +119,12 @@ describe Cmsimple::Path do
   describe "#from_request!" do
     let(:request) { ActionDispatch::TestRequest.new }
 
-    after { Cmsimple::Path.unstub(:from_request) }
-
-    it "calls the #from_request method" do
-      Cmsimple::Path.expects(:from_request).with(request, true)
-      Cmsimple::Path.from_request!(request)
-    end
-
-    it "raises ActiveRecord::RecordNotFound if no records are found" do
-      request.expects(:fullpath).returns('/foo').at_least_once
-      request.expects(:params).returns(path: '/foo').at_least_once
+    it "raises ActiveRecord::RecordNotFound when no records are found" do
+      Cmsimple::Path.should_receive(:from_request).with(request).and_return(nil)
+      request.stub(:fullpath).and_return('/foo')
+      request.stub(:params).and_return(path: '/foo')
       expect { Cmsimple::Path.from_request!(request) }.to raise_error ActiveRecord::RecordNotFound
     end
+
   end
 end

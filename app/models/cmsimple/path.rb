@@ -11,19 +11,16 @@ module Cmsimple
 
     before_validation :downcase_uri
 
-    def self.from_request(request, raise_error=false)
+    def self.from_request(request)
       if request.fullpath == '/'
         with_pages.merge(Cmsimple::Page.root).first
       elsif result = find_from_request(request)
         result
-      else
-        raise ActiveRecord::RecordNotFound.new if raise_error
       end
-
     end
 
     def self.from_request!(request)
-      from_request(request, true)
+      from_request(request) || raise(ActiveRecord::RecordNotFound.new)
     end
 
     def self.with_pages
