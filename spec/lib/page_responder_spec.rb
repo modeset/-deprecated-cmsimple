@@ -9,7 +9,7 @@ describe Cmsimple::PageResponder do
     controller.request.expects(:fullpath).returns("/foo")
     responder = Cmsimple::PageResponder.new(controller)
     responder.should_receive(:current_page_is_viewable?).and_return(false)
-    expect { responder.respond }.to raise_error(Cmsimple::Error::PageNotFound)
+    expect { responder.respond }.to raise_error(Cmsimple::PageNotFoundError)
   end
 
   describe 'current page is viewable' do

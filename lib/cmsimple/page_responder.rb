@@ -1,6 +1,4 @@
-require 'error/page_not_found'
 module Cmsimple
-
   class PageResponder
     def initialize(controller)
       @controller  = controller
@@ -14,7 +12,7 @@ module Cmsimple
     end
 
     def page_for_context
-      raise Cmsimple::Error::PageNotFound.new(@request.full_path) unless current_page_is_viewable?
+      raise Cmsimple::PageNotFoundError.new(@request.full_path) unless current_page_is_viewable?
 
       return published_context? ||
                version_context? ||

@@ -4,6 +4,7 @@ require 'mercury-rails'
 require 'cells'
 require 'carrierwave'
 require 'dimensions'
+require 'cmsimple/errors'
 
 # dependencies we want to reduce the
 # need of after codebase stabilizes
