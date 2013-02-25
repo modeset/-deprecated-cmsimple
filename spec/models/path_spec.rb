@@ -1,6 +1,9 @@
 require 'spec_helper'
+
 describe Cmsimple::Path do
+
   subject { Cmsimple::Path.new }
+
   it { should validate_presence_of(:uri) }
   it { should belong_to(:page) }
 
@@ -34,38 +37,97 @@ describe Cmsimple::Path do
       subject.destination.should be_a(Cmsimple::Path::Redirect)
       subject.should be_redirect
     end
-
   end
 
-  describe 'from_request' do
+  describe '#from_request' do
 
-    it 'returns the path that has a uri mathing the request path' do
-      subject.uri = '/path'
-      subject.redirect_uri = '/some-other-path'
-      subject.save
-      Cmsimple::Path.from_request(OpenStruct.new(path: '/path')).destination.uri.should == '/some-other-path'
+    let(:request) { ActionDispatch::TestRequest.new }
+
+    context "when there is no path to follow" do
+      before do
+        request.stub(:fullpath).and_return('/foo')
+        request.stub(:params).and_return(path: '/path')
+      end
+      it "does not raise an error" do
+        expect(Cmsimple::Path.from_request(request)).to_not raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it "returns nil" do
+        expect(Cmsimple::Path.from_request(request)).to eq(nil)
+      end
     end
 
-    it "returns the path with the associated page" do
-      page = Cmsimple::Page.create title: 'About'
-      Cmsimple::Path.create uri: '/about', page: page
-      Cmsimple::Path.from_request(OpenStruct.new(path: '/about')).destination.title.should == 'About'
+    context "when a path exists that matches the full request path" do
+
+      it "finds the redirect" do
+        request.stub(:fullpath).and_return('/path')
+        subject.uri = '/path'
+        subject.redirect_uri = '/some-other-path'
+        subject.save
+        expect(Cmsimple::Path.from_request(request).destination.uri).to eq('/some-other-path')
+      end
+
+      it "finds the redirect when the path has an extension" do
+        request.stub(:fullpath).and_return('/Legacy.aspx')
+        subject.uri = '/Legacy.aspx'
+        subject.redirect_uri = '/some-other-path'
+        subject.save
+        expect(Cmsimple::Path.from_request(request).destination.uri).to eq('/some-other-path')
+      end
     end
 
-    it "returns the path where the associated page is marked as root" do
-      page = Cmsimple::Page.create title: 'Home', is_root: true
-      Cmsimple::Path.create uri: '/home', page: page
-      Cmsimple::Path.from_request(OpenStruct.new(path: '/')).destination.title.should == 'Home'
+    context "when a path exists that matches the globbed request path" do
+      before do
+        request.stub(:fullpath).and_return('/foo')
+      end
+
+      it 'returns the path that has a uri matching the request path' do
+        request.stub(:params).and_return(path: '/path')
+        subject.uri = '/path'
+        subject.redirect_uri = '/some-other-path'
+        subject.save
+        Cmsimple::Path.from_request(request).destination.uri.should == '/some-other-path'
+      end
+
+      it "returns the path with the associated page" do
+        page = Cmsimple::Page.create title: 'About'
+        Cmsimple::Path.create uri: '/about', page: page
+        request.stub(:params).and_return(path: '/about')
+        Cmsimple::Path.from_request(request).destination.title.should == 'About'
+      end
+
+      it "returns the path where the associated page is marked as root" do
+        page = Cmsimple::Page.create title: 'Home', is_root: true
+        Cmsimple::Path.create uri: '/home', page: page
+        request.stub(:params).and_return(path: '/home')
+        Cmsimple::Path.from_request(request).destination.title.should == 'Home'
+      end
+
+      it "normalizes the path before querying" do
+        subject.uri = '/path'
+        subject.redirect_uri = '/some-other-path'
+        subject.save
+        request.stub(:params).and_return(path: '//path')
+        Cmsimple::Path.from_request(request).destination.uri.should == '/some-other-path'
+        request.stub(:params).and_return(path: '//path/')
+        Cmsimple::Path.from_request(request).destination.uri.should == '/some-other-path'
+        request.stub(:params).and_return(path: 'path')
+        Cmsimple::Path.from_request(request).destination.uri.should == '/some-other-path'
+        request.stub(:params).and_return(path: '/Path')
+        Cmsimple::Path.from_request(request).destination.uri.should == '/some-other-path'
+      end
+    end
+  end
+
+  describe "#from_request!" do
+    let(:request) { ActionDispatch::TestRequest.new }
+
+    it "raises ActiveRecord::RecordNotFound when no records are found" do
+      Cmsimple::Path.should_receive(:from_request).with(request).and_return(nil)
+      request.stub(:fullpath).and_return('/foo')
+      request.stub(:params).and_return(path: '/foo')
+      expect { Cmsimple::Path.from_request!(request) }.to raise_error ActiveRecord::RecordNotFound
     end
 
-    it "normalizes the path before querying" do
-      subject.uri = '/path'
-      subject.redirect_uri = '/some-other-path'
-      subject.save
-      Cmsimple::Path.from_request(OpenStruct.new(path: '//path')).destination.uri.should == '/some-other-path'
-      Cmsimple::Path.from_request(OpenStruct.new(path: '//path/')).destination.uri.should == '/some-other-path'
-      Cmsimple::Path.from_request(OpenStruct.new(path: 'path')).destination.uri.should == '/some-other-path'
-      Cmsimple::Path.from_request(OpenStruct.new(path: '/Path')).destination.uri.should == '/some-other-path'
-    end
   end
 end

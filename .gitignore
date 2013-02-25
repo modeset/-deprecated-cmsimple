@@ -1,5 +1,6 @@
 .DS_Store
 .bundle
+vendor/ruby
 .idea
 .rake_tasks
 .rvmrc

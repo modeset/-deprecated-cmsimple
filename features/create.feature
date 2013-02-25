@@ -11,7 +11,7 @@ Feature: As a user I should be able to create pages on the site
     Then I should be redirected to the new page
     And I should see the page in the sitemap
 
-  Scenario: As a user I add a page from the sitemap panel
+  Scenario: As a user I add a new home page from the sitemap panel
     When I open the sitemap
     And I add a new home page
     Then I should be redirected to the home page
