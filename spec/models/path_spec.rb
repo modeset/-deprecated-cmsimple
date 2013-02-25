@@ -57,7 +57,18 @@ describe Cmsimple::Path do
       end
     end
 
+    context 'without a path parameter' do
+      it "should send you to Cmsimple root path" do
+        page = Cmsimple::Page.create!(is_root: true, uri: "/foo", slug: "foo", title: "Foo")
+        Cmsimple::Path.should_not_receive(:find_from_request)
+        request.stub(:fullpath).and_return('/editor')
+        request.stub(:params).and_return({})
+        expect(Cmsimple::Path.from_request(request).destination.uri).to eq("/foo")
+      end
+    end
+
     context "when a path exists that matches the full request path" do
+      before { request.stub(:params).and_return(path:nil) }
 
       it "finds the redirect" do
         request.stub(:fullpath).and_return('/path')

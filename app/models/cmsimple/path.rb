@@ -12,7 +12,7 @@ module Cmsimple
     before_validation :downcase_uri
 
     def self.from_request(request)
-      if request.fullpath == '/'
+      if !request.params.has_key?(:path)
         with_pages.merge(Cmsimple::Page.root).first
       elsif result = find_from_request(request)
         result
