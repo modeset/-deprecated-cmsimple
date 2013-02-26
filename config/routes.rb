@@ -25,7 +25,7 @@ Cmsimple::Engine.routes.draw do
 
   get '/editor(/*path)' => "pages#editor", :as => :mercury_editor
 
-  get '*path' => 'front#show'
+  get '*path' => 'front#show', constraints: Cmsimple::Routing::PathConstraint.new
   root :to => 'front#show', :via => :get
 
   put '*path' => 'pages#update_content'

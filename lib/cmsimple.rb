@@ -5,6 +5,7 @@ require 'cells'
 require 'carrierwave'
 require 'dimensions'
 require 'cmsimple/errors'
+require 'cmsimple/routing/path_constraint'
 
 # dependencies we want to reduce the
 # need of after codebase stabilizes
