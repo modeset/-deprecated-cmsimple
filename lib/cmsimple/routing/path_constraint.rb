@@ -2,7 +2,7 @@ module Cmsimple
   module Routing
     class PathConstraint
       def matches?(request)
-        Cmsimple::PageNotFoundError.new
+        !!Cmsimple::Path.from_request(request)
       end
     end
   end

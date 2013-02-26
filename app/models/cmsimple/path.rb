@@ -20,7 +20,7 @@ module Cmsimple
     end
 
     def self.from_request!(request)
-      from_request(request) || raise(ActiveRecord::RecordNotFound.new)
+      from_request(request) || raise(Cmsimple::PageNotFoundError)
     end
 
     def self.with_pages

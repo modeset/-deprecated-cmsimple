@@ -122,11 +122,11 @@ describe Cmsimple::Path do
   describe "#from_request!" do
     let(:request) { ActionDispatch::TestRequest.new }
 
-    it "raises ActiveRecord::RecordNotFound when no records are found" do
+    it "raises Cmsimple::PageNotFoundError when no records are found" do
       Cmsimple::Path.should_receive(:from_request).with(request).and_return(nil)
       request.stub(:fullpath).and_return('/foo')
       request.stub(:params).and_return(path: '/foo')
-      expect { Cmsimple::Path.from_request!(request) }.to raise_error ActiveRecord::RecordNotFound
+      expect { Cmsimple::Path.from_request!(request) }.to raise_error Cmsimple::PageNotFoundError
     end
 
   end
