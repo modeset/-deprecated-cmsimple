@@ -5,8 +5,7 @@ require 'cells'
 require 'carrierwave'
 require 'dimensions'
 
-# dependencies we want to reduce the
-# need of after codebase stabilizes
+# dependencies we want to reduce the need for after codebase stabilizes
 require 'jquery-rails'
 require 'spine-rails'
 require 'haml-rails'
