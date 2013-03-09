@@ -1,7 +1,6 @@
 source :rubygems
 
 gem 'mysql2'
-gem 'jquery-rails'
 
 gem 'multi_json', '>= 1.3.4'
 
