@@ -7,6 +7,7 @@ require 'dimensions'
 
 # dependencies we want to reduce the
 # need of after codebase stabilizes
+require 'jquery-rails'
 require 'spine-rails'
 require 'haml-rails'
 require 'haml_coffee_assets'
