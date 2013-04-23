@@ -41,6 +41,20 @@ You can also tell the helper to render the container by providing the tag: :elem
 <% end %>
 ```
 
+Templates are located in the app/views/cmsimple/templates directory. Below is an example of what the cmsimple views directory might look like for a simple site.
+
+```
+app/views/cmsimple/
+├── _snippet_list.html.haml
+├── pages
+│   └── _form_extras.html.haml
+└── templates
+    ├── generic.html.haml
+    ├── home-v1.html.haml
+    ├── one-column.html.haml
+    └── two-column.html.haml
+
+```
 ### Notes
 
 There are a couple of things to keep in mind as you maintain and augment templates. The first is that you should try to keep regions consistently named. If a user changes the template that they want to use if the regions are not named the same the content will not display in the new template. Of course this isn't always possible, for example the home page template is very different from any of the content templates.
