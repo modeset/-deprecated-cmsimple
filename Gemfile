@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'mysql2'
+gem 'pg'
 
 gem 'multi_json', '>= 1.3.4'
 
