@@ -3,8 +3,8 @@ test: &test
   encoding: utf8
   reconnect: false
   database: cmsimple_test
+  username: postgres
   pool: 5
-  host: localhost
   min_messages: error
 
 cucumber:

@@ -3,7 +3,7 @@ rvm:
   - 1.9.3
 gemfile: Gemfile.ci
 before_script:
-  - mysql -e 'create database cmsimple_test;'
+  - psql -c 'create database cmsimple_test' -U postgres
   - 'cp spec/rails_app/config/database.travis.yml spec/rails_app/config/database.yml'
   - bundle exec rake db:migrate
   - 'sh -e /etc/init.d/xvfb start'
