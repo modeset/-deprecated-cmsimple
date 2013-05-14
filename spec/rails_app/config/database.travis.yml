@@ -1,8 +1,11 @@
 test: &test
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
+  reconnect: false
   database: cmsimple_test
-  username: root
+  pool: 5
+  host: localhost
+  min_messages: error
 
 cucumber:
   <<: *test
