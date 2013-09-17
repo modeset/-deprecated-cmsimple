@@ -6,6 +6,8 @@ describe Cmsimple::Page do
   it {should belong_to(:parent)}
   it {should have_many(:versions)}
 
+  let(:page) { Cmsimple::Page.create title: 'About' }
+
   describe '#update_content' do
     before do
       subject.uri = '/about'
@@ -120,7 +122,6 @@ describe Cmsimple::Page do
   end
 
   describe 'publishing' do
-    let(:page) { Cmsimple::Page.create title: 'About' }
 
     it "has published_at set to nil by default" do
       page.published_at.should be_nil
@@ -194,7 +195,6 @@ describe Cmsimple::Page do
   end
 
   describe 'versioning' do
-    let(:page) { Cmsimple::Page.create title: 'About' }
 
     before do
       page.update_content({:content => {:value => 'content version 1'}})
@@ -203,11 +203,12 @@ describe Cmsimple::Page do
       page.publish!
       page.update_content({:content => {:value => 'content version 3'}})
       page.publish!
+      page.versions.reload
     end
 
     describe 'can return a page at a specific version' do
       it 'returns the page with the content from the requested version' do
-        version = page.versions.first
+        version = page.versions.last
         page.at_version!(version.id)
         page.regions.content.to_s.should == 'content version 1'
       end
@@ -221,7 +222,7 @@ describe Cmsimple::Page do
 
     describe 'reverting' do
       it 'can revert to a specific version' do
-        version = page.versions.first
+        version = page.versions.last
         page.revert_to!(version.id)
         Cmsimple::Page.find(page.id).regions.content.to_s.should == 'content version 1'
       end
