@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "cells", "~> 3.8"
   s.add_runtime_dependency "carrierwave", "~> 0.5.8"
 
-  s.add_runtime_dependency "spine-rails", "~> 0.1"
   s.add_runtime_dependency "coffee-script-source", "~> 1.2.0"
   s.add_runtime_dependency "haml", "~> 3.1.6"
   s.add_runtime_dependency "haml-rails", "0.3.4"

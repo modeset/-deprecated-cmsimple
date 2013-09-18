@@ -14,11 +14,12 @@
   * Moment.js
   *= require moment-1.6.2
   *
-  * Spine.js (spine-rails)
-  *= require spine
+  * Spine (1.0.6)
+  *= require spine/spine
   *= require spine/ajax
   *= require spine/relation
   *= require spine/route
+
   *
   * Haml Coffee Templates
   *= require hamlcoffee
