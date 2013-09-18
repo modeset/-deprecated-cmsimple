@@ -30,7 +30,7 @@ require 'rspec/core/rake_task'
 
 # Teabag
 desc "Run the javascript specs"
-task :teabag => "app:teabag"
+task :teaspoon => "app:teaspoon"
 
 # Cucumber
 require 'cucumber/rake/task'
@@ -43,5 +43,5 @@ RSpec::Core::RakeTask.new(:spec) do |t|
 end
 
 # Default should run all three
-task :default => [:spec, :teabag, :cucumber]
+task :default => [:spec, :teaspoon, :cucumber]
 

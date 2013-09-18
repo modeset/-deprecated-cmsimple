@@ -1,4 +1,4 @@
-# This file allows you to override various Teabag configuration directives when running from the command line. It is not
+# This file allows you to override various Teasppon configuration directives when running from the command line. It is not
 # required from within the Rails environment, so overriding directives that have been defined within the initializer
 # is not possible.
 #
@@ -8,11 +8,11 @@ require File.expand_path("../../config/environment", __FILE__)
 
 # Provide default configuration.
 #
-# You can override various configuration directives defined here by using arguments with the teabag command.
+# You can override various configuration directives defined here by using arguments with the teaspoon command.
 #
-# teabag --driver=selenium --suppress-log
-# rake teabag DRIVER=selenium SUPPRESS_LOG=false
-Teabag.setup do |config|
+# teaspoon --driver=selenium --suppress-log
+# rake teaspoon DRIVER=selenium SUPPRESS_LOG=false
+Teasppon.setup do |config|
   # Driver
   #config.driver         = "phantomjs" # available: phantomjs, selenium
   #config.phantomjs_bin  = nil
