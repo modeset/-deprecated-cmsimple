@@ -3,7 +3,7 @@
   * Vendor dependencies
   *
   * Minimum jQuery requirements are 1.7
-  *= require jquery-1.7
+  *= require jquery
   *= require jquery_ujs
   *
   *= require jquery.to-json

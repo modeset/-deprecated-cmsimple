@@ -2,19 +2,6 @@ module Cmsimple
   class Page < ActiveRecord::Base
     serialize :content, Hash
 
-    attr_accessible :slug,
-                    :uri,
-                    :title,
-                    :content,
-                    :template,
-                    :parent_id,
-                    :is_root,
-                    :position,
-                    :published,
-                    :keywords,
-                    :description,
-                    :browser_title
-
     belongs_to :parent,   :class_name => '::Cmsimple::Page', :foreign_key => 'parent_id'
     has_many   :children, :class_name => '::Cmsimple::Page', :foreign_key => 'parent_id', :dependent => :destroy
     has_many   :paths,    :dependent => :destroy
@@ -34,11 +21,11 @@ module Cmsimple
     after_save  :create_path
 
     def self.for_parent_select(page)
-      scope = scoped
+      scope = self.all
       unless page.new_record?
         scope = scope.where('id NOT IN (?)', page.descendants.map(&:id) + [page.id])
       end
-      scope.order('position').all
+      scope.order('position').load
     end
 
     # TODO: move this to a view delegator/presenter
@@ -67,7 +54,7 @@ module Cmsimple
     end
 
     def descendants
-      children.all.inject([]) do |ary, child|
+      children.load.inject([]) do |ary, child|
         ary << child
         ary + child.descendants
       end.sort_by(&:position)

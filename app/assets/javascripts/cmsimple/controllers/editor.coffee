@@ -49,7 +49,7 @@ class CMSimple.Editor extends Spine.Controller
     @loadPath(path)
 
   initializeMercury: ->
-    @mercury = new Mercury.PageEditor(null, saveStyle: 'json')
+    @mercury = new Mercury.PageEditor(null, saveStyle: 'json', saveMethod: 'PUT')
 
     Mercury.on 'saved', =>
       CMSimple.Page.fetch(id: @current_page.id)

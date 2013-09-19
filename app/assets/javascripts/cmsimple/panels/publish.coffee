@@ -16,10 +16,11 @@ class CMSimple.Panels.Publish extends Spine.Controller
     e.preventDefault()
     form = $(e.target)
     @page = CMSimple.Editor.current_page.fromForm(form)
-    @page.save
+    args =
       ajax:
         error: @proxy @error
       success: @proxy @success
+    @page.save(args)
 
   success: ->
     @modal.hide()

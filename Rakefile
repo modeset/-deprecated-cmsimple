@@ -32,16 +32,11 @@ require 'rspec/core/rake_task'
 desc "Run the javascript specs"
 task :teaspoon => "app:teaspoon"
 
-# Cucumber
-require 'cucumber/rake/task'
 
-Cucumber::Rake::Task.new(:cucumber) do |t|
-  # t.cucumber_opts = "features --format pretty"
-end
 RSpec::Core::RakeTask.new(:spec) do |t|
   t.pattern = "./spec/**/*_spec.rb"
 end
 
 # Default should run all three
-task :default => [:spec, :teaspoon, :cucumber]
+task :default => [:spec, :teaspoon]
 

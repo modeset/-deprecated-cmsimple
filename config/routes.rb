@@ -1,8 +1,8 @@
 Cmsimple::Engine.routes.draw do
 
-  match '/cmsimple/snippets/:name/preview' => 'snippets#preview'
-  match '/cmsimple/snippets/:name/options' => 'snippets#options'
-  match '/cmsimple/snippets' => 'snippets#index', :as => :snippets
+  post '/cmsimple/snippets/:name/preview' => 'snippets#preview'
+  post '/cmsimple/snippets/:name/options' => 'snippets#options'
+  get '/cmsimple/snippets' => 'snippets#index', :as => :snippets
 
   resources :pages do
     member do
@@ -29,6 +29,6 @@ Cmsimple::Engine.routes.draw do
   root :to => 'front#show', :via => :get
 
   put '*path' => 'pages#update_content'
-  root :to => 'pages#update_content', :via => :put
+  put '/' => 'pages#update_content'
 
 end

@@ -1,6 +1,5 @@
 module Cmsimple
   class Image < ActiveRecord::Base
-    attr_accessible :attachment, :title, :width, :height, :content_type, :file_size
     mount_uploader :attachment, ImageAttachmentUploader
 
     validates :attachment, :presence => true
