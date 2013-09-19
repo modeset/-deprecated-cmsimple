@@ -6,6 +6,10 @@
 
 CMSimple is an easy-to-use but extensible CMS wrapped around the Mercury editor (https://github.com/jejacks0n/mercury), written as a Rails engine.
 
+## Rails 3
+
+A stable version of the project is available on the branch `rails3-stable`. Rails 3 projects should point to that tag in their Gemfile.
+
 ## Getting Started
 
 Add the gem to your Gemfile
