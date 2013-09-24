@@ -44,6 +44,7 @@
   *
   * Custom Mercury handlers for CMSimple
   *= require cmsimple/mercury/handlers
+  *= require cmsimple/mercury/string
   *
   * CMSimple Editor
   *
