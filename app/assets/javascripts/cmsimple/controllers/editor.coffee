@@ -53,6 +53,7 @@ class CMSimple.Editor extends Spine.Controller
 
     Mercury.on 'saved', =>
       CMSimple.Page.fetch(id: @current_page.id)
+    # is this really an event?
     Mercury.one 'ready', =>
       @checkPublishedState()
 
