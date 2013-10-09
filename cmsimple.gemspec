@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency "rails", '~> 4.0'
-  s.add_runtime_dependency 'jquery-rails', '2.0.2'
+  s.add_runtime_dependency 'jquery-rails', '>= 2.0.2'
   s.add_runtime_dependency "cells"
   s.add_runtime_dependency "carrierwave"
 
