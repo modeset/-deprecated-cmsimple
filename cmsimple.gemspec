@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "shoulda-matchers"
   s.add_development_dependency "timecop"
   s.add_development_dependency "teabag"
-  s.add_development_dependency "pry"
+  s.add_development_dependency "pry-rails"
 
   # s.add_runtime_dependency "rest-client"
 end
