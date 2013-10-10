@@ -1,12 +1,15 @@
 source 'https://rubygems.org'
 
-gem 'pg'
+# Specify your gem's dependencies in ..gemspec
+gemspec
 
-gem 'multi_json', '>= 1.3.4'
-
-# gem 'mercury-rails', :path => '~/work/libraries/ruby/gems/mercury'
 gem 'mercury-rails', github: 'jejacks0n/mercury'
-gem 'railties', '~> 3.2.13'
+
+# Requirements for the spec app
+gem 'rails', '~> 3.2.13'
+gem 'pg'
+gem 'multi_json', '>= 1.3.4'
+# gem 'mercury-rails', :path => '~/work/libraries/ruby/gems/mercury'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -16,5 +19,3 @@ group :assets do
   gem 'uglifier'
 end
 
-# Specify your gem's dependencies in ..gemspec
-gemspec
