@@ -42,12 +42,11 @@ module Cmsimple
     protected
 
     def self.find_from_request(request)
-      if found_with_fullpath = with_pages.where(uri: request.fullpath).first
+      if found_with_fullpath = with_pages.where(uri: request.fullpath.downcase).first
         found_with_fullpath
       else
         path = request.params[:path]
-        path = "/#{path.gsub(/\/$/,'')}".gsub(/\/+/, '/')
-        path.downcase!
+        path = "/#{path.gsub(/\/$/,'')}".gsub(/\/+/, '/').downcase
         with_pages.where(uri: path).first
       end
     end
