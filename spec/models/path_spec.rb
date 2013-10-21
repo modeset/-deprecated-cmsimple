@@ -75,13 +75,11 @@ describe Cmsimple::Path do
         subject.uri = '/path'
         subject.redirect_uri = '/some-other-path'
         subject.save
-        subject.reload
         expect(Cmsimple::Path.from_request(request).destination.uri).to eq('/some-other-path')
       end
 
       it "finds the redirect when the path has an extension" do
         request.stub(:fullpath).and_return('/Legacy.aspx')
-        puts request.params.inspect
         subject.uri = '/Legacy.aspx'
         subject.redirect_uri = '/some-other-path'
         subject.save
