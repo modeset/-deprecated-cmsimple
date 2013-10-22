@@ -207,7 +207,7 @@ describe Cmsimple::Page do
 
     describe 'can return a page at a specific version' do
       it 'returns the page with the content from the requested version' do
-        version = page.versions.first
+        version = page.versions.last
         page.at_version!(version.id)
         page.regions.content.to_s.should == 'content version 1'
       end
@@ -221,7 +221,7 @@ describe Cmsimple::Page do
 
     describe 'reverting' do
       it 'can revert to a specific version' do
-        version = page.versions.first
+        version = page.versions.last
         page.revert_to!(version.id)
         Cmsimple::Page.find(page.id).regions.content.to_s.should == 'content version 1'
       end
