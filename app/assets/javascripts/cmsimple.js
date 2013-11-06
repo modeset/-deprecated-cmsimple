@@ -19,21 +19,12 @@
   *= require spine/ajax
   *= require spine/relation
   *= require spine/route
-
   *
   * Haml Coffee Templates
   *= require hamlcoffee
   *
-  * Mercury specifics
-  *
-  * Add all requires for the support libraries that integrate nicely with Mercury Editor.
-  * require mercury/support/history
-  *
-  * Mercury configuration
-  *= require cmsimple/mercury/config
-  *
-  * Require Mercury Editor itself.
-  *= require mercury/mercury
+  * Mercury
+  *= require cmsimple/mercury/mercury
   *
   *= require jquery.ui.nestedSortable-1.3.4
   *= require jquery-serializeObject
