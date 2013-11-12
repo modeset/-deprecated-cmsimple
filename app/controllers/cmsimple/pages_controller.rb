@@ -1,5 +1,8 @@
 module Cmsimple
   class PagesController < Cmsimple.configuration.parent_controller.constantize
+
+    self.responder = Cmsimple::ApiResponder
+
     helper_method :current_page
 
     before_filter :check_for_redirect, :only => [:editor, :update_content]

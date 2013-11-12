@@ -41,6 +41,13 @@ module Cmsimple
       scope.order('position').all
     end
 
+    def self.from_uri(uri, options={})
+      if path = where(uri: uri.downcase).first
+        path.as_published! if options[:published]
+      end
+      path
+    end
+
     # TODO: move this to a view delegator/presenter
     def select_label
       "#{'&nbsp;&nbsp;' * (uri ? (uri.count('/') - 1) : 0)}#{title}".html_safe

@@ -40,3 +40,11 @@ class CMSimple.Panels.PageMetadata extends Spine.Controller
     @content.html event.responseText
     alert('Please fill in the required fields.')
 
+  dispose: ->
+    @undelegateEvents()
+    @el.off()
+    delete @el
+    delete @modal
+    delete @action
+    delete @page
+

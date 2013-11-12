@@ -634,6 +634,25 @@
       return _results;
     };
 
+    Controller.prototype.undelegateEvents = function() {
+      var eventName, key, match, method, selector, _ref, _results;
+      _ref = this.events;
+      _results = [];
+      for (key in _ref) {
+        method = _ref[key];
+        if (typeof method !== 'function') method = this.proxy(this[method]);
+        match = key.match(this.eventSplitter);
+        eventName = match[1];
+        selector = match[2];
+        if (selector === '') {
+          _results.push(this.el.unbind(eventName, method));
+        } else {
+          _results.push(this.el.undelegate(selector, eventName, method));
+        }
+      }
+      return _results;
+    };
+
     Controller.prototype.refreshElements = function() {
       var key, value, _ref, _results;
       _ref = this.elements;

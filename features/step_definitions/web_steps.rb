@@ -252,3 +252,6 @@ And /^I accept confirmations$/ do
   }
 end
 
+And /^I sleep for (\d+) seconds?$/ do |time|
+  sleep(time.to_i)
+end

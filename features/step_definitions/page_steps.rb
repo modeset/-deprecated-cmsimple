@@ -106,7 +106,7 @@ end
 When "I add a new home page" do
   click_button 'Add Page'
   step %{the modal window should be visible}
-  fill_in 'Title', :with => 'Some new page'
+  fill_in 'Title', :with => 'Some new home page'
   check 'Home Page'
   click_button 'Create Page'
 end
@@ -188,9 +188,9 @@ Then "I should be redirected to the about page" do
   current_path.should == '/about'
 end
 
-Then "I should see the page in the sitemap" do
+Then /I should see the (.+) in the sitemap/ do |page|
   within '.mercury-panel .sitemap' do
-    page.should have_content 'Some new page'
+    page.should have_content "#{page}"
   end
 end
 

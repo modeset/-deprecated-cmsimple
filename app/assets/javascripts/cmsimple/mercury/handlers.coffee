@@ -1,9 +1,15 @@
 jQuery(window).bind 'mercury:ready', ->
+
+  bindPanel = (panel, element, modal, args...)->
+    Mercury.modalHandlers.currentHandler?.dispose()
+    panel = new panel(element, modal, args...)
+    Mercury.modalHandlers.currentHandler = panel
+
   Mercury.modalHandlers.editMetadata = ->
-    new CMSimple.Panels.PageMetadata(@element, @, 'edit')
+    bindPanel CMSimple.Panels.PageMetadata, @element, @, 'edit'
 
   Mercury.modalHandlers.newPage = ->
-    new CMSimple.Panels.PageMetadata(@element, @, 'new')
+    bindPanel CMSimple.Panels.PageMetadata, @element, @, 'new'
 
   Mercury.modalHandlers.publish = ->
-    new CMSimple.Panels.Publish(@element, @)
+    bindPanel CMSimple.Panels.Publish, @element, @

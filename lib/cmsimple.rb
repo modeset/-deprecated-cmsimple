@@ -16,6 +16,7 @@ require 'cmsimple/template_resolver'
 require 'cmsimple/template_responder'
 require 'cmsimple/page_responder'
 require 'cmsimple/regions_proxy'
+require 'cmsimple/api_responder'
 
 require 'cmsimple/exts/to_bool'
 
