@@ -1,5 +1,8 @@
 module Cmsimple
   class VersionsController < Cmsimple.configuration.parent_controller.constantize
+
+    self.responder = Cmsimple::ApiResponder
+
     respond_to :json
 
     def index

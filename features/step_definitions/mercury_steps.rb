@@ -229,6 +229,7 @@ When /^(?:|I )(?:drag|drop) (.*?) (?:into|on) (.*?)$/ do |snippet_locator, regio
       } else {
         var region = top.mercuryInstance.getRegionByName('#{region_id}');
         region.selection().range.collapse(true);
+        Mercury.snippet = {name: '#{snippet_name}', hasOptions: true};
         document.execCommand('insertHTML', false, '<img data-snippet="#{snippet_name}" src="/assets/mercury/default-snippet.png">');
         element.trigger('possible:drop');
       }

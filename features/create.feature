@@ -15,4 +15,4 @@ Feature: As a user I should be able to create pages on the site
     When I open the sitemap
     And I add a new home page
     Then I should be redirected to the home page
-    And I should see the page in the sitemap
+    And I should see the home page in the sitemap

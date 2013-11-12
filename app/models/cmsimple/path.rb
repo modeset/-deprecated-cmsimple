@@ -19,6 +19,10 @@ module Cmsimple
       end
     end
 
+    def self.from_uri(uri)
+      with_pages.where(uri: uri.downcase).first
+    end
+
     def self.from_request!(request)
       from_request(request) || raise(ActiveRecord::RecordNotFound.new)
     end
@@ -42,12 +46,12 @@ module Cmsimple
     protected
 
     def self.find_from_request(request)
-      if found_with_fullpath = with_pages.where(uri: request.fullpath.downcase).first
+      if found_with_fullpath = from_uri(request.fullpath)
         found_with_fullpath
       else
         path = request.params[:path]
-        path = "/#{path.gsub(/\/$/,'')}".gsub(/\/+/, '/').downcase
-        with_pages.where(uri: path).first
+        path = "/#{path.gsub(/\/$/,'')}".gsub(/\/+/, '/')
+        from_uri(path)
       end
     end
 

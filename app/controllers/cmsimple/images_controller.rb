@@ -1,5 +1,8 @@
 module Cmsimple
   class ImagesController < Cmsimple.configuration.parent_controller.constantize
+
+    self.responder = Cmsimple::ApiResponder
+
     respond_to :json, :html
     layout 'panel'
 

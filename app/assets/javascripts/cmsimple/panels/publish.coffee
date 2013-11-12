@@ -30,3 +30,11 @@ class CMSimple.Panels.Publish extends Spine.Controller
     @content.html event.responseText
     alert('The current page was unable to be published')
 
+  dispose: ->
+    @undelegateEvents()
+    @el.off()
+    delete @el
+    delete @modal
+    delete @action
+    delete @page
+
