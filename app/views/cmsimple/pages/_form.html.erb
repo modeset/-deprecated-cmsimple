@@ -1,0 +1,73 @@
+<%= form_for @page, :html => { :class => "form-horizontal" } do |f| %>
+  <div class="form-inputs mercury-display-pane-container">
+    <fieldset>
+      <legend>Page Info</legend>
+      <div class="control-group">
+        <%= f.label :title, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :title %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :slug, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :slug %>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Appearance</legend>
+      <div class="control-group">
+        <%= f.label :template, class: 'control-label' %>
+        <div class="controls">
+          <%= f.select :template, Cmsimple::TemplateResolver.all, include_blank: 'None / Inherit' %>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Hierarchy</legend>
+      <div class="control-group">
+        <%= f.label :parent_id, class: 'control-label' %>
+        <div class="controls">
+          <%= f.select :parent_id, Cmsimple::Page.for_parent_select(@page).map { |p| [ p.select_label, p.id ] }, include_blank: 'None' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <%= f.label :is_root, class: 'checkbox' do %>
+            Home Page?
+            <%= f.check_box :is_root %>
+          <% end %>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>SEO Info</legend>
+      <div class="control-group">
+        <%= f.label :browser_title, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :browser_title %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :keywords, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :keywords %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :description, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :description, input_html: {rows: 5} %>
+        </div>
+      </div>
+    </fieldset>
+    <%= render partial: 'form_extras', locals: {f: f} %>
+  </div>
+  <div class="form-actions mercury-display-controls">
+    <% unless @page.new_record? %>
+      <%= link_to 'Delete', page_path(@page), method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure you would like to permanently delete this page?\n\nIt will delete all versions and associated paths. If you are unsure you can unpublish a page to remove it from public access." } %>
+    <% end %>
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

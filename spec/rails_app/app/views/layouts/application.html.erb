@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>
+      <%= content_for :title || 'Cmsimple' %>
+    </title>
+    <% if content_for(:keywords).present? %>
+      <%= tag('meta', name: 'keywords', content: content_for(:keywords).strip) %>
+    <% end %>
+    <% if content_for(:description).present? %>
+      <%= tag('meta', name: 'description', content: content_for(:description).strip) %>
+    <% end %>
+    <%= stylesheet_link_tag :application %>
+    <%= javascript_include_tag :application %>
+    <%= csrf_meta_tag %>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>
