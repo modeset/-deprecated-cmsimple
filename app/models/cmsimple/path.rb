@@ -1,6 +1,5 @@
 module Cmsimple
   class Path < ActiveRecord::Base
-    attr_accessible :uri, :page_id, :redirect_uri
 
     belongs_to :page
 
@@ -28,7 +27,7 @@ module Cmsimple
     end
 
     def self.with_pages
-      includes(:page)
+      includes(:page).references(:pages)
     end
 
     def destination

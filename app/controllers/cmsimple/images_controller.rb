@@ -17,7 +17,7 @@ module Cmsimple
     end
 
     def create
-      @image = Image.new(params[:image])
+      @image = Image.new(image_params)
       @image.save
       respond_with @image, location: new_image_path
     end
@@ -27,5 +27,13 @@ module Cmsimple
       @image.destroy
       respond_with @image
     end
+
+    private
+
+    def image_params
+      whitelisted = [:attachment, :title]
+      params.require(:image).permit(*whitelisted)
+    end
+
   end
 end

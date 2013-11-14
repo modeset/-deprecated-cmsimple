@@ -3,7 +3,7 @@
   * Vendor dependencies
   *
   * Minimum jQuery requirements are 1.7
-  *= require jquery-1.7
+  *= require jquery-1.8.3
   *= require jquery_ujs
   *
   *= require jquery.to-json
@@ -24,16 +24,8 @@
   * Haml Coffee Templates
   *= require hamlcoffee
   *
-  * Mercury specifics
-  *
-  * Add all requires for the support libraries that integrate nicely with Mercury Editor.
-  * require mercury/support/history
-  *
-  * Mercury configuration
-  *= require cmsimple/mercury/config
-  *
-  * Require Mercury Editor itself.
-  *= require mercury/mercury
+  * Mercury
+  *= require cmsimple/mercury/mercury
   *
   *= require jquery.ui.nestedSortable-1.3.4
   *= require jquery-serializeObject
@@ -44,6 +36,7 @@
   *
   * Custom Mercury handlers for CMSimple
   *= require cmsimple/mercury/handlers
+  *= require cmsimple/mercury/string
   *
   * CMSimple Editor
   *

@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe Cmsimple::Path do
 
+  after(:each) do
+    Cmsimple::Page.destroy_all
+    Cmsimple::Path.destroy_all
+  end
+
   subject { Cmsimple::Path.new }
 
   it { should validate_presence_of(:uri) }

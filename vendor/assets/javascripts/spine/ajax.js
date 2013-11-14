@@ -171,9 +171,11 @@
     Singleton.prototype.update = function(params, options) {
       var _this = this;
       return this.queue(function() {
+        var data = {};
+        data[_this.record.constructor.className.toUnderscore()] = _this.record;
         return _this.ajax(params, {
           type: 'PUT',
-          data: JSON.stringify(_this.record),
+          data: JSON.stringify(data),
           url: Ajax.getURL(_this.record)
         }).success(_this.recordResponse(options)).error(_this.errorResponse(options));
       });

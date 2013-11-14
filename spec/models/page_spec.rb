@@ -1,6 +1,14 @@
 require 'spec_helper'
 describe Cmsimple::Page do
+  before(:all) do
+    Cmsimple::Page.destroy_all
+  end
+
+  after(:each) do
+    Cmsimple::Page.destroy_all
+  end
   subject { Cmsimple::Page.new }
+
   it {should validate_presence_of(:title) }
   it {should have_many(:children)}
   it {should belong_to(:parent)}
@@ -23,11 +31,11 @@ describe Cmsimple::Page do
 
   describe '#descendants' do
     before do
-      @childless = Cmsimple::Page.create(title: 'Misc', uri: '/Misc')
-      @page = Cmsimple::Page.create(title: 'Home', uri: '/')
-      @child = Cmsimple::Page.create(title: 'About', uri: '/about')
+      @childless = Cmsimple::Page.create!(title: 'Misc', uri: '/Misc')
+      @page = Cmsimple::Page.create!(title: 'Home', uri: '/')
+      @child = Cmsimple::Page.create!(title: 'About', uri: '/about')
       @page.children << @child
-      @descendant = Cmsimple::Page.create(title: 'Contact', uri: '/about/contact')
+      @descendant = Cmsimple::Page.create!(title: 'Contact', uri: '/about/contact')
       @child.children << @descendant
     end
 
@@ -207,6 +215,9 @@ describe Cmsimple::Page do
     end
 
     describe 'can return a page at a specific version' do
+      after(:each) do
+        Cmsimple::Version.destroy_all
+      end
       it 'returns the page with the content from the requested version' do
         version = page.versions.last
         page.at_version!(version.id)

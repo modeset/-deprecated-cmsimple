@@ -11,8 +11,8 @@ module Cmsimple
     end
 
     def create
-      @path = Path.new(params[:path])
-      @path.save
+      @path = Path.new(path_params)
+      @path.save!
       respond_with @path
     end
 
@@ -20,6 +20,13 @@ module Cmsimple
       @path = Path.find(params[:id])
       @path.destroy
       respond_with @path
+    end
+
+    private
+
+    def path_params
+      whitelisted = [:page_id, :uri, :redirect_uri]
+      params.require(:path).permit(*whitelisted)
     end
   end
 end

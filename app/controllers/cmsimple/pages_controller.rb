@@ -3,10 +3,13 @@ module Cmsimple
 
     self.responder = Cmsimple::ApiResponder
 
+    respond_to :html, :json, :js
+
     helper_method :current_page
 
-    before_filter :check_for_redirect, :only => [:editor, :update_content]
-    respond_to :html, :json, :js
+    before_filter :check_for_redirect, only: [:editor, :update_content]
+    before_filter :find_page, only: [:show, :edit, :publish, :update, :destroy]
+
 
     def index
       @pages = Page.all
@@ -14,7 +17,6 @@ module Cmsimple
     end
 
     def show
-      @page = Page.find(params[:id])
       respond_with @page
     end
 
@@ -28,7 +30,6 @@ module Cmsimple
     end
 
     def edit
-      @page = Page.find(params[:id])
       render :edit, :layout => false
     end
 
@@ -38,39 +39,39 @@ module Cmsimple
     end
 
     def publish
-      @page = Page.find(params[:id])
       render :publish, :layout => false
     end
 
     def update
-      @page = Page.find(params[:id])
-      params[:page].delete :id if params[:page] && params[:page].key?(:id)
-      if @page.update_attributes(params[:page])
-        respond_with(@page)
+      if @page.update_attributes!(page_params)
+        render json: @page
       else
         render :edit, layout: false, status: 422
       end
     end
 
     def create
-      params[:page].delete :id if params[:page] && params[:page].key?(:id)
-      @page = Page.new(params[:page])
+      @page = Page.new(page_params)
       if @page.save
-        respond_with(@page)
+        render json: @page
       else
         render :new, layout: false, status: 422
       end
     end
 
     def destroy
-      @page = Page.find(params[:id])
       @page.destroy
       respond_with(@page) do |format|
         format.html{ redirect_to '/editor' }
       end
     end
 
-    #helpers
+    private
+
+    def find_page
+      @page = Page.find(params[:id])
+    end
+
     def current_path
       @path ||= Path.from_request!(request)
     end
@@ -86,6 +87,11 @@ module Cmsimple
         path = "/editor#{path}" if action_name == 'editor'
         redirect_to path, status: 301
       end
+    end
+
+    def page_params
+      whitelisted = [:title, :slug, :template, :parent_id, :is_root, :browser_title, :keywords, :description, :commit, :uri, :position, :published]
+      params.require(:page).permit(*whitelisted)
     end
 
   end
