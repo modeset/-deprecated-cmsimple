@@ -144,6 +144,10 @@ module Cmsimple
       save!
     end
 
+    def path_for(record)
+      "#{self.uri}/#{record.to_param}"
+    end
+
     def as_json(options={})
       super(options.merge({:methods => [:unpublished_changes, :published]}))
     end
