@@ -19,7 +19,11 @@ module Cmsimple
     def create
       @image = Image.new(image_params)
       @image.save
-      respond_with @image, location: new_image_path
+      if request.xhr?
+        render json: {url: @image.attachment.url}
+      else
+        respond_with @image, location: new_image_path
+      end
     end
 
     def destroy
