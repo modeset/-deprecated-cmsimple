@@ -1,0 +1,18 @@
+<div class="mercury-display-pane" style='width: 600px;'>
+  <%= form_for @page do |f| %>
+    <fieldset>
+      <legend>Publish the current page</legend>
+      <%= f.hidden_field :published, value: true %>
+      <%= f.submit 'Publish Changes', class: 'btn btn-primary' %>
+    </fieldset>
+  <% end %>
+  <% if @page.published? %>
+    <%= form_for @page do |f| %>
+      <fieldset>
+        <legend>Deactivate the current page by unpublishing</legend>
+        <%= f.hidden_field :published, value: false %>
+        <%= f.submit 'Unpublish', class: 'btn btn-danger' %>
+      </fieldset>
+    <% end %>
+  <% end %>
+</div>

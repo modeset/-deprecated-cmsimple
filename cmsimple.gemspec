@@ -21,8 +21,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "cells"
   s.add_runtime_dependency "carrierwave"
 
-  s.add_runtime_dependency "haml"
-  s.add_runtime_dependency "haml-rails"
   s.add_runtime_dependency "haml_coffee_assets", "~> 0.9.2"
   s.add_runtime_dependency "dimensions"
   s.add_runtime_dependency "mini_magick"

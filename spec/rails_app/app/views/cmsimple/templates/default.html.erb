@@ -1,0 +1,21 @@
+<%= content_for :title do %>
+  <%= @page.browser_title %>
+<% end %>
+<%= content_for :keywords do %>
+  <%= @page.keywords %>
+<% end %>
+<%= content_for :description do %>
+  <%= @page.description %>
+<% end %>
+<h2>Editable</h2>
+<section data-mercury='full' id='editable1'>
+<%= region_content @page.regions.editable1 %>
+</section>
+<h2>Snippetable</h2>
+<section id="snippetable1" data-mercury='snippets'>
+<%= region_content @page.regions.snippetable1 %>
+</section>
+<h2>Markupable</h2>
+<section id="markupable1" data-mercury='markdown'>
+<%= region_content @page.regions.markupable1 %>
+</section>
