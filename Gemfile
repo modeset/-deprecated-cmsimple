@@ -16,3 +16,16 @@ group :assets do
   gem 'uglifier'
 end
 
+group :development, :test do
+  gem "rspec-rails", "~> 2.12.2"
+  gem "capybara", "~> 1.1.3"
+  gem "database_cleaner"
+  gem "shoulda-matchers"
+  gem "timecop"
+  gem "teaspoon"
+  gem "pry-rails"
+end
+
+group :test do
+  gem "cucumber-rails", require: false
+end
