@@ -20,11 +20,7 @@ module Cmsimple
     end
 
     def current_page
-      @page ||= if params[:id].present?
-                  Cmsimple::Page.find(params[:id])
-                else
-                  current_path.destination
-                end
+      @page ||= current_path.destination
     end
 
     def check_for_redirect
