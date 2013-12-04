@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.homepage    = ""
   s.summary     = %q{A simple CMS based on the Mercury editor}
   s.description = %q{A simple CMS based on the Mercury editor}
+  s.license     = "MIT"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
