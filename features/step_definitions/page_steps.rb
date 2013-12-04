@@ -164,7 +164,6 @@ Then "I should see that page's content in it's template" do
 </section>
   HTML
   page.driver.response.body.should =~ /#{region}/
-  puts page.driver.response.body
 end
 
 Then "I should be able to edit that page's content" do
