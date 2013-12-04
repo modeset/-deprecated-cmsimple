@@ -30,4 +30,3 @@ capybara*
 spec/rails_app/db/migrate/**.cmsimple.rb
 spec/rails_app/public/uploads/
 
-Gemfile.lock
