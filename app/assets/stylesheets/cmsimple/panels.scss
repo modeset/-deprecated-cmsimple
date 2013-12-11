@@ -95,7 +95,7 @@
 
 .image-filter input.filter {
   background-color: white;
-  background-image: url(/assets/mercury/search-icon.png);
+  background-image: image-url('mercury/search-icon.png');
   background-position: 4px center;
   background-repeat: no-repeat;
   border-radius: 30px;
@@ -207,18 +207,18 @@
 }
 
 .mercury-panel ul.sitemap li {
-  background: url(/assets/tree-line-horizontal.png) no-repeat left 12px;
+  background: image-url('tree-line-horizontal.png') no-repeat left 12px;
   list-style: none;
   margin: 0;
   padding: 0;
   padding-left: 2.5em;
 }
 .mercury-panel ul.sitemap li:last-child {
-  background-image: url(/assets/tree-line-horizontal-last.png);
+  background-image: image-url('tree-line-horizontal-last.png');
 }
 .mercury-panel ul.sitemap,
 .mercury-panel ul.sitemap ul {
-  background: url(/assets/tree-line-vertical.png) repeat-y;
+  background: image-url('tree-line-vertical.png') repeat-y;
 }
 
 .mercury-panel ul.sitemap > li article {
@@ -253,7 +253,7 @@
   margin-left: 0.5em;
 }
 .mercury-panel ul.sitemap > li article .icon {
-  background: url('/assets/sitemap/unpublished.png') no-repeat left top;
+  background: image-url('sitemap/unpublished.png') no-repeat left top;
   background-size: 16px 16px;
   display: inline-block;
   vertical-align: middle;
@@ -263,10 +263,10 @@
   height: 16px;
 }
 .mercury-panel ul.sitemap > li article .icon.has-changes {
-  background-image: url('/assets/sitemap/has-changes.png');
+  background-image: image-url('sitemap/has-changes.png');
 }
 .mercury-panel ul.sitemap > li article .icon.published {
-  background-image: url('/assets/sitemap/published.png');
+  background-image: image-url('sitemap/published.png');
 }
 .mercury-panel ul.sitemap .caret {
   border-color: white transparent transparent transparent;
