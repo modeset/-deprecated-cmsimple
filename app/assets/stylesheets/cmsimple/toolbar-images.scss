@@ -1,0 +1,26 @@
+/* Button example */
+.mercury-primary-toolbar .mercury-inspector-button em {
+  background-image: image-url('mercury/toolbar/primary/inspectorpanel.png');
+}
+
+.mercury-sitemap-button em {
+  background-image: image-url('toolbar/sitemap.png');
+}
+
+.mercury-publish-button em {
+  background-image: image-url('toolbar/publish.png');
+}
+
+.mercury-publish-button.unpublished em {
+  background-image: image-url('toolbar/unpublished.png');
+}
+
+.mercury-redirects-button em {
+  background-image: image-url('toolbar/redirect.png');
+}
+
+.mercury-primary-toolbar .mercury-editMetadata-button em,
+.mercury-expander-button[data-button="inspector"] em {
+  background-image: image-url('toolbar/metadata.png');
+}
+
