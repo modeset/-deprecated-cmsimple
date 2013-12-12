@@ -1,15 +1,20 @@
+<%# encoding: utf-8 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
-    <meta/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, initial-scale=1.0"/>
     <%= csrf_meta_tags %>
     <title>Mercury Editor</title>
     <%= stylesheet_link_tag    *Cmsimple.configuration.editor_stylesheets %>
     <%= javascript_include_tag *Cmsimple.configuration.editor_javascripts %>
   </head>
   <body>
-    <script>
-      new CMSimple.Editor( new CMSimple.Page(<%= current_page.to_json.html_safe %>) )
+    <script id='page_json' type='text/content'>
+      <%= current_page.to_json.html_safe %>
+    </script>
+    <script type='text/javascript' charset="utf-8">
+      new CMSimple.Editor( new CMSimple.Page(JSON.parse($('#page_json').html())) )
     </script>
   </body>
 </html>
