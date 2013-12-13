@@ -5,7 +5,7 @@ module Cmsimple
     belongs_to :parent,   :class_name => '::Cmsimple::Page', :foreign_key => 'parent_id'
     has_many   :children, :class_name => '::Cmsimple::Page', :foreign_key => 'parent_id', :dependent => :destroy
     has_many   :paths,    :dependent => :destroy
-    has_many   :versions, :dependent => :destroy, :order => 'created_at DESC'
+    has_many   :versions, proc { order(created_at: :desc) }, :dependent => :destroy
 
     validates :uri,
               :slug,
