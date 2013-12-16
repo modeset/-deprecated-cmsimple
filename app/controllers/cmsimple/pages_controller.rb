@@ -90,6 +90,7 @@ module Cmsimple
     end
 
     def page_params
+      return permitted_page_params if respond_to?(:permitted_page_params, true)
       whitelisted = [:title, :slug, :template, :parent_id, :is_root, :browser_title, :keywords, :description, :commit, :uri, :position, :published]
       params.require(:page).permit(*whitelisted)
     end
