@@ -20,13 +20,13 @@ describe Cmsimple::PageResponder do
 
     it 'is viewable if the page is published' do
       @editable = false
-      @page = mock('page', :published? => true)
+      @page = double('page', :published? => true)
       responder.current_page_is_viewable?.should be_true
     end
 
     it 'is not viewable if the request is not the editor iframe and the page is not published' do
       @editable = false
-      @page = mock('page', :published? => false)
+      @page = double('page', :published? => false)
       responder.current_page_is_viewable?.should be_false
     end
   end
@@ -35,14 +35,14 @@ describe Cmsimple::PageResponder do
     let(:responder) { responder = Cmsimple::PageResponder.new(controller) }
     it 'tries to use the published version of the page if the app is not in edit mode' do
       @editable = false
-      @page = mock('page', :published? => true)
+      @page = double('page', :published? => true)
       @page.should_receive(:as_published!).and_return(true)
       responder.page_for_context
     end
 
     it 'tries to use the published version of the page if the app is not in edit mode' do
       @editable = true
-      @page = mock('page', :published? => true)
+      @page = double('page', :published? => true)
       @params = {version: 1}
       @page.should_receive(:at_version!).and_return(true)
       responder.page_for_context
@@ -50,7 +50,7 @@ describe Cmsimple::PageResponder do
 
     it 'uses the current draft version by default' do
       @editable = true
-      @page = mock('page', :published? => false)
+      @page = double('page', :published? => false)
       responder.should_receive(:draft_context?)
       responder.page_for_context
     end

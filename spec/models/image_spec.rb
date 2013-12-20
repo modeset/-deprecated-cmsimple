@@ -5,6 +5,7 @@ describe Cmsimple::Image do
   before do
     @file_fixture_path = Cmsimple::Engine.root.join('spec', 'fixtures', 'rails.png')
     @file_fixture = File.open(@file_fixture_path)
+    I18n.enforce_available_locales = false
   end
 
   after do

@@ -14,7 +14,7 @@ describe Cmsimple::RegionsHelper do
                                                                      options: { first_name: 'Fred',
                                                                                 last_name: 'Flinstone'
                                               }}})
-      @page = mock('page', :regions => mock('regions', :body => @region, :heading => Cmsimple::Region.new({})))
+      @page = double('page', :regions => double('regions', :body => @region, :heading => Cmsimple::Region.new({})))
     end
 
     it 'renders without a wrapper tag if no tag provided' do

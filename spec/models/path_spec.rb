@@ -54,7 +54,7 @@ describe Cmsimple::Path do
         request.stub(:params).and_return(path: '/path')
       end
       it "does not raise an error" do
-        expect(Cmsimple::Path.from_request(request)).to_not raise_error(ActiveRecord::RecordNotFound)
+        expect{ Cmsimple::Path.from_request(request) }.to_not raise_error
       end
 
       it "returns nil" do
