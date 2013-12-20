@@ -4,7 +4,6 @@ rvm:
 env:
   - DISPLAY=':99.0' CUCUMBER_OPTS='-f progress' CI_WAIT_TIME=10
 gemfile:
-  - Gemfile.nolock
   - Gemfile
 before_script:
   - sh -e /etc/init.d/xvfb start
