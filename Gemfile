@@ -23,7 +23,7 @@ group :development, :test do
   gem "shoulda-matchers"
   gem "timecop"
   gem "teaspoon"
-  gem "pry-rails"
+  gem 'jazz_hands'
 end
 
 group :test do
