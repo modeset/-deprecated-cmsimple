@@ -10,6 +10,7 @@ vendor/bundle
 .rake_tasks~
 pkg
 mkmf.log
+tags
 
 # Local config files
 database.yml
