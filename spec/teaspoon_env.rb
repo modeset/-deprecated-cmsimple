@@ -1,4 +1,4 @@
-# This file allows you to override various Teasppon configuration directives when running from the command line. It is not
+# This file allows you to override various Teaspoon configuration directives when running from the command line. It is not
 # required from within the Rails environment, so overriding directives that have been defined within the initializer
 # is not possible.
 #
@@ -12,7 +12,7 @@ require File.expand_path("../../config/environment", __FILE__)
 #
 # teaspoon --driver=selenium --suppress-log
 # rake teaspoon DRIVER=selenium SUPPRESS_LOG=false
-Teasppon.setup do |config|
+Teaspoon.setup do |config|
   # Driver
   #config.driver         = "phantomjs" # available: phantomjs, selenium
   #config.phantomjs_bin  = nil
