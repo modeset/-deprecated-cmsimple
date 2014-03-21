@@ -16,12 +16,13 @@ class CMSimple.Panels.Sitemap.Tree extends Spine.Controller
 
   bindEvents: ->
     $('button.add', @el).click @proxy @addNewPage
-    CMSimple.Page.bind 'refresh change', _.debounce (=> @render()), 100
+    CMSimple.Page.bind 'refresh change', _.debounce (=> @render()), 300
 
   refresh: ->
     CMSimple.Page.fetch()
 
   render: ->
+    return if @sorting
     @sitemap.html ''
     @renderPages(@sitemap, CMSimple.Page.roots())
     $('li', @sitemap).click @proxy @pageClick
@@ -29,7 +30,9 @@ class CMSimple.Panels.Sitemap.Tree extends Spine.Controller
     @trigger 'redraw'
 
   initializeSortable: ->
-    new CMSimple.Panels.Sitemap.Sortable(@sitemap)
+    sortable = new CMSimple.Panels.Sitemap.Sortable(@sitemap)
+    sortable.bind 'beforeUpdatePositions', => @sorting = true
+    sortable.bind 'afterUpdatePositions', => @sorting = false
 
   renderPages: (container, pages)->
     for page in pages

@@ -21,7 +21,7 @@ class CMSimple.Panels.Sitemap.Sortable extends Spine.Controller
 
     @el.disableSelection()
 
-    @el.bind 'sortable:refresh', => @el.nestedSortable('refreshPositions')
+    @el.bind 'sortable:refresh', _.debounce(=> @el.nestedSortable('refreshPositions'))
 
   activate: ->
     @el.find('> li').on 'hover', @over
@@ -50,6 +50,8 @@ class CMSimple.Panels.Sitemap.Sortable extends Spine.Controller
     page.updateAttributes(parent_id: parent_id)
 
   updatePagePositions: ->
+    @trigger('beforeUpdatePositions')
     ids = _($('li', @el)).map (el) -> $(el).data('id')
     CMSimple.Page.updatePositions(ids)
+    @trigger('afterUpdatePositions')
 

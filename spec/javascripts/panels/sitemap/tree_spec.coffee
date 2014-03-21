@@ -36,7 +36,7 @@ describe 'CMSimple.Panels.Sitemap.Tree', ->
       spyOn(panel, 'render')
       runs ->
         panel.refresh()
-      waits 100
+      waits 500
       runs ->
         expect(panel.render).toHaveBeenCalled()
 

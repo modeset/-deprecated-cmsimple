@@ -191,6 +191,11 @@ module Cmsimple
       associated_path.page = self
       associated_path.redirect_uri = nil
       associated_path.save!
+      if valid?
+        children.load.each do |child|
+          child.save
+        end
+      end
     end
 
     def create_new_version
