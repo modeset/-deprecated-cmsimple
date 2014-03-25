@@ -191,7 +191,7 @@ module Cmsimple
       associated_path.page = self
       associated_path.redirect_uri = nil
       associated_path.save!
-      if valid?
+      if valid? && self.uri_changed?
         children.load.each do |child|
           child.save
         end
