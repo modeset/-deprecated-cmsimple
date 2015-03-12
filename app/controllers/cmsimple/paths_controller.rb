@@ -12,7 +12,9 @@ module Cmsimple
 
     def create
       @path = Path.new(path_params)
+      require 'pry'
       @path.save!
+
       respond_with @path
     end
 

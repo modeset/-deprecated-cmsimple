@@ -6,7 +6,7 @@ class Cmsimple::ApiResponder < ActionController::Responder
     errors
   end
 
-  def api_behavior
+  def api_behavior(error=nil)
     if get?
       display resource
     elsif post?
