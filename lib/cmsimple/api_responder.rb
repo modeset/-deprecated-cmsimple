@@ -6,7 +6,7 @@ class Cmsimple::ApiResponder < ActionController::Responder
     errors
   end
 
-  def api_behavior(error)
+  def api_behavior
     raise error unless resourceful?
 
     if get?
