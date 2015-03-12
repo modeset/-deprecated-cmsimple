@@ -24,8 +24,8 @@ describe Cmsimple::Page do
 
     it "updates content to a hash when json is given to #update_content" do
       subject.update_content({'content' => 'hello world'})
-      subject.content.should be_a Hash
-      subject.content['content'].should == 'hello world'
+      expect(subject.content).to be_a Hash
+      expect(subject.content['content']).to eq('hello world')
     end
   end
 
@@ -40,28 +40,28 @@ describe Cmsimple::Page do
     end
 
     it 'retrieves all the descendants for a page' do
-      @page.descendants.map(&:title).should =~ ['About', 'Contact']
+      expect(@page.descendants.map(&:title)).to match(['About', 'Contact'])
     end
 
     it 'returns nothing for a page with no descendants' do
-      @childless.descendants.should be_empty
+      expect(@childless.descendants).to be_empty
     end
 
     describe '.for_parent_select' do
       it 'only returns pages that arent direct descendants' do
-        Cmsimple::Page.for_parent_select(@page).map(&:title).should =~ ['Misc']
-        Cmsimple::Page.for_parent_select(@child).map(&:title).should =~ ['Misc', 'Home']
-        Cmsimple::Page.for_parent_select(@childless).map(&:title).should =~ ['Home', 'About', 'Contact']
+        expect(Cmsimple::Page.for_parent_select(@page).map(&:title)).to match ['Misc']
+        expect(Cmsimple::Page.for_parent_select(@child).map(&:title)).to match ['Misc', 'Home']
+        expect(Cmsimple::Page.for_parent_select(@childless).map(&:title)).to match ['Home', 'About', 'Contact']
       end
     end
 
     describe '#root' do
       it "returns the root of the page tree" do
-        @descendant.root.id.should == @page.id
+        expect(@descendant.root.id).to eq(@page.id)
       end
 
       it "returns the current page if it is a root" do
-        @page.root.id.should == @page.id
+        expect(@page.root.id).to eq(@page.id)
       end
     end
   end
@@ -70,25 +70,25 @@ describe Cmsimple::Page do
 
     it 'returns a default slug from the title' do
       subject.title = 'About Us'
-      subject.slug.should == 'about-us'
+      expect(subject.slug).to eq('about-us')
     end
 
     it "doesn't override the slug if it is manually set" do
       subject.slug = 'about'
       subject.title = 'About Us'
-      subject.slug.should == 'about'
+      expect(subject.slug).to eq('about')
     end
 
     it 'saves the default slug' do
       subject.title = 'About Us'
       subject.save
-      Cmsimple::Page.find(subject.id).slug.should == 'about-us'
+      expect(Cmsimple::Page.find(subject.id).slug).to eq('about-us')
     end
 
     it 'sets the path to the the slug on save if no parent' do
       subject.title = 'About Us'
       subject.save
-      Cmsimple::Page.find(subject.id).uri.should == '/about-us'
+      expect(Cmsimple::Page.find(subject.id).uri).to eq('/about-us')
     end
 
     it 'sets the path to the the slug on save if no parent' do
@@ -96,7 +96,7 @@ describe Cmsimple::Page do
       subject.parent = about
       subject.title = 'Contact Us'
       subject.save
-      Cmsimple::Page.find(subject.id).uri.should == '/about/contact-us'
+      expect(Cmsimple::Page.find(subject.id).uri).to eq('/about/contact-us')
     end
   end
 
@@ -109,12 +109,12 @@ describe Cmsimple::Page do
 
     it 'can only have one root' do
       Cmsimple::Page.create title: 'About', is_root: true
-      Cmsimple::Page.where(is_root: true).count.should == 1
+      expect(Cmsimple::Page.where(is_root: true).count).to eq(1)
     end
 
     it 'must have at least one root' do
       subject.is_root = false
-      subject.should_not be_valid
+      expect(subject).to_not be_valid
     end
   end
 
@@ -132,14 +132,14 @@ describe Cmsimple::Page do
   describe 'publishing' do
 
     it "has published_at set to nil by default" do
-      page.published_at.should be_nil
+      expect(page.published_at).to be_nil
     end
 
     describe '#publish!' do
       it 'sets the published_at date to now' do
         Timecop.freeze(Time.now) do
           page.publish!
-          page.published_at.to_s.should == Time.zone.now.to_s
+          expect(page.published_at.to_s).to eq(Time.zone.now.to_s)
         end
       end
 
@@ -150,13 +150,13 @@ describe Cmsimple::Page do
 
     describe '#unpublished_changes?' do
       it 'has unpublished changes if it was never published' do
-        page.published_at.should be_nil
-        page.unpublished_changes?.should eq(true)
+        expect(page.published_at).to be_nil
+        expect(page.unpublished_changes?).to eq(true)
       end
 
       it 'does not have unpublished changes once it is published' do
         page.publish!
-        page.unpublished_changes?.should eq(false)
+        expect(page.unpublished_changes?).to eq(false)
       end
     end
 
@@ -167,24 +167,24 @@ describe Cmsimple::Page do
 
       it 'sets published_at to nil' do
         page.unpublish!
-        page.published_at.should be_nil
+        expect(page.published_at).to be_nil
       end
     end
 
     describe 'published scope' do
       it 'returns the published page' do
         page.publish!
-        Cmsimple::Page.published.first.should == page
+        expect(Cmsimple::Page.published.first).to eq(page)
       end
 
       it 'does not return the page if it is not published' do
-        Cmsimple::Page.published.first.should be_nil
+        expect(Cmsimple::Page.published.first).to be_nil
       end
 
       it 'does not return the page if it is to be published in the future' do
         page.published_at = 2.weeks.from_now
         page.save!
-        Cmsimple::Page.published.first.should be_nil
+        expect(Cmsimple::Page.published.first).to be_nil
       end
     end
 
@@ -197,7 +197,7 @@ describe Cmsimple::Page do
       it 'returns puslished content when in published mode if there are unpublished changes' do
         page.update_content({:content => {:value => 'content version 2'}})
         page.as_published!
-        page.regions.content.to_s.should == 'content version 1'
+        expect(page.regions.content.to_s).to eq('content version 1')
       end
     end
   end
@@ -221,13 +221,13 @@ describe Cmsimple::Page do
       it 'returns the page with the content from the requested version' do
         version = page.versions.last
         page.at_version!(version.id)
-        page.regions.content.to_s.should == 'content version 1'
+        expect(page.regions.content.to_s).to eq('content version 1')
       end
 
       it 'returns the page with the content from another requested version' do
         version = page.versions.second
         page.at_version!(version.id)
-        page.regions.content.to_s.should == 'content version 2'
+        expect(page.regions.content.to_s).to eq('content version 2')
       end
     end
 
@@ -235,7 +235,7 @@ describe Cmsimple::Page do
       it 'can revert to a specific version' do
         version = page.versions.last
         page.revert_to!(version.id)
-        Cmsimple::Page.find(page.id).regions.content.to_s.should == 'content version 1'
+        expect(Cmsimple::Page.find(page.id).regions.content.to_s).to eq('content version 1')
       end
 
       it 'can not revert to a version that is not from the pages history' do

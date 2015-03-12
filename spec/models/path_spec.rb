@@ -15,32 +15,32 @@ describe Cmsimple::Path do
   it 'downcases its URI on save' do
     page = Cmsimple::Page.create title: 'Test'
     path = Cmsimple::Path.create page: page, uri: '/TestRedirect'
-    path.uri.should == '/testredirect'
+    expect(path.uri).to eq('/testredirect')
   end
 
   describe 'destination' do
 
     it 'is required' do
-      subject.should_not be_valid
-      subject.errors[:destination].should_not be_empty
+      expect(subject).to_not be_valid
+      expect(subject.errors[:destination]).to_not be_empty
     end
 
     it 'returns the destination path when a page is associated' do
       subject.page = Cmsimple::Page.new uri: '/some-path'
-      subject.destination.uri.should == '/some-path'
+      expect(subject.destination.uri).to eq('/some-path')
     end
 
     it 'returns the destination path when it is a redirect' do
       subject.redirect_uri = '/some-other-path'
-      subject.destination.uri.should == '/some-other-path'
-      subject.should be_redirect
+      expect(subject.destination.uri).to eq('/some-other-path')
+      expect(subject).to be_redirect
     end
 
     it 'returns a redirect if the path does not match the page path' do
       subject.uri = '/path'
       subject.page = Cmsimple::Page.new uri: '/some-other-path'
-      subject.destination.should be_a(Cmsimple::Path::Redirect)
-      subject.should be_redirect
+      expect(subject.destination).to be_a(Cmsimple::Path::Redirect)
+      expect(subject).to be_redirect
     end
   end
 
@@ -50,8 +50,8 @@ describe Cmsimple::Path do
 
     context "when there is no path to follow" do
       before do
-        request.stub(:fullpath).and_return('/foo')
-        request.stub(:params).and_return(path: '/path')
+        expect(request).to receive(:fullpath).and_return('foo').at_least(:once)
+        expect(request).to receive(:params).and_return(path: '/path').at_least(:once)
       end
       it "does not raise an error" do
         expect{ Cmsimple::Path.from_request(request) }.to_not raise_error
@@ -64,18 +64,18 @@ describe Cmsimple::Path do
 
     context 'without a path parameter' do
       it "should send you to Cmsimple root path" do
-        page = Cmsimple::Page.create!(is_root: true, uri: "/foo", slug: "foo", title: "Foo")
-        Cmsimple::Path.should_not_receive(:find_from_request)
-        request.stub(:params).and_return({})
+        Cmsimple::Page.create!(is_root: true, uri: "/foo", slug: "foo", title: "Foo")
+        expect(Cmsimple::Path).to_not receive(:find_from_request)
+        expect(request).to receive(:params).and_return({}).at_least(:once)
         expect(Cmsimple::Path.from_request(request).destination.uri).to eq("/foo")
       end
     end
 
     context "when a path exists that matches the full request path" do
-      before { request.stub(:params).and_return(path:nil) }
+      before { expect(request).to receive(:params).and_return(path:nil) }
 
       it "finds the redirect" do
-        request.stub(:fullpath).and_return('/path')
+        expect(request).to receive(:fullpath).and_return('/path')
         subject.uri = '/path'
         subject.redirect_uri = '/some-other-path'
         subject.save
@@ -83,7 +83,7 @@ describe Cmsimple::Path do
       end
 
       it "finds the redirect when the path has an extension" do
-        request.stub(:fullpath).and_return('/Legacy.aspx')
+        expect(request).to receive(:fullpath).and_return('/Legacy.aspx')
         subject.uri = '/Legacy.aspx'
         subject.redirect_uri = '/some-other-path'
         subject.save
@@ -93,43 +93,57 @@ describe Cmsimple::Path do
 
     context "when a path exists that matches the globbed request path" do
       before do
-        request.stub(:fullpath).and_return('/foo')
+        expect(request).to receive(:fullpath).and_return('/foo').at_least(:once)
       end
 
       it 'returns the path that has a uri matching the request path' do
-        request.stub(:params).and_return(path: '/path')
+        expect(request).to receive(:params).and_return(path: '/path').at_least(:once)
         subject.uri = '/path'
         subject.redirect_uri = '/some-other-path'
         subject.save
-        Cmsimple::Path.from_request(request).destination.uri.should == '/some-other-path'
+        expect(Cmsimple::Path.from_request(request).destination.uri).to eq('/some-other-path')
       end
 
       it "returns the path with the associated page" do
         page = Cmsimple::Page.create title: 'About'
         Cmsimple::Path.create uri: '/about', page: page
-        request.stub(:params).and_return(path: '/about')
-        Cmsimple::Path.from_request(request).destination.title.should == 'About'
+        expect(request).to receive(:params).and_return(path: '/about').at_least(:once)
+        expect(Cmsimple::Path.from_request(request).destination.title).to eq('About')
       end
 
       it "returns the path where the associated page is marked as root" do
         page = Cmsimple::Page.create title: 'Home', is_root: true
         Cmsimple::Path.create uri: '/home', page: page
-        request.stub(:params).and_return(path: '/home')
-        Cmsimple::Path.from_request(request).destination.title.should == 'Home'
+        expect(request).to receive(:params).and_return(path: '/home').at_least(:once)
+        expect(Cmsimple::Path.from_request(request).destination.title).to eq('Home')
       end
 
-      it "normalizes the path before querying" do
-        subject.uri = '/path'
-        subject.redirect_uri = '/some-other-path'
-        subject.save
-        request.stub(:params).and_return(path: '//path')
-        Cmsimple::Path.from_request(request).destination.uri.should == '/some-other-path'
-        request.stub(:params).and_return(path: '//path/')
-        Cmsimple::Path.from_request(request).destination.uri.should == '/some-other-path'
-        request.stub(:params).and_return(path: 'path')
-        Cmsimple::Path.from_request(request).destination.uri.should == '/some-other-path'
-        request.stub(:params).and_return(path: '/Path')
-        Cmsimple::Path.from_request(request).destination.uri.should == '/some-other-path'
+      context 'normalizing the path before querying' do
+        before do
+          subject.uri = '/path'
+          subject.redirect_uri = '/some-other-path'
+          subject.save
+        end
+
+        it 'removes front slashes' do
+          expect(request).to receive(:params).and_return(path: '//path').at_least(:once)
+          expect(Cmsimple::Path.from_request(request).destination.uri).to eq('/some-other-path')
+        end
+
+        it 'removes trailing slashes' do
+        expect(request).to receive(:params).and_return(path: '//path/').at_least(:once)
+        expect(Cmsimple::Path.from_request(request).destination.uri).to eq('/some-other-path')
+        end
+
+        it 'adds a forward slash to the path' do
+          expect(request).to receive(:params).and_return(path: 'path').at_least(:once)
+          expect(Cmsimple::Path.from_request(request).destination.uri).to eq('/some-other-path')
+        end
+
+        it 'ignores case' do
+          expect(request).to receive(:params).and_return(path: '/Path').at_least(:once)
+          expect(Cmsimple::Path.from_request(request).destination.uri).to eq('/some-other-path')
+        end
       end
     end
   end

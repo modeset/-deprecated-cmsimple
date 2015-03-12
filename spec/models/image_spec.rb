@@ -18,7 +18,7 @@ describe Cmsimple::Image do
 
   describe 'image attachment uploader' do
     it 'has an uploader mounted to attachment' do
-      subject.attachment.should be_a(ImageAttachmentUploader)
+      expect(subject.attachment).to be_a(ImageAttachmentUploader)
     end
   end
 
@@ -29,19 +29,19 @@ describe Cmsimple::Image do
     end
 
     it 'sets content_type from the file' do
-      @image.content_type.should == 'image/png'
+      expect(@image.content_type).to eq('image/png')
     end
 
     it 'sets file_size from the file' do
-      @image.file_size.should == @file_fixture.size
+      expect(@image.file_size).to eq(@file_fixture.size)
     end
 
     it 'sets width from the file' do
-      @image.width.should == 50
+      expect(@image.width).to eq(50)
     end
 
     it 'sets height from the file' do
-      @image.height.should == 64
+      expect(@image.height).to eq(64)
     end
   end
 end
