@@ -117,33 +117,33 @@ describe Cmsimple::Path do
         expect(request).to receive(:params).and_return(path: '/home').at_least(:once)
         expect(Cmsimple::Path.from_request(request).destination.title).to eq('Home')
       end
+    end
 
-      context 'normalizing the path before querying' do
-        before do
-          subject.uri = '/path'
-          subject.redirect_uri = '/some-other-path'
-          subject.save
-        end
+    context 'normalizing the path before querying' do
+      before do
+        subject.uri = '/path'
+        subject.redirect_uri = '/some-other-path'
+        subject.save
+      end
 
-        it 'removes front slashes' do
-          expect(request).to receive(:params).and_return(path: '//path').at_least(:once)
-          expect(Cmsimple::Path.from_request(request).destination.uri).to eq('/some-other-path')
-        end
-
-        it 'removes trailing slashes' do
-        expect(request).to receive(:params).and_return(path: '//path/').at_least(:once)
+      it 'removes front slashes' do
+        expect(request).to receive(:params).and_return(path: '//path').at_least(:once)
         expect(Cmsimple::Path.from_request(request).destination.uri).to eq('/some-other-path')
-        end
+      end
 
-        it 'adds a forward slash to the path' do
-          expect(request).to receive(:params).and_return(path: 'path').at_least(:once)
-          expect(Cmsimple::Path.from_request(request).destination.uri).to eq('/some-other-path')
-        end
+      it 'removes trailing slashes' do
+      expect(request).to receive(:params).and_return(path: '//path/').at_least(:once)
+      expect(Cmsimple::Path.from_request(request).destination.uri).to eq('/some-other-path')
+      end
 
-        it 'ignores case' do
-          expect(request).to receive(:params).and_return(path: '/Path').at_least(:once)
-          expect(Cmsimple::Path.from_request(request).destination.uri).to eq('/some-other-path')
-        end
+      it 'adds a forward slash to the path' do
+        expect(request).to receive(:params).and_return(path: 'path').at_least(:once)
+        expect(Cmsimple::Path.from_request(request).destination.uri).to eq('/some-other-path')
+      end
+
+      it 'ignores case' do
+        expect(request).to receive(:params).and_return(path: '/Path').at_least(:once)
+        expect(Cmsimple::Path.from_request(request).destination.uri).to eq('/some-other-path')
       end
     end
   end
