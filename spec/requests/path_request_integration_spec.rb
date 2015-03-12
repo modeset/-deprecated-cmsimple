@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'PathRequests' do
+describe 'PathRequests', type: :request do
   let(:path) { {path: {page_id: '1', uri: '/foo', redirect_uri: '/bar'}} }
   after do
     Cmsimple::Path.destroy_all

@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'cell/test_case'
-describe Cmsimple::RegionsHelper do
+describe Cmsimple::RegionsHelper, type: :helper do
   include Cell::TestCase::TestMethods
 
   it 'returns the value of the region' do
@@ -19,7 +19,7 @@ describe Cmsimple::RegionsHelper do
 
     it 'renders without a wrapper tag if no tag provided' do
       content = render_region(:body)
-      content.should have_selector('h1', content: 'Fred Flinstone')
+      content.should have_selector('h1', text: 'Fred Flinstone')
     end
 
     it 'renders block if region has no content' do
@@ -31,14 +31,14 @@ describe Cmsimple::RegionsHelper do
 
     it 'renders the region with a wrapper if a tag is specified' do
       content = render_region(:body, tag: :section)
-      content.should have_selector('h1', content: 'Fred Flinstone')
+      content.should have_selector('h1', text: 'Fred Flinstone')
       content.should have_selector("section[data-mercury='full']")
       content.should have_selector('section#body')
     end
 
     it 'renders the region with a wrapper and set class and region type from options' do
       content = render_region(:body, tag: :section, html: {class: 'blah'}, region_type: 'snippets')
-      content.should have_selector('h1', content: 'Fred Flinstone')
+      content.should have_selector('h1', text: 'Fred Flinstone')
       content.should have_selector('section.blah')
       content.should have_selector("section[data-mercury='snippets']")
       content.should have_selector('section#body')
@@ -56,7 +56,8 @@ describe Cmsimple::RegionsHelper do
 
     it 'renders the snippets when present' do
       rendered_region = region_content(@region)
-      rendered_region.should have_selector('h1', content: 'Fred Flinstone')
+      rendered_region.should have_selector('h1', text: 'Fred Flinstone')
     end
   end
+
 end

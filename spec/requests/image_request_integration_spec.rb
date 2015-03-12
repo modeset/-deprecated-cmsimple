@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'ImageRequest' do
+describe 'ImageRequest', type: :request do
   after do
     Cmsimple::Image.destroy_all
   end

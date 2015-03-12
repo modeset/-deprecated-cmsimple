@@ -151,12 +151,12 @@ describe Cmsimple::Page do
     describe '#unpublished_changes?' do
       it 'has unpublished changes if it was never published' do
         page.published_at.should be_nil
-        page.unpublished_changes?.should be_true
+        page.unpublished_changes?.should eq(true)
       end
 
       it 'does not have unpublished changes once it is published' do
         page.publish!
-        page.unpublished_changes?.should be_false
+        page.unpublished_changes?.should eq(false)
       end
     end
 

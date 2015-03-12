@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Page Requests' do
+describe 'Page Requests', type: :request do
   after(:each) do
     Cmsimple::Page.destroy_all
   end
