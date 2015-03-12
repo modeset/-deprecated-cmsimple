@@ -7,6 +7,7 @@ gemspec
 gem 'multi_json', '>= 1.3.4'
 gem 'railties', '~> 4.0.0'
 gem 'mercury-rails', github: "jejacks0n/mercury"
+gem 'responders'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -18,14 +19,14 @@ end
 
 group :development, :test do
   gem "rspec-rails"
-  gem "capybara", "~> 1.1.3"
+  gem "capybara"
   gem "database_cleaner"
   gem "shoulda-matchers"
   gem "timecop"
   gem "teaspoon"
-  gem 'jazz_hands'
 end
 
 group :test do
   gem "cucumber-rails", require: false
+  gem 'selenium-webdriver'
 end
