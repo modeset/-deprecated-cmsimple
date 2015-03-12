@@ -12,10 +12,20 @@ require File.expand_path("../../config/environment", __FILE__)
 #
 # teaspoon --driver=selenium --suppress-log
 # rake teaspoon DRIVER=selenium SUPPRESS_LOG=false
-Teaspoon.setup do |config|
+Teaspoon.configure do |config|
+  config.mount_at = "/teaspoon"
+  config.root = nil
+  config.asset_paths = ["spec/javascripts", "spec/javascripts/stylesheets"]
+  config.fixture_paths = %w(spec javascripts fixtures)
+  config.suite do |suite|
+    suite.matcher = "{spec/javascripts,app/assets}/**/*_spec.{js,js.coffee,coffee}"
+    suite.helper = "spec_helper"
+    suite.stylesheets = ["teaspoon"]
+    suite.no_coverage = [%r{/lib/ruby/gems/}, %r{/vendor/assets/}, %r{/support/}, %r{/(.+)_helper.}]
+  end
   # Driver
+  config.driver = 'phantomjs'
   #config.driver         = "phantomjs" # available: phantomjs, selenium
-  #config.phantomjs_bin  = nil
 
   # Behaviors
   #config.server_timeout = 20 # timeout for starting the server
