@@ -66,7 +66,6 @@ describe Cmsimple::Path do
       it "should send you to Cmsimple root path" do
         page = Cmsimple::Page.create!(is_root: true, uri: "/foo", slug: "foo", title: "Foo")
         Cmsimple::Path.should_not_receive(:find_from_request)
-        request.stub(:fullpath).and_return('/editor')
         request.stub(:params).and_return({})
         expect(Cmsimple::Path.from_request(request).destination.uri).to eq("/foo")
       end
@@ -139,9 +138,7 @@ describe Cmsimple::Path do
     let(:request) { ActionDispatch::TestRequest.new }
 
     it "raises ActiveRecord::RecordNotFound when no records are found" do
-      Cmsimple::Path.should_receive(:from_request).with(request).and_return(nil)
-      request.stub(:fullpath).and_return('/foo')
-      request.stub(:params).and_return(path: '/foo')
+      expect(Cmsimple::Path).to receive(:from_request).with(request).and_return(nil)
       expect { Cmsimple::Path.from_request!(request) }.to raise_error ActiveRecord::RecordNotFound
     end
 
