@@ -241,9 +241,7 @@ Then /^show me the page$/ do
 end
 
 When /^(?:|I )wait for ajax requests to complete/ do
-  wait_until do
-    page.evaluate_script('$.active') == 0
-  end
+  page.evaluate_script('$.active') == 0
 end
 
 And /^I accept confirmations$/ do

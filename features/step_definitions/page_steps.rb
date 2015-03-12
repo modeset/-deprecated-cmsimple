@@ -126,6 +126,7 @@ end
 When /^I change the slug to "([^"]*)"/ do |path|
   fill_in 'Slug', :with => path
   click_button 'Update Page'
+  page.should_not have_content('Update Page')
 end
 
 When "I publish the current page" do
@@ -167,9 +168,8 @@ Then "I should see that page's content in it's template" do
 end
 
 Then "I should be able to edit that page's content" do
-  sleep(1)
   within_frame 'mercury_iframe' do
-    within '[data-mercury]' do
+    within "section[data-mercury='full']" do
       page.body.should =~ /#{@content}/
     end
   end
@@ -248,7 +248,7 @@ end
 
 Then "I should see the old version" do
   within_frame 'mercury_iframe' do
-    within '[data-mercury]' do
+    within "section[data-mercury='full']" do
       page.should have_content('This is a published page')
     end
   end
@@ -256,13 +256,13 @@ end
 
 Then "there should be an indication of unpublished changes" do
   step %{I wait for ajax requests to complete}
-  within '.mercury-toolbar' do
+  within '.mercury-primary-toolbar' do
     page.should have_selector '.mercury-publish-button.unpublished'
   end
 end
 
 Then "there should not be an indication of unpublished changes" do
-  within '.mercury-toolbar' do
+  within '.mercury-primary-toolbar' do
     page.should_not have_selector '.mercury-publish-button.unpublished'
   end
 end
