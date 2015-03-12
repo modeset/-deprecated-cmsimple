@@ -11,6 +11,7 @@ vendor/bundle
 pkg
 mkmf.log
 tags
+Gemfile.lock
 
 # Local config files
 database.yml
