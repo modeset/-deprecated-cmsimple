@@ -33,36 +33,36 @@ end
 World(WithinHelpers)
 
 # Single-line step scoper
-When /^(.*) within (.*[^:])$/ do |inner_step, parent|
+When( /^(.*) within (.*[^:])$/) do |inner_step, parent|
   with_scope(parent) { step inner_step }
 end
 
 # Multi-line step scoper
-When /^(.*) within (.*[^:]):$/ do |inner_step, parent, table_or_string|
+When (/^(.*) within (.*[^:]):$/) do |inner_step, parent, table_or_string|
   with_scope(parent) { step "#{inner_step}:", table_or_string }
 end
 
-Given /^(?:|I )am on (.+)$/ do |page_name|
+Given (/^(?:|I )am on (.+)$/) do |page_name|
   visit path_to(page_name)
 end
 
-When /^(?:|I )go to (.+)$/ do |page_name|
+When (/^(?:|I )go to (.+)$/) do |page_name|
   visit path_to(page_name)
 end
 
-When /^(?:|I )press "([^"]*)"$/ do |button|
+When (/^(?:|I )press "([^"]*)"$/) do |button|
   click_button(button)
 end
 
-When /^(?:|I )follow "([^"]*)"$/ do |link|
+When (/^(?:|I )follow "([^"]*)"$/) do |link|
   click_link(link)
 end
 
-When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
+When (/^(?:|I )fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
   fill_in(field, :with => value)
 end
 
-When /^(?:|I )fill in "([^"]*)" for "([^"]*)"$/ do |value, field|
+When (/^(?:|I )fill in "([^"]*)" for "([^"]*)"$/) do |value, field|
   fill_in(field, :with => value)
 end
 
@@ -77,69 +77,69 @@ end
 # TODO: Add support for checkbox, select og option
 # based on naming conventions.
 #
-When /^(?:|I )fill in the following:$/ do |fields|
+When (/^(?:|I )fill in the following:$/) do |fields|
   fields.rows_hash.each do |name, value|
     step %{I fill in "#{name}" with "#{value}"}
   end
 end
 
-When /^(?:|I )select "([^"]*)" from "([^"]*)"$/ do |value, field|
+When (/^(?:|I )select "([^"]*)" from "([^"]*)"$/) do |value, field|
   select(value, :from => field)
 end
 
-When /^(?:|I )check "([^"]*)"$/ do |field|
+When (/^(?:|I )check "([^"]*)"$/) do |field|
   check(field)
 end
 
-When /^(?:|I )uncheck "([^"]*)"$/ do |field|
+When (/^(?:|I )uncheck "([^"]*)"$/) do |field|
   uncheck(field)
 end
 
-When /^(?:|I )choose "([^"]*)"$/ do |field|
+When (/^(?:|I )choose "([^"]*)"$/) do |field|
   choose(field)
 end
 
-When /^(?:|I )attach the file "([^"]*)" to "([^"]*)"$/ do |path, field|
+When (/^(?:|I )attach the file "([^"]*)" to "([^"]*)"$/) do |path, field|
   attach_file(field, File.expand_path(path))
 end
 
-Then /^(?:|I )should see "([^"]*)"$/ do |text|
-  if page.respond_to? :should
-    page.should have_content(text)
+Then(/^(?:|I )should see "([^"]*)"$/) do |text|
+  if rspec?
+    expect(page).to have_content(text)
   else
     assert page.has_content?(text)
   end
 end
 
-Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
+Then (/^(?:|I )should see \/([^\/]*)\/$/) do |regexp|
   regexp = Regexp.new(regexp)
 
-  if page.respond_to? :should
-    page.should have_xpath('//*', :text => regexp)
+  if rspec?
+    expect(page).to have_xpath('//*', :text => regexp)
   else
     assert page.has_xpath?('//*', :text => regexp)
   end
 end
 
-Then /^(?:|I )should not see "([^"]*)"$/ do |text|
-  if page.respond_to? :should
-    page.should have_no_content(text)
+Then (/^(?:|I )should not see "([^"]*)"$/) do |text|
+  if rspec?
+    expect(page).to have_no_content(text)
   else
     assert page.has_no_content?(text)
   end
 end
 
-Then /^(?:|I )should not see \/([^\/]*)\/$/ do |regexp|
+Then (/^(?:|I )should not see \/([^\/]*)\/$/) do |regexp|
   regexp = Regexp.new(regexp)
 
-  if page.respond_to? :should
-    page.should have_no_xpath('//*', :text => regexp)
+  if rspec?
+    expect(page).to have_no_xpath('//*', :text => regexp)
   else
     assert page.has_no_xpath?('//*', :text => regexp)
   end
 end
 
-Then /^the "([^"]*)" field(?: within (.*))? should contain "([^"]*)"$/ do |field, parent, value|
+Then (/^the "([^"]*)" field(?: within (.*))? should contain "([^"]*)"$/) do |field, parent, value|
   with_scope(parent) do
     field = find_field(field)
     field_value = (field.tag_name == 'textarea') ? field.text : field.value
@@ -151,7 +151,7 @@ Then /^the "([^"]*)" field(?: within (.*))? should contain "([^"]*)"$/ do |field
   end
 end
 
-Then /^the "([^"]*)" field(?: within (.*))? should not contain "([^"]*)"$/ do |field, parent, value|
+Then (/^the "([^"]*)" field(?: within (.*))? should not contain "([^"]*)"$/) do |field, parent, value|
   with_scope(parent) do
     field = find_field(field)
     field_value = (field.tag_name == 'textarea') ? field.text : field.value
@@ -163,16 +163,16 @@ Then /^the "([^"]*)" field(?: within (.*))? should not contain "([^"]*)"$/ do |f
   end
 end
 
-Then /^the "([^"]*)" field should have the error "([^"]*)"$/ do |field, error_message|
+Then (/^the "([^"]*)" field should have the error "([^"]*)"$/) do |field, error_message|
   begin
     element = find_field(field)
-  rescue Capybara::ElementNotFound => ex
+  rescue Capybara::ElementNotFound
     # radio buttons in formtastic don't follow capybara's expectation of field labels
     element = page.find(:xpath, "//li/fieldset/legend/label[contains(normalize-space(string(.)), '#{field}')]")
   end
 
   wrapping_element = element.find(:xpath, 'ancestor::li')
-  form_for_input = element.find(:xpath, 'ancestor::form[1]')
+  element.find(:xpath, 'ancestor::form[1]')
 
   classes = wrapping_element[:class].split(' ')
   classes.should include('error'), "'#{field}' doesn't have class 'error'"
@@ -181,7 +181,7 @@ Then /^the "([^"]*)" field should have the error "([^"]*)"$/ do |field, error_me
   error_paragraph.should have_content(error_message), "'#{field}' doesn't have message '#{error_message}'"
 end
 
-Then /^the "([^"]*)" field should have no error$/ do |field|
+Then (/^the "([^"]*)" field should have no error$/) do |field|
   element = find_field(field)
   wrapping_element = element.find(:xpath, 'ancestor::li')
 
@@ -189,7 +189,7 @@ Then /^the "([^"]*)" field should have no error$/ do |field|
   classes.should_not include('error')
 end
 
-Then /^the "([^"]*)" checkbox(?: within (.*))? should be checked$/ do |label, parent|
+Then (/^the "([^"]*)" checkbox(?: within (.*))? should be checked$/) do |label, parent|
   with_scope(parent) do
     field_checked = find_field(label)['checked']
     if field_checked.respond_to? :should
@@ -200,7 +200,7 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should be checked$/ do |label, pa
   end
 end
 
-Then /^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/ do |label, parent|
+Then (/^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/) do |label, parent|
   with_scope(parent) do
     field_checked = find_field(label)['checked']
     if field_checked.respond_to? :should
@@ -211,19 +211,19 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/ do |label
   end
 end
  
-Then /^(?:|I )should be on (.+)$/ do |page_name|
+Then (/^(?:|I )should be on (.+)$/) do |page_name|
   path = URI.parse(current_url).path
   fragment = URI.parse(current_url).fragment
   current_path = [path, fragment].compact.join('#')
   current_path.gsub!(/\#$/, '')
-  if current_path.respond_to? :should
+  if rspec?
     current_path.should == path_to(page_name)
   else
     assert_equal path_to(page_name), current_path
   end
 end
 
-Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
+Then (/^(?:|I )should have the following query string:$/) do |expected_pairs|
   query = URI.parse(current_url).query
   actual_params = query ? CGI.parse(query) : {}
   expected_params = {}
@@ -236,20 +236,24 @@ Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
   end
 end
 
-Then /^show me the page$/ do
+Then (/^show me the page$/) do
   save_and_open_page
 end
 
-When /^(?:|I )wait for ajax requests to complete/ do
+When (/^(?:|I )wait for ajax requests to complete/) do
   page.evaluate_script('$.active') == 0
 end
 
-And /^I accept confirmations$/ do
+And (/^I accept confirmations$/) do
   page.execute_script %Q{
     window.confirm = function(){ return true };
   }
 end
 
-And /^I sleep for (\d+) seconds?$/ do |time|
+And (/^I sleep for (\d+) seconds?$/) do |time|
   sleep(time.to_i)
+end
+
+def rspec?
+  @rspec ||= defined?(:expect)
 end

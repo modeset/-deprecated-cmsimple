@@ -111,22 +111,22 @@ When "I add a new home page" do
   click_button 'Create Page'
 end
 
-When /^I change the template to "([^"]*)"/ do |template|
+When(/^I change the template to "([^"]*)"/) do |template|
   select template, :from => 'Template'
   click_button 'Update Page'
 end
 
-When /^I change the seo info of the page/ do
+When (/^I change the seo info of the page/) do
   fill_in 'Keywords', :with => 'some_keyword, someother_keyword'
   fill_in 'Description', :with => 'This is a description of the page'
   fill_in 'Browser title', :with => 'This is a new title for the browser'
   click_button 'Update Page'
 end
 
-When /^I change the slug to "([^"]*)"/ do |path|
+When(/^I change the slug to "([^"]*)"/) do |path|
   fill_in 'Slug', :with => path
   click_button 'Update Page'
-  page.should_not have_content('Update Page')
+  expect(page).to_not have_content('Update Page')
 end
 
 When "I publish the current page" do
@@ -155,7 +155,7 @@ When "I publish a new version of the current page" do
 end
 
 Then "I should see that page's content" do
-  page.driver.response.body.should =~ /#{@content}/
+  expect(page.driver.response.body).to match(/#{@content}/)
 end
 
 Then "I should see that page's content in it's template" do
@@ -164,76 +164,77 @@ Then "I should see that page's content in it's template" do
 #{@content}
 </section>
   HTML
-  page.driver.response.body.should =~ /#{region}/
+  expect(page.driver.response.body).to match(/#{region}/)
 end
 
 Then "I should be able to edit that page's content" do
   within_frame 'mercury_iframe' do
     within "section[data-mercury='full']" do
-      page.body.should =~ /#{@content}/
+      expect(page.body).to match(/#{@content}/)
     end
   end
 end
 
 Then "I should be redirected to the new page" do
-  current_path.should == '/editor/some-new-page'
+  expect(current_path).to eq("/editor/some-new-page")
 end
 
 Then "I should be redirected to the home page" do
-  current_path.should =~ /^\/editor\/?$/
+  expect(current_path).to match(/^\/editor\/?$/)
 end
 
 Then "I should be redirected to the about page" do
-  current_path.should == '/about'
+  expect(current_path).to eq("/about")
 end
 
-Then /I should see the (.+) in the sitemap/ do |page|
+Then (/I should see the (.+) in the sitemap/) do |page|
   within '.mercury-panel .sitemap' do
-    page.should have_content "#{page}"
+    expect(page).to have_content "#{page}"
   end
 end
 
 Then "I should see the path in the redirects" do
   within '.mercury-panel .redirects' do
-    page.should have_content '/redirect-path'
+    expect(page).to have_content "/redirect-path"
   end
 end
 
 Then "I should not see the path in the redirects" do
   within '.mercury-panel' do
-    page.should_not have_content '/redirect-path'
+    expect(page).to_not have_content "/redirect-path"
   end
 end
 
 Then "I should not see the duplicate path in the redirects" do
   within '.mercury-panel' do
-    page.should_not have_content '/about'
+    expect(page).to_not have_content "/about"
   end
 end
 
 Then "I should be alerted to the duplicate redirect" do
-  page.should have_content 'Source URL must be unique'
+  expect(page).to have_content 'Source URL must be unique'
 end
 
-Then /^I should see that seo info on the page/ do
+Then (/^I should see that seo info on the page/) do
   allow_hidden_elements do
 
     visit current_path.gsub('/editor', '')
     within('title') do
-      page.should have_content('This is a new title for the browser')
+      expect(page).to have_content('This is a new title for the browser')
     end
-    page.should have_css('meta[name="keywords"]')
-    page.should have_css('meta[content="some_keyword, someother_keyword"]')
-    page.should have_css('meta[name="description"]')
-    page.should have_css('meta[content="This is a description of the page"]')
+
+    expect(page).to have_css('meta[name="keywords"]')
+    expect(page).to have_css('meta[content="some_keyword, someother_keyword"]')
+    expect(page).to have_css('meta[name="description"]')
+    expect(page).to have_css('meta[content="This is a description of the page"]')
 
   end
 end
 
 Then "the current page should be publicly available" do
   step %(I visit the current page's public path)
-  current_path.should_not =~ /\/editor/
-  page.should have_content('This is a published page')
+  expect(current_path).to_not match(/\/editor/)
+  expect(page).to have_content('This is a published page')
 end
 
 Then "the current page should only show published content" do
@@ -242,14 +243,14 @@ end
 
 Then "I there should be one version in the history panel" do
   within '.mercury-panel .versions' do
-    page.should have_selector 'li', count: 1
+    expect(page).to have_selector 'li', count: 1
   end
 end
 
 Then "I should see the old version" do
   within_frame 'mercury_iframe' do
     within "section[data-mercury='full']" do
-      page.should have_content('This is a published page')
+      expect(page).to have_content('This is a published page')
     end
   end
 end
@@ -257,12 +258,12 @@ end
 Then "there should be an indication of unpublished changes" do
   step %{I wait for ajax requests to complete}
   within '.mercury-primary-toolbar' do
-    page.should have_selector '.mercury-publish-button.unpublished'
+    expect(page).to have_selector '.mercury-publish-button.unpublished'
   end
 end
 
 Then "there should not be an indication of unpublished changes" do
   within '.mercury-primary-toolbar' do
-    page.should_not have_selector '.mercury-publish-button.unpublished'
+    expect(page).to_not have_selector '.mercury-publish-button.unpublished'
   end
 end
