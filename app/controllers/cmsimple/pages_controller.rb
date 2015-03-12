@@ -26,7 +26,7 @@ module Cmsimple
     end
 
     def editor
-      render :nothing => true, :layout => 'editor'
+      render :text => '', :layout => 'editor'
     end
 
     def edit
