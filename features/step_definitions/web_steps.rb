@@ -143,8 +143,8 @@ Then (/^the "([^"]*)" field(?: within (.*))? should contain "([^"]*)"$/) do |fie
   with_scope(parent) do
     field = find_field(field)
     field_value = (field.tag_name == 'textarea') ? field.text : field.value
-    if field_value.respond_to? :should
-      field_value.should =~ /#{value}/
+    if rspec?
+      expect(field_value).to match(/#{value}/)
     else
       assert_match(/#{value}/, field_value)
     end
@@ -155,8 +155,8 @@ Then (/^the "([^"]*)" field(?: within (.*))? should not contain "([^"]*)"$/) do 
   with_scope(parent) do
     field = find_field(field)
     field_value = (field.tag_name == 'textarea') ? field.text : field.value
-    if field_value.respond_to? :should_not
-      field_value.should_not =~ /#{value}/
+    if rspec?
+      expect(field_value).to_not match(/#{value}/)
     else
       assert_no_match(/#{value}/, field_value)
     end
@@ -175,10 +175,10 @@ Then (/^the "([^"]*)" field should have the error "([^"]*)"$/) do |field, error_
   element.find(:xpath, 'ancestor::form[1]')
 
   classes = wrapping_element[:class].split(' ')
-  classes.should include('error'), "'#{field}' doesn't have class 'error'"
+  expect(classes).to include('error'), "'#{field}' doesn't have class 'error'"
 
   error_paragraph = wrapping_element.find(:xpath, './/*[@class="inline-errors"][1]')
-  error_paragraph.should have_content(error_message), "'#{field}' doesn't have message '#{error_message}'"
+  expect(error_paragraph).to have_content(error_message), "'#{field}' doesn't have message '#{error_message}'"
 end
 
 Then (/^the "([^"]*)" field should have no error$/) do |field|
@@ -186,28 +186,20 @@ Then (/^the "([^"]*)" field should have no error$/) do |field|
   wrapping_element = element.find(:xpath, 'ancestor::li')
 
   classes = wrapping_element[:class].split(' ')
-  classes.should_not include('error')
+  expect(classes).to_not include('error')
 end
 
 Then (/^the "([^"]*)" checkbox(?: within (.*))? should be checked$/) do |label, parent|
   with_scope(parent) do
     field_checked = find_field(label)['checked']
-    if field_checked.respond_to? :should
-      field_checked.should be_true
-    else
-      assert field_checked
-    end
+    expect(field_checked).to be_truthy
   end
 end
 
 Then (/^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/) do |label, parent|
   with_scope(parent) do
     field_checked = find_field(label)['checked']
-    if field_checked.respond_to? :should
-      field_checked.should be_false
-    else
-      assert !field_checked
-    end
+    expect(field_checked).to be_falsey
   end
 end
  
@@ -216,11 +208,7 @@ Then (/^(?:|I )should be on (.+)$/) do |page_name|
   fragment = URI.parse(current_url).fragment
   current_path = [path, fragment].compact.join('#')
   current_path.gsub!(/\#$/, '')
-  if rspec?
-    current_path.should == path_to(page_name)
-  else
-    assert_equal path_to(page_name), current_path
-  end
+  expect(current_path).to eq(path_to(page_name))
 end
 
 Then (/^(?:|I )should have the following query string:$/) do |expected_pairs|
@@ -228,12 +216,7 @@ Then (/^(?:|I )should have the following query string:$/) do |expected_pairs|
   actual_params = query ? CGI.parse(query) : {}
   expected_params = {}
   expected_pairs.rows_hash.each_pair{|k,v| expected_params[k] = v.split(',')} 
-  
-  if actual_params.respond_to? :should
-    actual_params.should == expected_params
-  else
-    assert_equal expected_params, actual_params
-  end
+  expect(actual_params).to eq(expected_params)
 end
 
 Then (/^show me the page$/) do
