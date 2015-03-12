@@ -4,7 +4,7 @@
 #------------------------------------------------------------------------------
 When /^(?:|I )click on (.+)$/ do |locator|
   selector = selector_for(locator)
-  find(selector, :message => "Unable to locate the element '#{selector}' to click on").click
+  find(selector).click
 end
 
 Then /^(.+) should (not )?be visible$/ do |locator, boolean|
@@ -48,7 +48,7 @@ end
 # for the select dropdowns
 When /^(?:|I )select (.*?) from the dropdown$/ do |locator|
   selector = selector_for(locator)
-  find(selector, :message => "Unable to locate the element '#{selector}' to click on").click
+  find(selector).click
 end
 
 
@@ -77,7 +77,7 @@ When /^(?:|I )(?:change|set) the contents? of (.*?) to (.*?)$/ do |region_locato
   region_id = region_selector_for(region_locator).gsub('#', '')
   content = contents[0] == '"' ? contents : "\"#{contents_for(contents)}\""
   page.driver.within_frame('mercury_iframe') do
-    find("##{region_id}", :message => "Unable to locate a region matching '##{region_id}'")
+    find("##{region_id}")
     page.driver.execute_script <<-JAVASCRIPT
       var element = top.jQuery(document).find('##{region_id}');
       if (element.data('mercury') == 'markdown') {
@@ -100,8 +100,8 @@ When /^(?:|I )(?:make|have) a selection (?:in (.*?) )?for "([^"]*)"$/ do |region
   # assume the first editable region if one wasn't provided'
   region_selector = region_selector_for(region_locator || 'the editable region')
   page.driver.within_frame('mercury_iframe') do
-    find("#{region_selector}", :message => "Unable to locate a region matching '#{region_selector}'")
-    find("#{region_selector} #{selector}", :message => "Unable to locate a match for '#{selector}' inside '#{region_locator}'")
+    find("#{region_selector}")
+    find("#{region_selector} #{selector}")
     page.driver.execute_script <<-JAVASCRIPT
       var element = top.jQuery(document).find('#{region_selector}');
       if (element.data('mercury') == 'markdown') {
@@ -124,8 +124,8 @@ When /^(?:|I )double click on (.*?) in (.*?)$/ do |locator, region_locator|
   # assume the first editable region if one wasn't provided'
   region_selector = region_selector_for(region_locator || 'the editable region')
   page.driver.within_frame('mercury_iframe') do
-    find("#{region_selector}", :message => "Unable to locate a region matching '#{region_selector}'")
-    find("#{region_selector} #{selector}", :message => "Unable to locate a match for '#{selector}' inside '#{region_locator}'")
+    find("#{region_selector}")
+    find("#{region_selector} #{selector}")
     page.driver.execute_script <<-JAVASCRIPT
       top.jQuery(document).find('#{region_selector} #{selector}').simulate('dblclick');
     JAVASCRIPT
@@ -136,7 +136,7 @@ end
 Then /^the contents? of (.*?) should be "([^"]*)"$/ do |region_locator, content|
   region_selector = region_selector_for(region_locator)
   page.driver.within_frame('mercury_iframe') do
-    find("#{region_selector}", :message => "Unable to locate a region matching '#{region_selector}'")
+    find("#{region_selector}")
     results = page.driver.execute_script <<-JAVASCRIPT
       var element = top.jQuery(document).find('#{region_selector}');
       if (element.data('mercury') == 'markdown') {
@@ -193,7 +193,7 @@ end
 
 Then /^the selected cell should be (.*?)$/ do |locator|
   selector = selector_for(locator).gsub('td:', 'td.selected:')
-  find("#{selector}", :message => "Unable to locate the selected cell for '#{selector}'")
+  find("#{selector}")
 end
 
 # in general
@@ -220,7 +220,7 @@ When /^(?:|I )(?:drag|drop) (.*?) (?:into|on) (.*?)$/ do |snippet_locator, regio
   snippet_name = snippet_name_for(snippet_locator)
   region_id = region_selector_for(region_locator).gsub('#', '')
   page.driver.within_frame('mercury_iframe') do
-    find("##{region_id}", :message => "Unable to locate a region matching '##{region_id}'")
+    find("##{region_id}")
     page.driver.execute_script <<-JAVASCRIPT
       var element = top.jQuery(document).find('##{region_id}');
       if (element.data('mercury') == 'markdown') {
@@ -242,7 +242,7 @@ When /^(?:|I )hover over (.*?)(?: in (.*?))?$/ do |locator, region_locator|
   selector = selector_for(locator)
   region_selector = region_selector_for(region_locator || 'the editable region')
   page.driver.within_frame('mercury_iframe') do
-    find("#{region_selector}", :message => "Unable to locate a region matching '#{region_selector}'")
+    find("#{region_selector}")
     page.driver.execute_script <<-JAVASCRIPT
       var element = top.jQuery(document).find('#{region_selector}');
       if (element.data('mercury') == 'markdown') {
